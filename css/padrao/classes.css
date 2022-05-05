@@ -1,0 +1,197 @@
+/* CONTAINERS */
+.container-lg {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  max-width: var(--size-xlg);
+  padding: 0 24px;
+}
+
+.container-md {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  max-width: var(--size-lg);
+  padding: 0 16px;
+}
+
+.container-sm {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  max-width: var(--size-md);
+  padding: 8px;
+}
+
+.container-xsm {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  max-width: var(--size-sm);
+  padding: 4px;
+}
+
+/* DISPLAY */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.d-none {
+  display: none;
+}
+
+/* FONTES */
+.font-sm {
+  font-size: var(--font-sm);
+}
+
+.font-lg {
+  font-size: var(--font-lg);
+}
+
+.font-md {
+  font-size: var(--font-md);
+}
+
+.font-xmd {
+  font-size: var(--font-xmd);
+}
+
+.title-1 {
+  font-weight: 700;
+  font-size: var(--font-title-1);
+}
+
+.title-2 {
+  font-weight: 700;
+  font-size: var(--font-title-2);
+}
+
+.title-3 {
+  font-weight: 700;
+  font-size: var(--font-title-3);
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.lighter {
+  font-weight: 300;
+}
+
+.border {
+  border: 3px solid red;
+}
+
+.mt {
+  margin-top: var(--margin-lg);
+}
+
+.mb {
+  margin-bottom: var(--margin-lg);
+}
+
+.margin {
+  margin: var(--margin);
+}
+
+.padding-md {
+  padding: var(--padding-md);
+}
+
+.padding-sm {
+  padding: var(--padding-sm);
+}
+
+.padding-lg {
+  padding: var(--padding-lg);
+}
+
+/* SHADOW */
+.shadow-sm {
+  box-shadow: 0 1px 8px var(--color-shadow);
+}
+
+.shadow-md {
+  box-shadow: inset 4px 4px 16px #d5d5d588,
+    inset -4px -4px 16px var(--color-shadow);
+}
+
+.shadow-lg {
+  box-shadow: 12px 12px 32px var(--color-shadow)
+}
+
+/* TAGS */
+.btn {
+  width: 160px;
+  padding: 0 var(--padding-lg);
+  font-size: var(--font-xmd);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: 0;
+  opacity: 0.9;
+
+}
+
+.btn:hover,
+.btn:focus {
+  opacity: 1;
+}
+
+.btn.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-light);
+}
+
+.input {
+  border: 0;
+  margin-top: var(--margin);
+  border-radius: var(--radius-sm);
+  padding: var(--padding-sm) var(--padding-md);
+  font-size: var(--font-xmd);
+  min-height: 30px;
+  opacity: 0.9;
+}
+
+.input:hover,
+input:focus {
+  opacity: 1;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+}
+
+/* Hover */
+.hover-under:hover {
+  text-decoration: underline;
+}
+
+.hover-opacity {
+  opacity: .85;
+  transition: .35s ease;
+}
+
+.hover-opacity:hover {
+  opacity: 1;
+}
