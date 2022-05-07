@@ -19,6 +19,10 @@
 @import url(./paginas/simulador.css);
 @import url(./paginas/inicio.css);
 @import url(./paginas/perfil.css);
+@import url(./paginas/login.css);
 @import url(./paginas/cadastro.css);
 @import url(./paginas/esqueciSenha.css);
 @import url(./paginas/dashboard.css);
+
+/* Imagens */
+@import url(./imagens/storyset);

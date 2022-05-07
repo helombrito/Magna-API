@@ -8,11 +8,10 @@
         <!-- Mudar em toda página o titulo -->
         <title>Magna | Login</title>
         <!-- Padrão CSS e Icones FA -->
-        <link rel="stylesheet" href="../../css/index.css">
+        <link rel="stylesheet" type="text/css" href="../../css/index.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
             integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="../../css/paginas/login.css">
         <link rel="shortcut icon" href="../../imagens/magna/favicon.ico" type="image/x-icon">
 
     </head>
@@ -52,14 +51,15 @@
                     <input type="text" placeholder="insira seu email" id="inp_email">
                     <label>Senha:</label>
                     <input type="password" placeholder="Insira sua senha" id="inp_senha">
+                    <span id="erro"></span>
                     <a href="esqueciSenha.html" class="hover-under">Esqueceu sua senha?</a>
                     <a href="cadastro.html">Não tem conta? <span id="crie"> Crie já!</span></a>
-                    <button onclick="validar()">Entrar</button>
+                    <button onclick="entrar()">Entrar</button>
                 </div>
 
 
                 <div class="box_img flex-center">
-                    <img src="../../imagens/storyset/imagemLogin.png" alt="Login, Entrar, Signin, Bem vindo de volta">
+                    <img src="./imagens/storyset/imagemLogin.png" alt="Login, Entrar, Signin, Bem vindo de volta">
                 </div>
 
             </div>
@@ -102,7 +102,7 @@
             </div>
         </div>
     </body>
-    <script src="../../js/paginas/login.js"></script>
-    <script src="../../js/global.js"></script>
+    <script src="js/paginas/login.js"></script>
+    <script src="js/global.js"></script>
 
 </html>
