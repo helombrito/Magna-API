@@ -1,6 +1,7 @@
-
-function validar(){
-    var email = in_email.value;
+showMenu('login');
+showFooter();
+function validar () {
+      var email = in_email.value;
 
       if (email == '')
       {

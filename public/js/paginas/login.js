@@ -1,30 +1,33 @@
-function entrar() {
+showFooter();
+showMenu('login');
+function entrar () {
 
     var emailVar = inp_email.value;
     var senhaVar = inp_senha.value;
 
 
-    if (emailVar == '') {
+    if (emailVar == '')
+    {
         erro.innerHTML = `Preencha o E-mail`;
         erro.className = 'erro';
-    } else if (senhaVar == '') {
+    } else if (senhaVar == '')
+    {
         erro.innerHTML = `Preencha a senha`;
         erro.className = 'erro';
-    } else if (emailVar.indexOf('@') == -1) {
+    } else if (emailVar.indexOf('@') == -1)
+    {
         erro.innerHTML = `Seu e-mail está invalido.`;
         erro.className = 'erro';
-    } else if (emailVar.length < 4) {
+    } else if (emailVar.length < 4)
+    {
         erro.innerHTML = `E-mail deve possuir 4 ou mais caracteres.`;
         erro.className = 'erro';
-    } else if (senhaVar.length < 4) {
+    } else if (senhaVar.length < 4)
+    {
         erro.innerHTML = `Senha deve possuir 4 ou mais caracteres.`;
         erro.className = 'erro';
-    } else {
-
-
-
-
-
+    } else
+    {
 
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
@@ -39,8 +42,9 @@ function entrar() {
                 senhaServer: senhaVar
             })
         }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
-            if (resposta.ok) {
+            console.log("ESTOU NO THEN DO entrar()!");
+            if (resposta.ok)
+            {
                 console.log(resposta);
 
                 resposta.json().then(json => {
@@ -56,7 +60,8 @@ function entrar() {
                     }, 1000);
                 });
 
-            } else {
+            } else
+            {
 
                 console.log("Erro de login!");
 
@@ -67,11 +72,11 @@ function entrar() {
                 });
             }
 
-        })
+        });
     }
 }
 
-function validarSessao() {
+function validarSessao () {
 
 
     var login = sessionStorage.LOGIN_USUARIO;
@@ -79,19 +84,21 @@ function validarSessao() {
 
     var h1Titulo = document.getElementById("h1_titulo");
 
-    if (login != null && nome != null) {
+    if (login != null && nome != null)
+    {
         // window.alert(`Seja bem-vindo, ${nome}!`);
         h1Titulo.innerHTML = `${login}`;
 
-        finalizar
-    } else {
+        finalizar;
+    } else
+    {
         window.location = "login.html";
     }
 }
 
-function sair() {
+function sair () {
 
     sessionStorage.clear();
-    finalizar
+    finalizar;
     window.location = "login.html";
 }

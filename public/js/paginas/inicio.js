@@ -1,0 +1,2 @@
+showMenu('index');
+showFooter();

@@ -12,30 +12,12 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
             integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="shortcut icon" href="../../imagens/magna/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="../../image/magna/favicon.ico" type="image/x-icon">
 
     </head>
 
     <body>
-        <!-- header -->
-        <div class="header">
-            <div class="navbar container-lg">
-                <div class="logo">
-                    <a href="./inicio.html">
-                        <img src="../../imagens/magna/logoBranco2.png" alt="Logotipo, Logo, Image, Magna">
-                    </a>
-                </div>
-                <ul class="menu">
-                    <li class="item" title="Inicio"><a href="inicio.html" class="link">Inicio</a></li>
-                    <li class="item" title="Sobre"><a href="inicio.html" class="link">Sobre</a></li>
-                    <li class="item" title="Contato"><a href="inicio.html" class="link">Contato</a></li>
-                    <li class="item" title="Simulador Financeiro"><a href="simulador.html" class="link">Simulador</a>
-                    </li>
-                    <li class="item" title="Entrar"><a href="./login.html" class="link bold">Entrar</a></li>
-                    <li class="item" title="Cadastrar"><a href="./cadastro.html" class="link">Cadastrar</a></li>
-                </ul>
-            </div>
-        </div>
+        <div id="header"></div>
 
         <!-- conteudo -->
 
@@ -52,57 +34,23 @@
                     <label>Senha:</label>
                     <input type="password" placeholder="Insira sua senha" id="inp_senha">
                     <span id="erro"></span>
-                    <a href="esqueciSenha.html" class="hover-under">Esqueceu sua senha?</a>
+                    <a href="/esqueciSenha.html" class="hover-under">Esqueceu sua senha?</a>
                     <a href="cadastro.html">Não tem conta? <span id="crie"> Crie já!</span></a>
                     <button onclick="entrar()">Entrar</button>
                 </div>
 
 
                 <div class="box_img flex-center">
-                    <img src="./imagens/storyset/imagemLogin.png" alt="Login, Entrar, Signin, Bem vindo de volta">
+                    <img src="./image/storyset/imagemLogin.png" alt="Login, Entrar, Signin, Bem vindo de volta">
                 </div>
 
             </div>
 
         </div>
 
-        <!-- footer -->
-        <div class="footer">
-            <div class="container-lg">
-                <div class="logo">
-                    <a href="./inicio.html">
-                        <img src="../../imagens/magna/logoBranco.png" alt="Magna, Logotipo, Empresa">
-                    </a>
-                </div>
-                <div class="footer-meio flex-center">
-                    <span class="endereco">Av. Angélica, 1048 São Paulo - SP, 01227100
-                    </span>
-                    <span class="copyright">Copyright © 2010-2022 Magna Company S.L. Todos os direitos
-                        reservados.</span>
-                </div>
-                <div class="footer-redes">
-                    <span class="email">magna.sptech@gmail.com</span>
-                    <div class="redes-sociais">
-                        <a href="https://www.facebook.com/MagnaItda" class="icon" target="_blank">
-                            <i class="fa-brands fa-facebook-square"></i>
-                        </a>
-                        <a href="https://www.instagram.com/magnaltda/" class="icon" target="_blank">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/magna-ltda-34bb29236/" class="icon" target="_blank">
-                            <i class="fa-brands fa-linkedin"></i>
-                        </a>
-                        <a href="mailto:magna.sptech@gmail.com?body=Bom%20dia!" class="icon" target="_blank">
-                            <i class="fa-brands fa-google"></i>
-                        </a>
-
-                    </div>
-                </div>
-                </div>
-            </div>
-        </div>
+        <div id="footer"></div>
     </body>
-    <script src="js/paginas/login.js"></script>
     <script src="js/global.js"></script>
+    <script src="js/paginas/login.js"></script>
 
 </html>

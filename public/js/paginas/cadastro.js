@@ -1,5 +1,6 @@
-
-function cadastrar() {
+showMenu('cadastro');
+showFooter();
+function cadastrar () {
 
     var emailVar = in_email.value;
     var nomeVar = in_nome.value;
@@ -15,16 +16,20 @@ function cadastrar() {
         telVar == '' ||
         senhaVar == '' ||
         confVar == ''
-    ) {
+    )
+    {
         erro.innerHTML = `Preencha todos os campos`;
         erro.className = 'erro';
-    } else if (emailVar.indexOf('@') == -1) {
+    } else if (emailVar.indexOf('@') == -1)
+    {
         erro.innerHTML = `Seu e-mail está invalido.`;
         erro.className = 'erro';
-    } else if (senhaVar.toLowerCase().trim() != confVar.toLowerCase().trim()) {
+    } else if (senhaVar.toLowerCase().trim() != confVar.toLowerCase().trim())
+    {
         erro.innerHTML = `As senhas não são iguais`;
         erro.className = 'erro';
-    } else {
+    } else
+    {
         erro.innerHTML = `Usuário cadastrado com sucesso!!`;
         erro.className = 'success';
 
@@ -44,18 +49,20 @@ function cadastrar() {
 
             console.log("resposta: ", resposta);
 
-            if (resposta.ok) {
+            if (resposta.ok)
+            {
                 cardErro.style.display = "block";
 
                 mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
                 setTimeout(() => {
                     // window.location = "login.html";
-                }, "2000")
+                }, "2000");
 
                 limparFormulario();
                 finalizarAguardar();
-            } else {
+            } else
+            {
                 throw ("Houve um erro ao tentar realizar o cadastro!");
             }
         }).catch(function (resposta) {
@@ -68,8 +75,8 @@ function cadastrar() {
 
     return false;
 
-    function sumirMensagem() {
-        cardErro.style.display = "none"
+    function sumirMensagem () {
+        cardErro.style.display = "none";
     }
 }
 

@@ -17,7 +17,7 @@ CREATE TABLE Usuario (
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     nomeUsuario VARCHAR (100),
     emailUsuario VARCHAR (100),
-    senhaUsuario CHAR (10),
+    senhaUsuario VARCHAR (60),
     permissao CHAR (8) CHECK (permissao = 'MASTER' OR permissao = 'ADM' OR permissao = 'ANALISTA'),
     fkShopping INT,
     FOREIGN KEY (fkShopping) REFERENCES Shopping (idShopping)

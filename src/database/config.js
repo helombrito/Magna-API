@@ -15,19 +15,20 @@ var sqlServerConfig = {
     options: {
         encrypt: true, // for azure
     }
-}
+};
 
 // CONEXÃO DO MYSQL WORKBENCH (LOCAL)
 var mySqlConfig = {
     host: "localhost",
     user: "root",
     database: "magna",
-    password: "",
+    password: "1234",
 };
 
-function executar(instrucao) {
+function executar (instrucao) {
     // VERIFICA A VARIÁVEL DE AMBIENTE SETADA EM app.js
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "producao")
+    {
         return new Promise(function (resolve, reject) {
             sql.connect(sqlServerConfig).then(function () {
                 return sql.query(instrucao);
@@ -42,13 +43,15 @@ function executar(instrucao) {
                 return ("ERRO NO SQL SERVER (Azure): ", erro);
             });
         });
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento")
+    {
         return new Promise(function (resolve, reject) {
             var conexao = mysql.createConnection(mySqlConfig);
             conexao.connect();
             conexao.query(instrucao, function (erro, resultados) {
                 conexao.end();
-                if (erro) {
+                if (erro)
+                {
                     reject(erro);
                 }
                 console.log(resultados);
@@ -58,14 +61,13 @@ function executar(instrucao) {
                 return ("ERRO NO MySQL WORKBENCH (Local): ", erro.sqlMessage);
             });
         });
-    } else {
+    } else
+    {
         return new Promise(function (resolve, reject) {
             console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-            reject("AMBIENTE NÃO CONFIGURADO EM app.js")
+            reject("AMBIENTE NÃO CONFIGURADO EM app.js");
         });
     }
 }
 
-module.exports = {
-    executar
-}
+module.exports = { executar };
