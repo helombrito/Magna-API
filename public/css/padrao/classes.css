@@ -170,7 +170,19 @@
   font-size: var(--font-md);
   min-height: 30px;
   opacity: 0.9;
+  box-sizing: border-box;
 }
+.input.invalid{
+  background-color: #f8cbd0;
+  color: #e61818;
+  caret-color: #e61818;
+  position: relative;
+  box-shadow: 0 0 1px 1px #e61818;
+}
+.input.invalid::placeholder{
+  color: #e61818cc;
+}
+
 
 .input:hover,
 input:focus {
@@ -219,6 +231,14 @@ input:focus {
   font-weight: 500;
   border: 1px solid #e61818;
 }
+small.alert.error{
+  font-weight: normal;
+  color: #c20e0e;
+  border: none;
+  box-shadow: none;
+  font-size: var(--font-sm);
+  background-color: transparent;
+}
 
 .alert.success {
   background-color: #7efd9c;
@@ -242,9 +262,9 @@ input:focus {
 [data-title]:after {
   content: attr(data-title);
   position: absolute;
-  top: 100%;
+  top: 90%;
   transform: translateX(-10px);
-  transition: .4s ease .6s;
+  transition: .5s ease .4s;
   padding: 4px 6px;
   min-width: 60px;
   font-size: var(--font-sm);
@@ -264,4 +284,5 @@ input:focus {
 [data-title]:hover:after {
   opacity: 1;
   transform: translateX(0);
+  top: 95%;
 }

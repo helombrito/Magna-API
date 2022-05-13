@@ -152,3 +152,15 @@ function clearMessages (container = document.querySelector('#alertas')) {
         container.innerHTML = '';
     }
 }
+function checkInput(input = document.querySelector('input'), max, min, regex){
+    if(!input.checkValidity()){
+        console.log(input.parentNode)
+        input.classList.toggle('invalid');
+        var pn = input.parentNode
+        input.parentNode.appendChild(small) += `<small class='alert show error'>${input.validationMessage} </small>`;
+        console.log(pn)
+        // setTimeout(() => {
+        //     console.log(pn)
+        // }, 200);
+    }
+}

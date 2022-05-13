@@ -29,25 +29,26 @@
     <div class="container_pai container-lg shadow-lg">
       <div class="container_esquerda">
         <div class="container_titulo">
-          <h1 class="titulo">Cadastre-se</h1>
+          <h1 class="titulo">Novo Shopping</h1>
         </div>
         <div id="alertas"></div>
         <div class="container_inputs">
-          <span class="texto">Nome do Shopping:</span>
-          <input
-            type="text"
-            id="in_nome"
-            placeholder="Shopping São Paulo"
-            class="input"
-            max="100"
-            maxlength="100"
-            minlength="3"
-            required
-            pattern="[a-zA-Zs]"
-            autocomplete="name"
-          />
-
-          <span class="texto">E-mail:</span>
+          <div class="container-input" data-title="Insira somente texto com até 100 letras">
+            <label class="texto" for="in_nome">Nome do Shopping:</label>
+            <input
+              type="text"
+              id="in_nome"
+              placeholder="Shopping São Paulo"
+              class="input"
+              maxlength="100"
+              minlength="3"
+              required
+              pattern="[A-Za-zs]+"
+              autocomplete="name"
+            />
+          </div>
+          <div class="container-input">
+          <label class="texto" for="in_email">E-mail:</label>
           <input
             type="email"
             id="in_email"
@@ -61,8 +62,12 @@
             required
             autocomplete="email"
           />
+        </div>
+        <div class="container-input dividido">
 
-          <span class="texto">CNPJ:</span>
+        <div class="container-input ">
+
+          <label class="texto" for="in_cnpj">CNPJ:</label>
           <input
             type="number"
             id="in_cnpj"
@@ -74,8 +79,10 @@
             required
             autocomplete="cnpj"
           />
+        </div>
+        <div class="container-input">
 
-          <span class="texto">Telefone:</span>
+          <label class="texto" for="in_tel">Telefone:</label>
           <input
             type="number"
             id="in_tel"
@@ -87,8 +94,13 @@
             required
             autocomplete="tel"
           />
+          </div>
+        </div>
+          <div class="container-input dividido">
 
-          <span class="texto">Senha:</span>
+          <div class="container-input">
+
+          <label class="texto" for="in_senha">Senha:</label>
           <input
             type="password"
             id="in_senha"
@@ -99,8 +111,10 @@
             required
             autocomplete="current-password"
           />
+        </div>
+        <div class="container-input">
 
-          <span class="texto">Confirmação de senha:</span>
+          <label class="texto" for="in_conf">Confirmação de senha:</label>
           <input
             type="password"
             id="in_conf"
@@ -112,6 +126,9 @@
             autocomplete="current-password"
           />
         </div>
+      </div>
+    </div>
+
 
         <div class="container_aceitos_btn">
           <div class="container_aceitos">

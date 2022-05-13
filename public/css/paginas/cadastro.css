@@ -25,13 +25,25 @@
 
 .container_pai .container_inputs {
     width: 100%;
-    /* font-size: var(--font-xmd); */
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
 }
+.container_pai .container_inputs .container-input {
+    display: flex;
+    flex-direction: column;
+}
+.container_pai .container_inputs .container-input.dividido {
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.container_inputs .container-input.dividido > * {
+    width: 100%;
+    max-width: 48%;
+}
 
-.container_pai .container_inputs span {
+.container_pai .container_inputs label {
     font-size: var(--font-xmd);
 }
 
@@ -69,7 +81,6 @@
 }
 
 .container_pai .input {
-    margin-bottom: 15px;
     margin-top: 2px;
 }
 
@@ -83,7 +94,8 @@
 }
 
 .container_direita img {
-    width: 100%;
+    margin-left: 10%;
+    width: 80%;
     height: 100%;
 }
 

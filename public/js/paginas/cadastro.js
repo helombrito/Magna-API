@@ -1,5 +1,6 @@
 showMenu('cadastro');
 showFooter();
+
 function cadastrar () {
 
     var emailVar = in_email.value;
@@ -9,6 +10,12 @@ function cadastrar () {
     var senhaVar = in_senha.value;
     var confVar = in_conf.value;
 
+
+
+    document.querySelectorAll('.input').forEach(input=>{
+        checkInput(input)
+    })
+    return;
     if (
         emailVar == '' ||
         nomeVar == '' ||
