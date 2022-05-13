@@ -18,10 +18,10 @@ function cadastrar () {
         confVar == ''
     )
     {
-        erro.innerHTML = `Preencha todos os campos`;
-        erro.className = 'erro';
+        showMessageWarning('Preencha todos os campos');
     } else if (emailVar.indexOf('@') == -1)
     {
+        deleteMessageError();
         erro.innerHTML = `Seu e-mail está invalido.`;
         erro.className = 'erro';
     } else if (senhaVar.toLowerCase().trim() != confVar.toLowerCase().trim())

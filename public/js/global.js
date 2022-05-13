@@ -79,3 +79,76 @@ function showMenu (page, container = 'header') {
     }
 
 }
+
+function showMessageError (text, container = document.querySelector('#alertas')) {
+    if (container)
+    {
+        container.innerHTML = `<span class='alert error'>${text} <i class='fa fa-exclamation-circle'></i> </span>`;
+
+        setTimeout(() => {
+            container.querySelector('.alert').classList.add('show');
+        }, 100);
+    }
+}
+function deleteMessageError (container = document.querySelector('#alertas')) {
+    if (container)
+    {
+        container.querySelectorAll('.error')
+            .forEach(val => {
+                val.classList.remove('show');
+                setTimeout(() => {
+                    val.remove();
+                }, 1000);
+            });
+    }
+}
+function showMessageSuccess (text, container = document.querySelector('#alertas')) {
+    if (container)
+    {
+        container.innerHTML = `<span class='alert success'>${text} <i class='fa fa-check-circle'></i> </span>`;
+
+        setTimeout(() => {
+            container.querySelector('.alert').classList.add('show');
+        }, 100);
+    }
+}
+function deleteMessageSuccess (container = document.querySelector('#alertas')) {
+    if (container)
+    {
+        container.querySelectorAll('.success')
+            .forEach(val => {
+                val.classList.remove('show');
+                setTimeout(() => {
+                    val.remove();
+                }, 1000);
+            });
+    }
+}
+function showMessageWarning (text, container = document.querySelector('#alertas')) {
+    if (container)
+    {
+        container.innerHTML = `<span class='alert warning'>${text} <i class='fa fa-warning'></i> </span>`;
+
+        setTimeout(() => {
+            container.querySelector('.alert').classList.add('show');
+        }, 100);
+    }
+}
+function deleteMessageWarning (container = document.querySelector('#alertas')) {
+    if (container)
+    {
+        container.querySelectorAll('.warning')
+            .forEach(val => {
+                val.classList.remove('show');
+                setTimeout(() => {
+                    val.remove();
+                }, 1000);
+            });
+    }
+}
+function clearMessages (container = document.querySelector('#alertas')) {
+    if (container)
+    {
+        container.innerHTML = '';
+    }
+}
