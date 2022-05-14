@@ -94,7 +94,7 @@ const labelsBar = [
 const dataBar = {
     labels: labelsBar,
     datasets: [ {
-        label: 'Quantidade de superlotações',
+        label: 'Dias por mês que a quantidade de pessoas ficou abaixo da média',
         backgroundColor: '#e83847',
         borderColor: '#dc3545ff',
         borderRadius: 8,

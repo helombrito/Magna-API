@@ -29,16 +29,20 @@
     flex-direction: column;
     flex-wrap: wrap;
 }
+
 .container_pai .container_inputs .container-input {
+    margin: var(--margin) 0 0;
     display: flex;
     flex-direction: column;
 }
+
 .container_pai .container_inputs .container-input.dividido {
     justify-content: space-between;
     flex-direction: row;
     flex-wrap: wrap;
 }
-.container_inputs .container-input.dividido > * {
+
+.container_inputs .container-input.dividido>* {
     width: 100%;
     max-width: 48%;
 }
