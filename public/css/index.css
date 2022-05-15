@@ -8,6 +8,7 @@
 
 /* Padrões  */
 @import url(./padrao/reset.css);
+@import url(./padrao/keyframes.css);
 @import url(./padrao/classes.css);
 
 /* Components */

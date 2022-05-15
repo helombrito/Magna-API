@@ -18,6 +18,11 @@
     align-items: center;
 }
 
+.container_pai .container_esquerda #alertas {
+    width: 100%;
+    margin: var(--margin) 0;
+}
+
 .container_pai .container_titulo {
     margin-bottom: var(--margin-lg);
     width: 100%;
@@ -31,7 +36,7 @@
 }
 
 .container_pai .container_inputs .container-input {
-    margin: var(--margin) 0 0;
+    margin: var(--margin) 0 var(--padding-sm);
     display: flex;
     flex-direction: column;
 }
@@ -44,6 +49,7 @@
 
 .container_inputs .container-input.dividido>* {
     width: 100%;
+    height: 100%;
     max-width: 48%;
 }
 
@@ -114,4 +120,11 @@
     width: 80%;
     margin: 0 auto;
     max-width: 400px;
+}
+
+.container_pai .container_termos.error {
+    color: var(--danger);
+    accent-color: var(--danger);
+
+    animation: shake .3s ease;
 }

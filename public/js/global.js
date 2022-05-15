@@ -152,9 +152,15 @@ function clearMessages (container = document.querySelector('#alertas')) {
         container.innerHTML = '';
     }
 }
+// default function to validate some fields from html
 function checkInput (input = document.querySelector('input'), max = null, min = null, regex = null) {
     if (input != undefined)
     {
+
+        if (input.parentNode.querySelector('.alert.error'))
+        {
+            inputErrorMessageClear(input);
+        }
         if (input.value.trim() == '' || input.value.trim().length == 0)
         {
             return inputErrorMessage(input, 'Esse campo deve ser preenchido');
@@ -167,10 +173,10 @@ function checkInput (input = document.querySelector('input'), max = null, min = 
         {
             return inputErrorMessage(input, `Esse campo pode ter no máximo ${max} caracteres`);
         }
-        // if (regex !== null && !regex.test(input.value.trim()))
-        // {
-        //     return inputErrorMessage(input, 'Preencha o campo de forma correta');
-        // }
+        if (regex !== null && !regex.test(input.value.trim()))
+        {
+            return inputErrorMessage(input, 'Preencha o campo de forma correta');
+        }
         if (!input.checkValidity())
         {
             return inputErrorMessage(input, input.validationMessage);
@@ -178,29 +184,49 @@ function checkInput (input = document.querySelector('input'), max = null, min = 
         return true;
     }
 }
-function inputErrorMessage (input, message) {
-    input.classList.add('invalid');
+// when add validate field in js, use this function to generate message and change input to error
+function inputErrorMessage (input, message = null) {
     var pn = input.parentNode;
-    if (pn.querySelector('small'))
+
+    input.classList.add('invalid');
+    if (message != null)
     {
-        inputErrorMessageClear(input);
-    } 
-    {
-        pn.innerHTML += `<small class='alert error'>${message} </small>`;
+        let alert = document.createElement('small');
+        alert.className = 'alert error';
+        alert.innerText = message;
+        pn.appendChild(alert);
+
         setTimeout(() => {
-            pn.querySelector('small').classList.add('show');
+            alert.classList.add('show');
         }, 10);
     }
     return false;
 }
 function inputErrorMessageClear (input) {
     input.classList.remove('invalid');
-    let pn = input.parentNode.querySelector('small');
+    let pn = input.parentNode.querySelector('.alert.error');
     if (pn)
     {
         pn.classList.remove('show');
-        setTimeout(() => {
-            pn.remove();
-        }, 500);
+        pn.remove();
+    }
+}
+
+function checkCheckbox (checkbox = document.querySelector('input'), containerAlert = document.querySelector('div#alertas')) {
+    if (checkbox)
+    {
+        var pn = checkbox.parentNode;
+        if (!checkbox.checked)
+        {
+            pn.classList.add('error');
+            showMessageWarning('Aceite os termos de uso e privacidade!', containerAlert);
+            return false;
+        }
+        else
+        {
+            pn.classList.remove('error');
+            clearMessages(containerAlert);
+            return true;
+        }
     }
 }
