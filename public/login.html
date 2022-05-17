@@ -1,56 +1,83 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Mudar em toda página o titulo -->
+    <title>Magna | Login</title>
+    <!-- Padrão CSS e Icones FA -->
+    <link rel="stylesheet" type="text/css" href="./css/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="shortcut icon"
+      href="../../image/magna/favicon.ico"
+      type="image/x-icon"
+    />
+  </head>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Mudar em toda página o titulo -->
-        <title>Magna | Login</title>
-        <!-- Padrão CSS e Icones FA -->
-        <link rel="stylesheet" type="text/css" href="../../css/index.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="shortcut icon" href="../../image/magna/favicon.ico" type="image/x-icon">
+  <body>
+    <div id="header"></div>
 
-    </head>
-
-    <body>
-        <div id="header"></div>
-
-        <!-- conteudo -->
-
-        <div class="container_login ">
-            <div class="nav_bar_login shadow-lg">
-
-
-                <div class="box_login shadow-sm">
-
-                    <h1 class="h1">Login</h1>
-                    <span id="erro" class="d-none"></span>
-                    <label>E-mail:</label>
-                    <input type="text" placeholder="insira seu email" id="inp_email">
-                    <label>Senha:</label>
-                    <input type="password" placeholder="Insira sua senha" id="inp_senha">
-                    <span id="erro"></span>
-                    <a href="/esqueciSenha.html" class="hover-under">Esqueceu sua senha?</a>
-                    <a href="cadastro.html">Não tem conta? <span id="crie"> Crie já!</span></a>
-                    <button onclick="entrar()">Entrar</button>
-                </div>
-
-
-                <div class="box_img flex-center">
-                    <img src="./image/storyset/imagemLogin.png" alt="Login, Entrar, Signin, Bem vindo de volta">
-                </div>
-
-            </div>
-
+    <!-- conteudo -->
+    <div class="container_login">
+      <div class="nav_bar_login shadow-lg">
+        <div class="box_login shadow-sm">
+          <h1 class="title-2 h1-login">Login</h1>
+          <div id="alertas" class="mb"></div>
+          <div class="container-input" data-title="Insira seu E-mail">
+            <label for="inp_email">E-mail:</label>
+            <input
+              type="email"
+              placeholder="email@example.com"
+              id="inp_email"
+              required
+              maxlength="100"
+              minlength="4"
+              autocomplete="email"
+              inputmode="email"
+              class="input"
+            />
+          </div>
+          <div class="container-input" data-title="Insira sua senha">
+            <label for="inp_senha">Senha:</label>
+            <input
+              type="password"
+              placeholder="********"
+              class="input"
+              id="inp_senha"
+              required
+              min="4"
+              maxlength="60"
+              autocomplete="current-password"
+            />
+          </div>
+          <a href="/esqueciSenha.html" class="hover-under"
+            >Esqueceu sua senha?</a
+          >
+          <a href="cadastro.html"
+            >Não tem conta? <span id="crie"> Crie já!</span></a
+          >
+          <button class="btn btn-primary" onclick="entrar()">Entrar</button>
         </div>
 
-        <div id="footer"></div>
-    </body>
-    <script src="js/global.js"></script>
-    <script src="js/paginas/login.js"></script>
+        <div class="box_img flex-center">
+          <img
+            src="./image/storyset/imagemLogin.png"
+            alt="Login, Entrar, Signin, Bem vindo de volta"
+          />
+        </div>
+      </div>
+    </div>
 
+    <div id="footer"></div>
+  </body>
+  <script src="js/global.js"></script>
+  <script src="js/paginas/login.js"></script>
 </html>

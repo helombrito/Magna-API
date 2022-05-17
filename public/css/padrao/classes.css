@@ -254,6 +254,10 @@ small.alert.error {
   background-color: transparent;
 }
 
+#alertas {
+  max-width: 95%;
+}
+
 .alert.success {
   background-color: var(--success);
   color: var(--success-text);
