@@ -60,24 +60,18 @@ function entrar(req, res) {
 }
 
 function cadastrar(req, res) {
-    var email = req.body.emailServer;
     var nome = req.body.nomeServer;
     var cnpj = req.body.cnpjServer;
     var tel = req.body.telServer;
+    var email = req.body.emailServer;
     var senha = req.body.senhaServer;
 
-    if (nome == undefined) {
-        res.status(400).send("Seu email está undefined!");
-    }  else if (cnpj == undefined) {
-        res.status(400).send("Seu CNPJ está undefined!");
-    } else if (tel == undefined) {
-        res.status(400).send("Seu telefone está undefined!");
-    } else {
-
+    console.log("cheguei em controller")
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, cnpj, tel)
+        usuarioModel.cadastrar(nome, cnpj, tel, email, senha)
             .then(
                 function (resultado) {
+                    
                     res.json(resultado);
                 }
             ).catch(
@@ -88,10 +82,11 @@ function cadastrar(req, res) {
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);
+
                 }
             );
     }
-}
+
 
 module.exports = {
     entrar,

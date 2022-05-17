@@ -36,14 +36,13 @@ function cadastrar () {
                 emailServer : in_email.value,
                 nomeServer : in_nome.value,
                 cnpjServer : in_cnpj.value,
-                telefoneServer : in_tel.value,
+                telServer : in_tel.value,
                 senhaServer : in_senha.value
             })
         }).then(function (resposta) {
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                cardErro.style.display = "block";
 
                 mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
