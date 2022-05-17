@@ -3,7 +3,7 @@ USE Magna;
 
 CREATE TABLE usuario(
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(100) NOT NULL,
+	nome VARCHAR(100),
     email VARCHAR(100) NOT NULL UNIQUE,
     senha VARCHAR(60) NOT NULL,
     cpf CHAR(11) UNIQUE,
@@ -15,7 +15,7 @@ CREATE TABLE Shopping(
     nomeShopping VARCHAR(100) NOT NULL,
     cnpj CHAR(14) NOT NULL UNIQUE,
     telefone CHAR(11) NOT NULL,
-    cep CHAR(8) NOT NULL,
+    cep CHAR(8),
     numeroEndereco INT,
     CONSTRAINT ct_ckNumeroEndereco CHECK (numeroEndereco > 0)
 );

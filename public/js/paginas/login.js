@@ -12,8 +12,8 @@ function entrar () {
         checkInput(senhaVar, 60, 4)
     )
     {
-        emailVar = emailVar.value;
-        senhaVar = senhaVar.value;
+        emailVar = inp_email.value;
+        senhaVar = inp_senha.value;
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
 
