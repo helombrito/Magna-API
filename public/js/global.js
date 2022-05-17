@@ -53,8 +53,8 @@ function showMenu (page, container = 'header') {
                 <li class="item" title="Inicio"><a href="/" class="link">Inicio</a></li>
                 <li class="item" title="Sobre"><a href="/" class="link">Sobre</a></li>
                 <li class="item" title="Contato"><a href="/" class="link">Contato</a></li>
-                <li class="item" title="Simulador Financeiro"><a href="simulador.html" class="link">Simulador</a></li>
-                <li class="item" title="Entrar"><a href="login.html" class="link">Entrar</a></li>
+                <li class="item" title="Simulador Financeiro"><a href="/simulador.html" class="link">Simulador</a></li>
+                <li class="item" title="Entrar"><a href="/login.html" class="link">Entrar</a></li>
                 <li class="item" title="Cadastrar"><a href="/cadastro.html" class="link">Cadastrar</a></li>
             </ul>
         </div>

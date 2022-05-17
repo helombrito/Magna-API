@@ -1,34 +1,19 @@
 showFooter();
 showMenu('login');
 function entrar () {
+    var emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/gm;
+    /** @type {HTMLInputElement} */
+    var emailVar = inp_email;
+    /** @type {HTMLInputElement} */
+    var senhaVar = inp_senha;
 
-    var emailVar = inp_email.value;
-    var senhaVar = inp_senha.value;
-
-
-    if (emailVar == '')
+    if (
+        checkInput(emailVar, 100, 4, emailRegex) &&
+        checkInput(senhaVar, 60, 4)
+    )
     {
-        erro.innerHTML = `Preencha o E-mail`;
-        erro.className = 'erro';
-    } else if (senhaVar == '')
-    {
-        erro.innerHTML = `Preencha a senha`;
-        erro.className = 'erro';
-    } else if (emailVar.indexOf('@') == -1)
-    {
-        erro.innerHTML = `Seu e-mail está invalido.`;
-        erro.className = 'erro';
-    } else if (emailVar.length < 4)
-    {
-        erro.innerHTML = `E-mail deve possuir 4 ou mais caracteres.`;
-        erro.className = 'erro';
-    } else if (senhaVar.length < 4)
-    {
-        erro.innerHTML = `Senha deve possuir 4 ou mais caracteres.`;
-        erro.className = 'erro';
-    } else
-    {
-
+        emailVar = inp_email.value;
+        senhaVar = inp_senha.value;
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
 
@@ -45,7 +30,6 @@ function entrar () {
             console.log("ESTOU NO THEN DO entrar()!");
             if (resposta.ok)
             {
-                console.log(resposta);
 
                 resposta.json().then(json => {
                     console.log(json);
@@ -62,11 +46,8 @@ function entrar () {
 
             } else
             {
-
-                console.log("Erro de login!");
-
                 resposta.text().then(texto => {
-                    console.error(texto);
+                    showMessageError(texto);
                     // limparFormulario();
 
                 });

@@ -97,7 +97,6 @@ function entrar(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
-
         usuarioModel.entrar(email, senha)
             .then(
                 function (resultado) {
@@ -125,10 +124,10 @@ function entrar(req, res) {
 }
 
 function cadastrar(req, res) {
-    var email = req.body.emailServer;
     var nome = req.body.nomeServer;
     var cnpj = req.body.cnpjServer;
     var tel = req.body.telServer;
+    var email = req.body.emailServer;
     var senha = req.body.senhaServer;
 
 
@@ -147,9 +146,10 @@ function cadastrar(req, res) {
     else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(email, nome, cnpj, tel, senha)
+        usuarioModel.cadastrar(nome, cnpj, tel, email, senha)
             .then(
                 function (resultado) {
+                    
                     res.json(resultado);
                 }
             ).catch(
@@ -160,10 +160,12 @@ function cadastrar(req, res) {
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);
+
                 }
             );
     }
 }
+
 
 module.exports = {
     entrar,

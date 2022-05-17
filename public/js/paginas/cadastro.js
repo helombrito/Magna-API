@@ -25,9 +25,51 @@ function cadastrar () {
     if (validarCampos())
     {
         showMessageSuccess('Todos os campos validados!');
+        fetch("usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                emailServer : in_email.value,
+                nomeServer : in_nome.value,
+                cnpjServer : in_cnpj.value,
+                telServer : in_tel.value,
+                senhaServer : in_senha.value
+            })
+        }).then(function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+
+                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                setTimeout(() => {
+                    window.location = "login.html";
+                }, "2000")
+                
+                limparFormulario();
+                finalizarAguardar();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+    function sumirMensagem() {
+        cardErro.style.display = "none"
     }
 
+ 
 }
+
+
 
 function validarCampos () {
     var emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/gm;
