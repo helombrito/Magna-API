@@ -60,7 +60,7 @@ async function enviar_email(req) {
 
    
     // colocar a variavel dentro do to
-    //  var email = req.body.emailServer;
+     var email = req.body.emailServer;
 
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
@@ -74,18 +74,50 @@ async function enviar_email(req) {
         },
     });
 
-    // send mail with defined transport object
+    // enviando email com o objeto de transporte definido 
     let info = await transporter.sendMail({
-        from: '"Magna" <magna.sptech@gmail.com>', // sender address
-        to: "pedrohenriqueranea@gmail.com", // list of receivers
+        from: '"Magna" <magna.sptech@gmail.com>', // Endereço de email de quem esta enviando
+        to: `${email}`, // lista de enviados
         subject: "Recuperação de senha.", // Subject line
-        text: "Hello world?", // plain text body
-        html: "<b>Hello world?</b>", // html body
+        text: "Acesse o link para criar sua nova senha.", // plain text body
+        html: "<b>Acesse o link para criar sua nova senha.</b><br>", // html body
     });
 
     console.log("Message sent: %s", info.messageId);
 }
 
+
+function novaSenha(req, res) {
+    var senha = req.body.senhaServer;
+
+    if (senha == undefined) {
+        res.status(400).send("Sua senha está indefinida!");
+    } else {
+        usuarioModel.novaSenha(senha)
+            .then(
+                function (resultado) {
+                    console.log(`\nResultados encontrados: ${resultado.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
+
+                    if (resultado.length == 1) {
+                        console.log(resultado);
+                        res.json(resultado[0]);
+                    } else if (resultado.length == 0) {
+                        res.status(403).send("Senha inválida");
+                    } else {
+                        res.status(403).send("Erro ao mudar senha!");
+                    }
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nErro no login! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+}
 
 
 function entrar(req, res) {
@@ -115,7 +147,7 @@ function entrar(req, res) {
             ).catch(
                 function (erro) {
                     console.log(erro);
-                    console.log("\nErro no esqueci minha senha! Erro: ", erro.sqlMessage);
+                    console.log("\nErro no login! Erro: ", erro.sqlMessage);
                     res.status(500).json(erro.sqlMessage);
                 }
             );
@@ -173,5 +205,6 @@ module.exports = {
     listar,
     testar,
     validar,
-    enviar_email
+    enviar_email,
+    novaSenha
 };

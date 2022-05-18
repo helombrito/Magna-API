@@ -36,19 +36,19 @@ function validar (email) {
 
 
 
-function nova_senha(senha){
+function novaSenha(senha, email){
 
 
-    var instrucao = ` update usuario set senha = '${novaSenha}'  where emailUsuario = '${email}'`
+    var instrucao = ` update usuario set senha = '${senha}'  where emailUsuario = '${email}'`
     return database.executar(instrucao);
 
 
 }
 // esqueci minha senha
-async function enviar_email() {
+async function enviar_email(email) {
   
 
-
+   
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -59,14 +59,13 @@ async function enviar_email() {
             pass: "M@gna2020", // generated ethereal password
         },
     });
-
-    // send mail with defined transport object
+    // enviando email com o objeto de transporte definido 
     let info = await transporter.sendMail({
-        from: '"Magna" <magna.sptech@gmail.com>', // sender address
-        to: "pedrohenriqueranea@gmail.com", // list of receivers
+        from: '"Magna" <magna.sptech@gmail.com>', // Endereço de email de quem esta enviando
+        to: `${email}`, // lista de enviados
         subject: "Recuperação de senha.", // Subject line
-        text: "Hello world?", // plain text body
-        html: "<b>Hello world?</b>", // html body
+        text: "Acesse o link para criar sua nova senha.", // plain text body
+        html: "<b>Acesse o link para criar sua nova senha.</b><br> ", // html body
     });
 
     console.log("Message sent: %s", info.messageId);
@@ -92,6 +91,7 @@ module.exports = {
     cadastrar: cadastrar,
     listar: listar,
     validar: validar,
-    enviar_email: enviar_email
+    enviar_email: enviar_email,
+    novaSenha:novaSenha
    
 };

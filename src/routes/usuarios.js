@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var nodemailer = require("nodemailer");
+
 
 var usuarioController = require("../controllers/usuarioController");
 
@@ -25,6 +25,10 @@ router.post("/validar", function (req, res) {
 
 router.post("/enviar_email", function (req) {
     usuarioController.enviar_email(req);
+});
+
+router.post("/enviar_email", function (req) {
+    usuarioController.novaSenha(req);
 });
 
 
