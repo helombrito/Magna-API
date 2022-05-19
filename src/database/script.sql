@@ -13,8 +13,8 @@ CREATE TABLE usuario(
 CREATE TABLE Shopping(
 	idShopping INT PRIMARY KEY AUTO_INCREMENT,
     nomeShopping VARCHAR(100) NOT NULL,
-    cnpj CHAR(14) UNIQUE,
-    telefone CHAR(11),
+    cnpj CHAR(14) UNIQUE NOT NULL,
+    telefone CHAR(11) NOT NULL,
     cep CHAR(8),
     numeroEndereco INT,
     CONSTRAINT ct_ckNumeroEndereco CHECK (numeroEndereco > 0)
@@ -54,12 +54,9 @@ CREATE TABLE Sensor(
 CREATE TABLE Registro(
 	idSensor INT AUTO_INCREMENT,
     dataCaptura DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    captura CHAR(1) NOT NULL DEFAULT 0 CHECK (captura in (0,1)),
+    captura CHAR(1) NOT NULL DEFAULT 0 CHECK (captura in (0,1)),-- 0 não tem ngm e 1 tem
 	fkSensor INT NOT NULL,
     FOREIGN KEY (fkSensor) REFERENCES Sensor(idSensor),
     PRIMARY KEY(idSensor, fkSensor)
 );
-
--- drop database magna;
-select * from Shopping;
 

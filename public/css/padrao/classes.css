@@ -136,7 +136,7 @@
 }
 
 .shadow-lg {
-  box-shadow: 6px 12px 16px var(--color-shadow)
+  box-shadow: 6px 12px 16px var(--color-shadow);
 }
 
 /* TAGS */
@@ -149,7 +149,10 @@
   border: 0;
   opacity: 0.9;
   box-shadow: 0 0px 4px var(--color-shadow);
+}
 
+.btn.loading img {
+  width: 1.1em;
 }
 
 .btn:hover {
@@ -160,7 +163,6 @@
 .btn.btn-primary {
   background-color: var(--color-primary);
   color: var(--color-light);
-
 }
 
 .input {
@@ -191,14 +193,12 @@
   position: relative;
   box-shadow: 0 0 1px 1px var(--danger);
 
-  animation: shake .3s;
+  animation: shake 0.3s;
 }
-
 
 .input.invalid::placeholder {
-  color: var(--danger)cc;
+  color: var(--danger-placeholder);
 }
-
 
 .checkbox {
   width: 20px;
@@ -211,8 +211,8 @@
 }
 
 .hover-opacity {
-  opacity: .85;
-  transition: .35s ease;
+  opacity: 0.85;
+  transition: 0.35s ease;
 }
 
 .hover-opacity:hover {
@@ -227,11 +227,10 @@
   border: 1px solid var(--color-shadow);
   opacity: 0;
   box-shadow: 1px 1px 2px var(--color-shadow);
-  transition: .4s ease;
+  transition: 0.4s ease;
   margin-left: -40px;
   align-self: flex-start;
 }
-
 
 .alert.show {
   opacity: 1;
@@ -287,8 +286,9 @@ span.alert.show:hover {
   position: absolute;
   top: 95%;
   transform: translateX(-10px);
-  transition: .5s ease .4s;
+  transition: 0.5s ease 0.4s;
   padding: 4px 6px;
+  user-select: none;
   min-width: 60px;
   font-size: var(--font-sm);
   color: var(--color-dark);
@@ -307,5 +307,17 @@ span.alert.show:hover {
 [data-title]:hover:after {
   opacity: 1;
   transform: translateX(0);
-  top: 105%;
+  top: 110%;
+}
+
+/* MODAL */
+body > .modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background-color: #2228;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
 }

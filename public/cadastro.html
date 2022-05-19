@@ -46,6 +46,7 @@
               maxlength="100"
               minlength="3"
               required
+              inputmode="text"
               autocomplete="name"
             />
           </div>
@@ -69,6 +70,42 @@
             />
           </div>
           <div class="container-input dividido">
+            <div
+              class="container-input"
+              data-title="Insira somente os números do seu CEP"
+            >
+              <label class="texto" for="in_cep">CEP:</label>
+              <input
+                type="text"
+                id="in_cep"
+                class="input"
+                placeholder="00000-000"
+                maxlength="8"
+                minlength="8"
+                required
+                inputmode="numeric"
+                autocomplete="cep"
+              />
+            </div>
+            <div
+              class="container-input"
+              data-title="Insira número do local do shopping"
+            >
+              <label class="texto" for="in_numLocal">Número Local:</label>
+              <input
+                type="text"
+                id="in_numLocal"
+                placeholder="123"
+                class="input"
+                maxlength="7"
+                minlength="1"
+                required
+                inputmode="numeric"
+                autocomplete="cc-number"
+              />
+            </div>
+          </div>
+          <div class="container-input dividido">
             <div class="container-input" data-title="Insira somente números">
               <label class="texto" for="in_cnpj">CNPJ:</label>
               <input
@@ -78,6 +115,7 @@
                 placeholder="00.000.000/0000-00"
                 maxlength="14"
                 minlength="14"
+                inputmode="numeric"
                 required
                 autocomplete="cnpj"
               />
@@ -89,6 +127,7 @@
                 id="in_tel"
                 placeholder="(00) 00000-0000"
                 class="input"
+                inputmode="tel"
                 maxlength="11"
                 minlength="9"
                 required
@@ -148,13 +187,16 @@
           </div>
 
           <div class="container_btn">
-            <button class="btn btn-primary" onclick="cadastrar()">
+            <button
+              class="btn btn-primary"
+              id="btn_cadastrar"
+              onclick="cadastrar()"
+            >
               Cadastrar
             </button>
           </div>
         </div>
       </div>
-      <div id="mensagem_erro"></div>
       <div class="container_direita">
         <div class="container_texto">
           <span>
