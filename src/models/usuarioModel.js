@@ -1,5 +1,5 @@
 var database = require("../database/config");
- // esqueci minha senha
+// esqueci minha senha
 const nodemailer = require("nodemailer");
 
 
@@ -36,19 +36,19 @@ function validar (email) {
 
 
 
-function trocarSenha(senha, email){
+function trocarSenha (senha, email) {
 
 
-    var instrucao = ` update usuario set senha = '${senha}'  where email = '${email}'`
+    var instrucao = ` update usuario set senha = '${senha}'  where email = '${email}'`;
     return database.executar(instrucao);
 
 
 }
 // esqueci minha senha
-async function enviar_email(email) {
-  
+async function enviar_email (email) {
 
-   
+
+
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -78,12 +78,13 @@ async function enviar_email(email) {
 }
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucao
-function cadastrar (nome, cnpj, tel, email, senha) {
+function cadastrar (nome, cnpj, tel, email, senha, cep, numLocal) {
     // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, cnpj, tel);
-    var instrucao = `INSERT INTO shopping (nomeShopping, cnpj, telefone) VALUES ('${nome}', '${cnpj}', '${tel}');`;
+    var instrucao = `INSERT INTO shopping (nomeShopping, cnpj, telefone, cep, numeroEndereco) VALUES ('${nome}', '${cnpj}', '${tel}', '${cep}', '${numLocal}');`;
     //console.log("Executando a instrução SQL: \n" + instrucao);
-    var instrucao2 = `INSERT INTO usuario (email, senha) VALUES ('${email}','${senha}');`;
-           database.executar(instrucao2);
+    var instrucao2 = `INSERT INTO usuario (nome, email, senha) VALUES ('${nome}','${email}','${senha}');`;
+    // return console.log(instrucao, instrucao2);
+    database.executar(instrucao2);
     return database.executar(instrucao);
 }
 
@@ -93,6 +94,5 @@ module.exports = {
     listar: listar,
     validar: validar,
     enviar_email: enviar_email,
-    trocarSenha:trocarSenha
-   
+    trocarSenha: trocarSenha
 };
