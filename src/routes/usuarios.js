@@ -27,8 +27,8 @@ router.post("/enviar_email", function (req) {
     usuarioController.enviar_email(req);
 });
 
-router.post("/enviar_email", function (req) {
-    usuarioController.novaSenha(req);
+router.post("/trocarSenha", function (req) {
+    usuarioController.trocarSenha(req);
 });
 
 

@@ -13,13 +13,8 @@ CREATE TABLE usuario(
 CREATE TABLE Shopping(
 	idShopping INT PRIMARY KEY AUTO_INCREMENT,
     nomeShopping VARCHAR(100) NOT NULL,
-<<<<<<< HEAD
-    cnpj CHAR(14) NOT NULL UNIQUE,
-    telefone CHAR(11) NOT NULL,
-=======
     cnpj CHAR(14) UNIQUE,
     telefone CHAR(11),
->>>>>>> d50d8462f28479bfc4f52f71b13028a586a86ff2
     cep CHAR(8),
     numeroEndereco INT,
     CONSTRAINT ct_ckNumeroEndereco CHECK (numeroEndereco > 0)

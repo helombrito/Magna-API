@@ -25,7 +25,7 @@ function entrar (email, senha) {
 function validar (email) {
     // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha);
     var instrucao = `
-        SELECT * FROM usuario WHERE emailUsuario = '${email}';
+        SELECT * FROM usuario WHERE email = '${email}';
     `;
 
     // console.log("Executando a instrução SQL: \n" + instrucao);
@@ -36,10 +36,10 @@ function validar (email) {
 
 
 
-function novaSenha(senha, email){
+function trocarSenha(senha, email){
 
 
-    var instrucao = ` update usuario set senha = '${senha}'  where emailUsuario = '${email}'`
+    var instrucao = ` update usuario set senha = '${senha}'  where email = '${email}'`
     return database.executar(instrucao);
 
 
@@ -65,7 +65,8 @@ async function enviar_email(email) {
         to: `${email}`, // lista de enviados
         subject: "Recuperação de senha.", // Subject line
         text: "Acesse o link para criar sua nova senha.", // plain text body
-        html: "<b>Acesse o link para criar sua nova senha.</b><br> ", // html body
+        html: `<b>Acesse o link para criar sua nova senha.</b><br> 
+        <a href="http://localhost:3333/trocarSenha.html">http://localhost:3333/trocarSenha.html</a>`, // html body
     });
 
     console.log("Message sent: %s", info.messageId);
@@ -92,6 +93,6 @@ module.exports = {
     listar: listar,
     validar: validar,
     enviar_email: enviar_email,
-    novaSenha:novaSenha
+    trocarSenha:trocarSenha
    
 };

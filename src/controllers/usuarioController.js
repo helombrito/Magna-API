@@ -80,20 +80,24 @@ async function enviar_email(req) {
         to: `${email}`, // lista de enviados
         subject: "Recuperação de senha.", // Subject line
         text: "Acesse o link para criar sua nova senha.", // plain text body
-        html: "<b>Acesse o link para criar sua nova senha.</b><br>", // html body
+        html: `<b>Acesse o link para criar sua nova senha.</b><br>
+        <a href="http://localhost:3333/trocarSenha.html">http://localhost:3333/trocarSenha.html</a>`, // html body
     });
 
     console.log("Message sent: %s", info.messageId);
 }
 
 
-function novaSenha(req, res) {
-    var senha = req.body.senhaServer;
+function trocarSenha(req, res) {
+    var email = req.body.emailServer;
+    var senha = req.body.novaSenhaServer;
 
     if (senha == undefined) {
-        res.status(400).send("Sua senha está indefinida!");
+        console.log("Sua senha está indefinida!");
+    } else if (email == undefined) {
+        console.log("Seu email está indefinida!");
     } else {
-        usuarioModel.novaSenha(senha)
+        usuarioModel.trocarSenha(senha, email)
             .then(
                 function (resultado) {
                     console.log(`\nResultados encontrados: ${resultado.length}`);
@@ -103,9 +107,9 @@ function novaSenha(req, res) {
                         console.log(resultado);
                         res.json(resultado[0]);
                     } else if (resultado.length == 0) {
-                        res.status(403).send("Senha inválida");
+                       console.log("Senha inválida");
                     } else {
-                        res.status(403).send("Erro ao mudar senha!");
+                       console.log("Sucesso ao mudar senha!");
                     }
                 }
             ).catch(
@@ -139,9 +143,9 @@ function entrar(req, res) {
                         console.log(resultado);
                         res.json(resultado[0]);
                     } else if (resultado.length == 0) {
-                        res.status(403).send("Email e/ou senha inválido(s)");
+                       console.log("Email e/ou senha inválido(s)");
                     } else {
-                        res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                       console.log("Mais de um usuário com o mesmo login e senha!");
                     }
                 }
             ).catch(
@@ -206,5 +210,5 @@ module.exports = {
     testar,
     validar,
     enviar_email,
-    novaSenha
+    trocarSenha
 };
