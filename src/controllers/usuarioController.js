@@ -3,17 +3,19 @@ const nodemailer = require("nodemailer");
 
 var sessoes = [];
 
-function testar(req, res) {
+function testar (req, res) {
     console.log("ENTRAMOS NA usuarioController");
     res.json("ESTAMOS FUNCIONANDO!");
 }
 
-function listar(req, res) {
+function listar (req, res) {
     usuarioModel.listar()
         .then(function (resultado) {
-            if (resultado.length > 0) {
+            if (resultado.length > 0)
+            {
                 res.status(200).json(resultado);
-            } else {
+            } else
+            {
                 res.status(204).send("Nenhum resultado encontrado!");
             }
         }).catch(
@@ -25,7 +27,7 @@ function listar(req, res) {
         );
 }
 
-function validar(req, res) {
+function validar (req, res) {
 
     var email = req.body.emailServer;
 
@@ -37,10 +39,12 @@ function validar(req, res) {
                 console.log(`\nResultados encontrados: ${resultado.length}`);
                 console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
 
-                if (resultado.length == 1) {
+                if (resultado.length == 1)
+                {
                     console.log(resultado);
-                    res.json(resultado[0]);
-                } else if (resultado.length == 0) {
+                    res.json(resultado[ 0 ]);
+                } else if (resultado.length == 0)
+                {
                     res.status(403).send("Email e/ou senha inválido(s)");
                 }
             }
@@ -56,21 +60,21 @@ function validar(req, res) {
 
 // esqueci minha senha
 // 
-async function enviar_email(req) {
+async function enviar_email (req) {
 
-   
+
     // colocar a variavel dentro do to
-     var email = req.body.emailServer;
+    var email = req.body.emailServer;
 
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 587,
         secure: false, // true for 465, false for other ports
-        auth: { 
+        auth: {
             // mudar
             user: "magna.sptech@gmail.com",
-            pass: "M@gna2020", 
+            pass: "M@gna2020",
         },
     });
 
@@ -88,28 +92,34 @@ async function enviar_email(req) {
 }
 
 
-function trocarSenha(req, res) {
+function trocarSenha (req, res) {
     var email = req.body.emailServer;
     var senha = req.body.novaSenhaServer;
 
-    if (senha == undefined) {
+    if (senha == undefined)
+    {
         console.log("Sua senha está indefinida!");
-    } else if (email == undefined) {
+    } else if (email == undefined)
+    {
         console.log("Seu email está indefinida!");
-    } else {
+    } else
+    {
         usuarioModel.trocarSenha(senha, email)
             .then(
                 function (resultado) {
                     console.log(`\nResultados encontrados: ${resultado.length}`);
                     console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
 
-                    if (resultado.length == 1) {
+                    if (resultado.length == 1)
+                    {
                         console.log(resultado);
-                        res.json(resultado[0]);
-                    } else if (resultado.length == 0) {
-                       console.log("Senha inválida");
-                    } else {
-                       console.log("Sucesso ao mudar senha!");
+                        res.json(resultado[ 0 ]);
+                    } else if (resultado.length == 0)
+                    {
+                        console.log("Senha inválida");
+                    } else
+                    {
+                        console.log("Sucesso ao mudar senha!");
                     }
                 }
             ).catch(
@@ -124,28 +134,34 @@ function trocarSenha(req, res) {
 }
 
 
-function entrar(req, res) {
+function entrar (req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
 
-    if (email == undefined) {
+    if (email == undefined)
+    {
         res.status(400).send("Seu email está undefined!");
-    } else if (senha == undefined) {
+    } else if (senha == undefined)
+    {
         res.status(400).send("Sua senha está indefinida!");
-    } else {
+    } else
+    {
         usuarioModel.entrar(email, senha)
             .then(
                 function (resultado) {
                     console.log(`\nResultados encontrados: ${resultado.length}`);
                     console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
 
-                    if (resultado.length == 1) {
+                    if (resultado.length == 1)
+                    {
                         console.log(resultado);
-                        res.json(resultado[0]);
-                    } else if (resultado.length == 0) {
-                       console.log("Email e/ou senha inválido(s)");
-                    } else {
-                       console.log("Mais de um usuário com o mesmo login e senha!");
+                        res.json(resultado[ 0 ]);
+                    } else if (resultado.length == 0)
+                    {
+                        console.log("Email e/ou senha inválido(s)");
+                    } else
+                    {
+                        console.log("Mais de um usuário com o mesmo login e senha!");
                     }
                 }
             ).catch(
@@ -159,30 +175,80 @@ function entrar(req, res) {
 
 }
 
-function cadastrar(req, res) {
+function cadastrar (req, res) {
     var nome = req.body.nomeServer;
     var cnpj = req.body.cnpjServer;
     var tel = req.body.telServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
+    var cep = req.body.cepServer;
+    var numLocal = req.body.numServer;
 
 
-    if (email == undefined) {
+    if (email == undefined)
+    {
         res.status(400).send("Seu email está undefined!");
-    } else if (nome == undefined) {
+    } else if (nome == undefined)
+    {
         res.status(400).send("Seu nome está undefined!");
-    } else if (cnpj == undefined) {
+    } else if (cnpj == undefined)
+    {
         res.status(400).send("Seu CNPJ está undefined!");
-    } else if (tel == undefined) {
+    } else if (tel == undefined)
+    {
         res.status(400).send("Seu telefone está undefined!");
-    } else if (senha == undefined) {
+    } else if (senha == undefined)
+    {
         res.status(400).send("Sua senha está undefined!");
-    }
+    } else if (cep == undefined)
+    {
+        res.status(400).send("Sua CEP está undefined!");
+    } else if (numLocal == undefined)
+    {
+        res.status(400).send("Sua CEP está undefined!");
+    } else
+    {
+        // return console.log(nome, cnpj, tel, email, senha, cep, numLocal);
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.cadastrar(nome, cnpj, tel, email, senha, cep, numLocal)
+            .then(
+                function (resultado) {
 
-    else {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+
+                }
+            );
+    }
+}
+
+
+function cadastrar_usuario(req, res) {
+    var nomeCompleto = req.body.nomeCompletoServer;
+    var email = req.body.emailServer;
+    var cpf = req.body.cpfServer;
+    var senha = req.body.senhaServer;
+
+    if (nomeCompleto == undefined) {
+        res.status(400).send("Seu nome completo está undefined!");
+    } else if (email == undefined) {
+        res.status(400).send("Seu e-mail está undefined!");
+    } else if (cpf == undefined) {
+        res.status(400).send("Seu CPF está undefined!");
+    } else if (senha == undefined) {
+        res.status(400).send("Seu senha está undefined!");
+    } else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, cnpj, tel, email, senha)
+        usuarioModel.cadastrar_usuario(nomeCompleto, email, cpf, senha)
             .then(
                 function (resultado) {
                     
@@ -201,7 +267,6 @@ function cadastrar(req, res) {
             );
     }
 }
-
 
 module.exports = {
     entrar,
