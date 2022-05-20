@@ -31,7 +31,7 @@
 .container_superior .container_input {
     display: flex;
     flex-direction: column;
-    margin-top: 40px;
+    margin-top: 8px;
 }
 
 .container_superior .container_input .btn {
@@ -54,24 +54,4 @@
 
 .container_superior .texto {
     color: var(--color-white);
-}
-
-.container_superior .erro {
-    display: block;
-    color: rgba(232, 40, 72, 1);
-    font-weight: 600;
-    font-family: sans-serif;
-    border-radius: 4px;
-    background-color: rgba(232, 40, 72, .6);
-    padding: var(--padding-md);
-}
-
-.container_superior .success {
-    display: block;
-    color: var(--green);
-    font-weight: 600;
-    font-family: sans-serif;
-    border-radius: 4px;
-    background-color: rgba(66, 232, 40, 0.6);
-    padding: var(--padding-md);
 }

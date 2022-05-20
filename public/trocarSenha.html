@@ -1,64 +1,84 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Magna | Esqueci a Senha</title>
+    <link rel="stylesheet" href="../../css/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Magna | Esqueci a Senha</title>
-        <link rel="stylesheet" href="../../css/index.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="shortcut icon"
+      href="../../image/magna/favicon.ico"
+      type="image/x-icon"
+    />
+  </head>
 
-        <link rel="shortcut icon" href="../../image/magna/favicon.ico" type="image/x-icon">
+  <body>
+    <div id="header"></div>
 
-
-    </head>
-
-    <body>
-
-        <div id="header"></div>
-
-        <!-- INICIO ESQUECI SENHA -->
-        <div class="container_superior flex-center">
-            <div class="container-lg">
-
-                <div class="container_imagem">
-                    <img src="../../image/storyset/imagemSenha.png">
-                </div>
-
-                <div class="container_esq">
-
-                    <div class="container_tit">
-
-                        <h1 class="tit">Digite sua nova senha</h1>
-                        <span class="span">Não se preocupe, esquecer as coisas é normal.</span>
-                    </div>
-
-                    <div class="container_input">
-                        <div id="erro"></div>
-                        <span class="texto">Confirme seu email:</span>
-                        <input type="text" class="input" id="input_email">
-                        <span class="texto">Nova senha:</span>
-                        <input type="text" class="input" id="input_novaSenha">
-
-
-                        <button onclick="trocarSenha()" class="btn btn-primary mt">
-                            Enviar
-                        </button>
-
-                    </div>
-                </div>
-            </div>
+    <!-- INICIO ESQUECI SENHA -->
+    <div class="container_superior flex-center">
+      <div class="container-lg">
+        <div class="container_imagem">
+          <img src="../../image/storyset/imagemSenha.png" />
         </div>
-        <!-- FIM ESQUECI SENHA -->
 
-        <div id="footer"></div>
+        <div class="container_esq">
+          <div class="container_tit">
+            <h1 class="tit title-2">Atualizar senha</h1>
+            <span class="span"
+              >Não se preocupe, esquecer as coisas é normal.</span
+            >
+          </div>
 
-        <script src="js/global.js"></script>
-        <script src="js/paginas/trocarSenha.js"></script>
+          <div class="container_input">
+            <div id="alertas"></div>
+            <div class="container_input flex-column">
+              <span id="input_novaSenha" class="texto">Nova senha:</span>
+              <input
+                type="password"
+                id="input_novaSenha"
+                placeholder="********"
+                class="input"
+                maxlength="60"
+                minlength="4"
+                required
+                autocomplete="current-password"
+              />
+            </div>
+            <div class="container_input flex-column">
+              <span id="input_confSenha" class="texto">Confirmar senha:</span>
+              <input
+                type="password"
+                placeholder="********"
+                class="input"
+                maxlength="60"
+                minlength="4"
+                required
+                autocomplete="current-password"
+                id="input_confSenha"
+              />
+            </div>
+            <button onclick="trocarSenha()" class="btn btn-primary mt">
+              Enviar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- FIM ESQUECI SENHA -->
 
-    </body>
+    <div id="footer"></div>
 
+    <script src="js/global.js"></script>
+    <script src="js/paginas/trocarSenha.js"></script>
+  </body>
 </html>

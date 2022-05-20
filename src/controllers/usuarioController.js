@@ -27,12 +27,9 @@ function listar (req, res) {
         );
 }
 
-function validar (req, res) {
-
+function validarId (req, res) {
     var email = req.body.emailServer;
-
-
-
+    
     usuarioModel.validar(email)
         .then(
             function (resultado) {
@@ -91,20 +88,24 @@ async function enviar_email (req) {
     console.log("Message sent: %s", info.messageId);
 }
 
-
-function trocarSenha (req, res) {
-    var email = req.body.emailServer;
+/**
+ * 
+ * @param {Request} req 
+ * @param {Response} res 
+ * @param {number} id 
+ */
+function trocarSenha (req, res, id) {
     var senha = req.body.novaSenhaServer;
 
     if (senha == undefined)
     {
         console.log("Sua senha está indefinida!");
-    } else if (email == undefined)
+    } else if (id == undefined)
     {
-        console.log("Seu email está indefinida!");
+        console.log("Seu id está indefinida!");
     } else
     {
-        usuarioModel.trocarSenha(senha, email)
+        usuarioModel.trocarSenha(senha, id)
             .then(
                 function (resultado) {
                     console.log(`\nResultados encontrados: ${resultado.length}`);
@@ -231,27 +232,32 @@ function cadastrar (req, res) {
 }
 
 
-function cadastrar_usuario(req, res) {
+function cadastrar_usuario (req, res) {
     var nomeCompleto = req.body.nomeCompletoServer;
     var email = req.body.emailServer;
     var cpf = req.body.cpfServer;
     var senha = req.body.senhaServer;
 
-    if (nomeCompleto == undefined) {
+    if (nomeCompleto == undefined)
+    {
         res.status(400).send("Seu nome completo está undefined!");
-    } else if (email == undefined) {
+    } else if (email == undefined)
+    {
         res.status(400).send("Seu e-mail está undefined!");
-    } else if (cpf == undefined) {
+    } else if (cpf == undefined)
+    {
         res.status(400).send("Seu CPF está undefined!");
-    } else if (senha == undefined) {
+    } else if (senha == undefined)
+    {
         res.status(400).send("Seu senha está undefined!");
-    } else {
+    } else
+    {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
         usuarioModel.cadastrar_usuario(nomeCompleto, email, cpf, senha)
             .then(
                 function (resultado) {
-                    
+
                     res.json(resultado);
                 }
             ).catch(
@@ -273,7 +279,7 @@ module.exports = {
     cadastrar,
     listar,
     testar,
-    validar,
+    validarId,
     enviar_email,
     trocarSenha
 };

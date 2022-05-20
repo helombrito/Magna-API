@@ -36,13 +36,9 @@ function validar (email) {
 
 
 
-function trocarSenha (senha, email) {
-
-
-    var instrucao = ` update usuario set senha = '${senha}'  where email = '${email}'`;
+function trocarSenha (senha, id) {
+    var instrucao = ` update usuario set senha = '${senha}'  where idUsuario = ${id}`;
     return database.executar(instrucao);
-
-
 }
 // esqueci minha senha
 async function enviar_email (email) {
@@ -87,8 +83,8 @@ function cadastrar (nome, cnpj, tel, email, senha, cep, numLocal) {
     database.executar(instrucao2);
     return database.executar(instrucao);
 }
-function cadastrar_usuario (nomeCompleto, email, cpf ,senha) {
-    
+function cadastrar_usuario (nomeCompleto, email, cpf, senha) {
+
     // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, cnpj, tel);
     var instrucao = `INSERT INTO usuario (nomeCompleto, email, cpf, senha) values ('${nomeCompleto}','${email}','${cpf}','${senha}')`;
     //console.log("Executando a instrução SQL: \n" + instrucao);
