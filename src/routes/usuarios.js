@@ -17,6 +17,7 @@ router.post("/cadastrar", function (req, res) {
 
 router.post("/cadastrar_usuario", function (req, res) {
     usuarioController.cadastrar_usuario(req, res);
+    console.log("routes")
 });
 
 router.post("/autenticar", function (req, res) {

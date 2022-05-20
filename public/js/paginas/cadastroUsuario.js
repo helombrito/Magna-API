@@ -1,4 +1,4 @@
-showMenu("cadastro");
+showMenu("cadastroUsuario");
 showFooter();
 var nomeCompleto = "";
 var email = "";
@@ -9,22 +9,22 @@ var termos = "";
 
 var div_alertas = "";
 
-function cadastrar() {
+function cadastrarUsuario() {
   nomeCompleto = in_nome_completo;
-  email = in_email;
-  cpf = in_cpf;
-  senha = in_senha;
-  confirmarSenha = in_conf;
+  email = in_email_usuario;
+  cpf = in_cpf_usuario;
+  senha = in_senha_usuario;
+  confirmarSenha = in_conf_usuario;
   termos = privacidade;
 
   div_alertas = alertas;
-
+  
   if (validarCampos()) {
-    limparCampos();
-    /** @type {HTMLButtonElement} */
-    let button = document.querySelector("button#btn_cadastrarUsuario");
-    button.onclick = none;
-
+      limparCampos();
+    //   /** @type {HTMLButtonElement} */
+    //   let button = document.querySelector("button#btn_cadastrarUsuario");
+      //button.onclick = none;
+      
     // Rota Cadastrar dentro de usuarios.js
     fetch("usuarios/cadastrar_usuario", {
       method: "POST",
@@ -36,12 +36,13 @@ function cadastrar() {
         // Agora vá para o arquivo routes/usuario.js
         // esses valores estão dentro de req.body
         nomeCompletoServer: in_nome_completo.value,
-        emailServer: in_email.value,
-        cpfServer: in_cpf.value,
-        senhaServer: in_senha.value,
-      }),
-    })
-      .then(function (resposta) {
+        emailServer: in_email_usuario.value,
+        cpfServer: in_cpf_usuario.value,
+        senhaServer: in_senha_usuario.value,
+        
+    }),
+})
+.then(function (resposta) {
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
@@ -54,14 +55,14 @@ function cadastrar() {
             }
           });
         } else {
-          button.onclick = cadastrar();
+          button.onclick = cadastrarUsuario();
           showMessageError("Houve um erro ao tentar realizar o cadastro!");
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
       .catch(function (resposta) {
         limparCampos();
-        console.error(`Erro: ${resposta}`);
+        console.error(`Erro: ${resposta}`),
         showMessageError(resposta);
       });
 
@@ -75,10 +76,9 @@ function validarCampos() {
   var cnpjRegex = /^\d{14}$/gm;
 
   if (
-    checkInput(nome, 100, 3, /^[a-zA-Zà-úÀ-Ú\s]*$/gm) &&
+    checkInput(nomeCompleto, 100, 3, /^[a-zA-Zà-úÀ-Ú\s]*$/gm) &&
     checkInput(email, 100, 5, emailRegex) &&
     // cpnj only numbers
-    checkInput(cpf, 14, 14, cnpjRegex) &&
     // telefone only numbers
     checkInput(senha, 60, 4) &&
     checkInput(confirmarSenha, 60, 4) &&
