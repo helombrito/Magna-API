@@ -1,26 +1,13 @@
 showMenu('cadastro');
 showFooter();
 
-async function trocarSenha() {
-      var email = input_email.value;
-      var novaSenha = input_novaSenha.value;
-      if (email == '') {
-            erro.innerHTML = `Preencha o E-mail`;
-            erro.className = 'erro';
-      } else if (email.indexOf('@') == -1) {
-            erro.innerHTML = `Seu e-mail está invalido.`;
-            erro.className = 'erro';
-      } else if (email.length < 4) {
-            erro.innerHTML = `E-mail deve possuir 4 ou mais caracteres.`;
-            erro.className = 'erro';
-      } else {
-
-
-
-            console.log("FORM LOGIN: ", email);
-
-
-
+async function trocarSenha () {
+      var novaSenha = input_novaSenha;
+      var confSenha = input_confSenha;
+      if (
+            checkInput(novaSenha, 60, 4) &&
+            checkInput(confSenha, 60, 4))
+      {
             var req = await fetch("/usuarios/validar", {
                   method: "POST",
                   headers: {
@@ -30,14 +17,13 @@ async function trocarSenha() {
                         emailServer: email,
 
                   })
-            })
+            });
             var res = await req.json();
-            console.log(res)
-
-            if (res != undefined) {
-
-                  erro.innerHTML = `trocamos sua senha com sucesso`;
-                  erro.className = 'success';
+            console.log(res);
+            return;
+            if (res != undefined)
+            {
+                  showMessageSuccess('Sua senha foi alterada!');
 
                   await fetch("/usuarios/trocarSenha", {
                         method: "POST",
@@ -45,18 +31,13 @@ async function trocarSenha() {
                               "Content-Type": "application/json"
                         },
                         body: JSON.stringify({
-                              emailServer: email,
                               novaSenhaServer: novaSenha
-
                         })
-
-
                   });
 
-            } else {
-
-                  erro.innerHTML = `Houve um erro ao trocar senha`;
-                  erro.className = 'erro';
+            } else
+            {
+                  showMessageError('Houve um erro ao trocar senha');
             }
       }
 }

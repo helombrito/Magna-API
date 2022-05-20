@@ -25,16 +25,25 @@ router.post("/autenticar", function (req, res) {
 });
 
 router.post("/validar", function (req, res) {
-    usuarioController.validar(req, res);
+    usuarioController.validarId(req, res);
 });
 
 router.post("/enviar_email", function (req) {
     usuarioController.enviar_email(req);
 });
 
-router.post("/trocarSenha", function (req) {
-    usuarioController.trocarSenha(req);
-});
+router.put("/trocarSenha/:id",
+    /**
+     * 
+     * @param {Request} req 
+     */
+    function (req) {
+        console.log(req.params.id);
+        if (req.params.id)
+        {
+            usuarioController.trocarSenha(id, req);
+        }
+    });
 
 
 

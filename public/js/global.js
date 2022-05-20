@@ -161,7 +161,7 @@ function checkInput(
     if (min !== null && input.value.trim().length < min) {
       return inputErrorMessage(
         input,
-        `Esse campo ter ${min} ou mais caracteres`
+        `Esse campo ter pode ter ${min} ou mais caracteres`
       );
     }
     if (max !== null && input.value.trim().length > max) {

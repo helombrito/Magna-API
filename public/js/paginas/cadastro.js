@@ -12,7 +12,7 @@ var termos = "";
 
 var div_alertas = "";
 
-function cadastrar() {
+function cadastrar () {
   email = in_email;
   nome = in_nome;
   cep = in_cep;
@@ -25,11 +25,12 @@ function cadastrar() {
 
   div_alertas = alertas;
 
-  if (validarCampos()) {
-    limparCampos();
+  if (validarCampos())
+  {
+    // limparCampos();
     /** @type {HTMLButtonElement} */
     let button = document.querySelector("button#btn_cadastrar");
-    button.onclick = none;
+    // button.onclick = () => { };
 
     // Rota Cadastrar dentro de usuarios.js
     fetch("usuarios/cadastrar", {
@@ -53,23 +54,26 @@ function cadastrar() {
       .then(function (resposta) {
         console.log("resposta: ", resposta);
 
-        if (resposta.ok) {
+        if (resposta.ok)
+        {
           showMessageSuccess(
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login..."
+            "Cadastro realizado com sucesso!"
           );
           loadingElement(button).then((val) => {
-            if (val) {
+            if (val)
+            {
               window.location = "login.html";
             }
           });
-        } else {
-          button.onclick = cadastrar();
+        } else
+        {
+          // button.onclick = cadastrar();
           showMessageError("Houve um erro ao tentar realizar o cadastro!");
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
       .catch(function (resposta) {
-        limparCampos();
+        // limparCampos();
         console.error(`Erro: ${resposta}`);
         showMessageError(resposta);
       });
@@ -78,7 +82,7 @@ function cadastrar() {
   }
 }
 
-function validarCampos() {
+function validarCampos () {
   var emailRegex =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/gm;
   var cnpjRegex = /^\d{14}$/gm;
@@ -88,17 +92,20 @@ function validarCampos() {
     checkInput(email, 100, 5, emailRegex) &&
     // cpnj only numbers
     checkInput(cep, 8, 8, /^\d{8}$/gm) &&
-    checkInput(numLocal, 1, 7, /\d{1,7}/) &&
+    checkInput(numLocal, 7, 1, /^\d{1,7}$/) &&
     checkInput(cnpj, 14, 14, cnpjRegex) &&
     // telefone only numbers
     checkInput(telefone, 11, 9, /^\d{9,11}$/gm) &&
     checkInput(senha, 60, 4) &&
     checkInput(confirmarSenha, 60, 4) &&
     checkCheckbox(termos, div_alertas)
-  ) {
-    if (senha.value.trim() !== confirmarSenha.value.trim()) {
+  )
+  {
+    if (senha.value.trim() !== confirmarSenha.value.trim())
+    {
       return inputErrorMessage(confirmarSenha, "Senhas não são identicas");
-    } else {
+    } else
+    {
       inputErrorMessageClear(confirmarSenha);
     }
     return true;
