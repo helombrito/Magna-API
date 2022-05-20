@@ -20,7 +20,7 @@ function cadastrarUsuario() {
   div_alertas = alertas;
   
   if (validarCampos()) {
-      limparCampos();
+      // limparCampos();
     //   /** @type {HTMLButtonElement} */
     //   let button = document.querySelector("button#btn_cadastrarUsuario");
       //button.onclick = none;
@@ -35,10 +35,10 @@ function cadastrarUsuario() {
         // crie um atributo que recebe o valor recuperado aqui
         // Agora vá para o arquivo routes/usuario.js
         // esses valores estão dentro de req.body
-        nomeCompletoServer: in_nome_completo.value,
-        emailServer: in_email_usuario.value,
-        cpfServer: in_cpf_usuario.value,
-        senhaServer: in_senha_usuario.value,
+        nomeCompletoServer: nomeCompleto.value,
+        emailServer: email.value,
+        cpfServer: cpf.value,
+        senhaServer: senha.value,
         
     }),
 })
@@ -55,13 +55,13 @@ function cadastrarUsuario() {
             }
           });
         } else {
-          button.onclick = cadastrarUsuario();
+          // button.onclick = cadastrarUsuario();
           showMessageError("Houve um erro ao tentar realizar o cadastro!");
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
       .catch(function (resposta) {
-        limparCampos();
+        // limparCampos();
         console.error(`Erro: ${resposta}`),
         showMessageError(resposta);
       });

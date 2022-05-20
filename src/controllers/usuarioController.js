@@ -213,6 +213,7 @@ function cadastrar_usuario(req, res) {
     var email = req.body.emailServer;
     var cpf = req.body.cpfServer;
     var senha = req.body.senhaServer;
+    console.log('controller');
 
     if (nomeCompleto == undefined) {
         res.status(400).send("Seu nome completo está undefined!");
@@ -223,9 +224,8 @@ function cadastrar_usuario(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Seu senha está undefined!");
     } else {
-
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar_usuario(nomeCompleto, cpf, email, senha)
+        usuarioModel.cadastrar_usuario(nomeCompleto, email, cpf, senha)
             .then(
                 function (resultado) {
 
