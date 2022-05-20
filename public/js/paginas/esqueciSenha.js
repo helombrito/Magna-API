@@ -16,11 +16,11 @@ async function validar () {
                         emailServer: email.value,
                   })
             });
-            var res = await req.json();
-            console.log(res);
 
-            if (res != undefined)
+            if (req.ok)
             {
+                  var res = await req.json();
+                  console.log(res.idUsuario);
                   showMessageSuccess('Enviamos sua senha no seu E-mail!');
 
                   await fetch("/usuarios/enviar_email", {
@@ -29,7 +29,8 @@ async function validar () {
                               "Content-Type": "application/json"
                         },
                         body: JSON.stringify({
-                              emailServer: email,
+                              emailServer: email.value,
+                              id: res.idUsuario
                         })
                   });
             }
