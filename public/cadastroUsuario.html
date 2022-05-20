@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro Usuário</title>
+
+    <link rel="stylesheet" type="text/css" href="../../../css/index.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="shortcut icon"
+      href="../image/magna/favicon.ico"
+      type="image/x-icon"
+    />
+  </head>
+
+  <body>
+    <div id="header"></div>
+
+    <!-- INICIO CADASTRO -->
+    <div class="container_pai container-lg shadow-lg">
+      <div class="container_esquerda">
+        <div class="container_titulo">
+          <h1 class="titulo">Novo usuário</h1>
+        </div>
+        <div id="alertas"></div>
+        <div class="container_inputs">
+          <div
+            class="container-input"
+            data-title="Insira somente texto com até 100 letras"
+          >
+            <label class="texto" for="in_nome">Nome completo:</label>
+            <input
+              type="text"
+              id="in_nome_completo"
+              placeholder="Lincoln ferreira de Jesus do Carmo"
+              class="input"
+              maxlength="100"
+              minlength="3"
+              required
+              inputmode="text"
+              autocomplete="name"
+            />
+          </div>
+          <div
+            class="container-input"
+            data-title="Insira somente um e-mail válido com até 100 letras"
+          >
+            <label class="texto" for="in_email_usuario">E-mail:</label>
+            <input
+              type="email"
+              id="in_email_usuario"
+              placeholder="email@exemplo.com"
+              autocomplete="email"
+              inputmode="email"
+              class="input"
+              max="100"
+              maxlength="100"
+              minlength="3"
+              required
+              autocomplete="email"
+            />
+          </div>
+          <div class="container-input dividido">
+            <div
+              class="container-input"
+              data-title="Insira somente os números do seu CPF"
+            >
+              <label class="texto" for="in_cep">CPF:</label>
+              <input
+                type="text"
+                id="in_cpf"
+                class="input"
+                placeholder="00000-000"
+                maxlength="8"
+                minlength="8"
+                required
+                inputmode="numeric"
+                autocomplete="cpf"
+              />
+            </div>
+            <div
+              class="container-input"
+              data-title="Insira número do local do shopping"
+            >
+              <label class="texto" for="in_dtNasc">Data de Nascimento:</label>
+              <input
+                type="text"
+                id="in_dtNasc"
+                placeholder="123"
+                class="input"
+                maxlength="10"
+                minlength="10"
+                required
+                inputmode="numeric"
+                autocomplete="cc-number"
+              />
+            </div>
+          </div>
+          <!-- <div class="container-input dividido">
+            <div class="container-input" data-title="Insira somente números">
+              <label class="texto" for="in_cnpj">CNPJ:</label>
+              <input
+                type="text"
+                id="in_cnpj"
+                class="input"
+                placeholder="00.000.000/0000-00"
+                maxlength="14"
+                minlength="14"
+                inputmode="numeric"
+                required
+                autocomplete="cnpj"
+              />
+            </div> -->
+            <!-- <div class="container-input" data-title="Insira somente números">
+              <label class="texto" for="in_tel">Telefone:</label>
+              <input
+                type="text"
+                id="in_tel"
+                placeholder="(00) 00000-0000"
+                class="input"
+                inputmode="tel"
+                maxlength="11"
+                minlength="9"
+                required
+                autocomplete="tel"
+              />
+            </div> 
+          </div>-->
+          <div class="container-input dividido">
+            <div
+              class="container-input"
+              data-title="Insira uma senha de no mínimo 4 caracteres"
+            >
+              <label class="texto" for="in_senha_usuario">Senha:</label>
+              <input
+                type="password"
+                id="in_senha_usuario"
+                placeholder="********"
+                class="input"
+                maxlength="60"
+                minlength="4"
+                required
+                autocomplete="current-password"
+              />
+            </div>
+            <div
+              class="container-input"
+              data-title="Insira a mesma senha do campo senha">
+              <label class="texto" for="in_conf_usuario">Confirmação de senha:</label>
+              <input
+                type="password"
+                id="in_conf_usuario"
+                placeholder="********"
+                class="input"
+                maxlength="60"
+                minlength="4"
+                required
+                autocomplete="current-password"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="container_aceitos_btn">
+          <div class="container_aceitos">
+            <div class="container_termos">
+              <input type="checkbox" id="privacidade" />
+              <label for="privacidade"
+                >Aceito os termos de uso e privacidade.*</label
+              >
+            </div>
+
+            <div class="container_termos">
+              <input type="checkbox" id="novidades" checked />
+              <label for="novidades"> Aceito receber novidades da Magna.</label>
+            </div>
+          </div>
+
+          <div class="container_btn">
+            <button
+              class="btn btn-primary"
+              id="btn_cadastrar"
+              onclick="cadastrarUsuario()"
+            >
+              Criar
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="container_direita">
+        <div class="container_texto">
+          <span>
+            Sabia que 80% das pessoas já desistiram de comprar algo em praças de
+            alimentação por conta da superlotação do espaço? Nós podemos te
+            ajudar com isso! Vem melhorar a gestão da praça de alimentação do
+            seu shopping!
+          </span>
+        </div>
+
+        <div class="container_img">
+          <img src="../image/storyset/imagemCadastro.png" alt="Cadastro" />
+        </div>
+      </div>
+    </div>
+
+    <div id="footer"></div>
+    <!-- FIM CADASTRO -->
+    <script src="js/global.js"></script>
+    <script src="js/paginas/cadastroUsuario.js"></script>
+  </body>
+</html>
