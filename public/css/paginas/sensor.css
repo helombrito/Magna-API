@@ -1,5 +1,4 @@
-
-.conteudo-users-list {
+.conteudo-sensor-list {
     background-color: var(--color-accent);
     border-radius: var(--radius-sm);
     width: 90%;
@@ -8,7 +7,7 @@
     color: var(--color-light);
 }
 
-.conteudo-users-list .table-title {
+.conteudo-sensor-list .table-title {
     letter-spacing: 1px;
 }
 
@@ -50,39 +49,4 @@ div .table {
 .table-striped tbody tr:nth-child(odd) {
     background-color: var(--gray);
     color: var(--color-dark);
-}
-
-.container-users-pai{
-    height: 800px;
-    min-height: 100vh;
-}
-
-.conteudo-users-select {
-    background-color: var(--color-accent);
-    border-radius: var(--radius-sm);
-    width: 90%;
-    padding: 40px 20px;
-    overflow: auto;
-    color: var(--color-light);
-    height: 300px;
-    display: flex;
-    justify-content: space-between;
-   
-}
-
-.input{
-    width: 80%;
-    align-items: center;
-    display: flex;
-    margin-left: 10%;
-}
-
-.conteudo-users-select H1{
-    margin-left: 10%;
-}
-
-.conteudo-users-select button{
-    margin-left: 60%;
-    height: 45px;
-    width: 30%;
 }

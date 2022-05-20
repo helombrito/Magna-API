@@ -1,14 +1,14 @@
-
-.conteudo-users-list {
+.conteudo-add-setor-list {
     background-color: var(--color-accent);
     border-radius: var(--radius-sm);
     width: 90%;
     padding: 40px 20px;
     overflow: auto;
     color: var(--color-light);
+    margin-top: 20px;
 }
 
-.conteudo-users-list .table-title {
+.conteudo-add-setor-list .table-title {
     letter-spacing: 1px;
 }
 
@@ -52,37 +52,25 @@ div .table {
     color: var(--color-dark);
 }
 
-.container-users-pai{
-    height: 800px;
-    min-height: 100vh;
-}
 
-.conteudo-users-select {
-    background-color: var(--color-accent);
-    border-radius: var(--radius-sm);
-    width: 90%;
-    padding: 40px 20px;
-    overflow: auto;
-    color: var(--color-light);
-    height: 300px;
+
+.container_input {
     display: flex;
-    justify-content: space-between;
-   
+    flex-direction: column;
+    margin-top: 40px;
 }
 
-.input{
-    width: 80%;
-    align-items: center;
+.container_input .btn {
+    width: 220px;
+    height: 55px;
+    
+}
+.container_input span{
+    margin-top: 10px;
+}
+
+.container_btn{
+    margin-top: 30px;
     display: flex;
-    margin-left: 10%;
-}
-
-.conteudo-users-select H1{
-    margin-left: 10%;
-}
-
-.conteudo-users-select button{
-    margin-left: 60%;
-    height: 45px;
-    width: 30%;
+    justify-content: flex-end;
 }
