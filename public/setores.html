@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Mudar em toda página o titulo -->
+    <title>Magna | Setores</title>
+    <!-- Padrão CSS e Icones FA -->
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="image/magna/favicon.ico" type="image/x-icon" />
+</head>
+
+<body class="body-perfil flex-center">
+    <!-- HEADER -->
+    <div class="header-user shadow-lg">
+        <div class="container-sm">
+            <div class="top">
+                <div class="icon flex-center shadow-sm">
+                    <span>X</span>
+                </div>
+                <span class="nome-empresa">XPTO</span>
+                <span class="cnpj-empresa">00.000.000/0001-00</span>
+            </div>
+
+            <ul class="menu">
+                <li class="menu-item">
+                    <a class="menu-link" href="./perfil.html">
+                        <i class="fa-solid fa-building"></i>
+                        <span>Shopping</span>
+                    </a>
+                </li>
+
+                <li class="menu-item">
+                    <a class="menu-link" href="./dashboard.html">
+                        <i class="fa-solid fa-chart-area"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="menu-item agora">
+                    <a class="menu-link" href="./setores.html">
+                        <i class="fa-regular fa-hard-drive"></i>
+                        <span>Setores</span>
+                    </a>
+                </li>
+
+                <li class="menu-item">
+                    <a class="menu-link" href="./sensores.html">
+                        <i class="fa-solid fa-tower-broadcast"></i>
+                        <span>Sensores</span>
+                    </a>
+                </li>
+
+                <li class="menu-item">
+                    <a class="menu-link" href="./usuarios.html">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Usuários</span>
+                    </a>
+                </li>
+
+                <li class="menu-item">
+                    <a class="menu-link" onclick="logout()">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Sair</span>
+                    </a>
+                </li>
+            </ul>
+            <span class="copy">
+                Copyright © 2010-2022 Magna Company S.L.Todos os direitos reservados.
+            </span>
+        </div>
+    </div>
+
+    <!-- CONTEUDO -->
+    <div class="container-lg">
+        <div class="conteudo-setor-list shadow-lg">
+            <h1 class="table-title title-3 mb">Setores</h1>
+            <table class="table table-striped shadow-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Setor</th>
+                        <th scope="col">Shopping</th>
+                        <th scope="col">Atualizar</th>
+                        <th scope="col">Excluir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>A</td>
+                        <td>Paulista</th=>
+                        <td>lápis</th=>
+                        <td>lixeira</th=>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>B</td>
+                        <td>Anália Franco</th=>
+                        <td>lápis</th=>
+                        <td>lixeira</th=>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>C</td>
+                        <td>Tatuapé</th=>
+                        <td>lápis</th=>
+                        <td>lixeira</th=>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td>D</td>
+                        <td>Center Norte</th=>
+                        <td>lápis</th=>
+                        <td>lixeira</th=>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td>E</td>
+                        <td>Itaquera</th=>
+                        <td>lápis</th=>
+                        <td>lixeira</th=>
+                    </tr>
+                    <tr>
+                        <th scope="row">6</th>
+                        <td>F</td>
+                        <td>Aricanduva</th=>
+                        <td>lápis</th=>
+                        <td>lixeira</th=>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="conteudo-add-setor-list shadow-lg">
+            <h1 class="table-title title-3 mb">Adicionar Setor</h1>
+            <table class="table table-striped shadow-sm">
+
+                <div class="container_input">
+                    <p>Shopping</p>
+                    <select class="input" name="" id="">
+                        <option value="paulista">Paulista</option>
+                        <option value="analia">Anália Franco</option>
+                        <option value="tatuape">Tatuapé</option>
+                        <option value="center">Center Norte</option>
+                        <option value="itaquera">Itaquera</option>
+                        <option value="aricanduva">Aricanduva</option>
+                    </select>
+                    <span class="texto">Apelido Setor</span>
+                    <input type="text" class="input" id="input_apelido_setor">
+                    <span class="texto">Quantidade de assentos disponíveis:</span>
+                    <input type="text" class="input" id="input_qts_assentos">
+                    <div class="container_btn">
+                        <button class="btn btn-primary" id="btn_cadastrar">
+                            Cadastrar
+                        </button>
+                    </div>
+                </div>
+
+            </table>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
