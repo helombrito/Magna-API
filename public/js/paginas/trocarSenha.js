@@ -4,40 +4,31 @@ showFooter();
 async function trocarSenha () {
       var novaSenha = input_novaSenha;
       var confSenha = input_confSenha;
+      // console.log(confSenha, novaSenha);
+      // return;
       if (
             checkInput(novaSenha, 60, 4) &&
             checkInput(confSenha, 60, 4))
       {
-            var req = await fetch("/usuarios/validar", {
+            let id = document.URL.split('?id=')[ 1 ];
+
+
+            let req = await fetch(`/usuarios/trocarSenha/${id}`, {
                   method: "POST",
                   headers: {
                         "Content-Type": "application/json"
                   },
                   body: JSON.stringify({
-                        emailServer: email,
-
+                        novaSenhaServer: novaSenha.value
                   })
             });
-            var res = await req.json();
-            console.log(res);
-            return;
-            if (res != undefined)
+            if (req.ok)
             {
                   showMessageSuccess('Sua senha foi alterada!');
-
-                  await fetch("/usuarios/trocarSenha", {
-                        method: "POST",
-                        headers: {
-                              "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                              novaSenhaServer: novaSenha
-                        })
-                  });
-
             } else
             {
                   showMessageError('Houve um erro ao trocar senha');
             }
+
       }
 }
