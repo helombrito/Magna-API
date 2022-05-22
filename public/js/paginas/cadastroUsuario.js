@@ -10,12 +10,12 @@ var termos = "";
 var div_alertas = "";
 
 function cadastrarUsuario() {
-  nomeCompleto = in_nome_completo;
-  email = in_email_usuario;
-  cpf = in_cpf_usuario;
-  senha = in_senha_usuario;
-  confirmarSenha = in_conf_usuario;
-  termos = privacidade;
+  nomeCompleto = in_nome_completo.value;
+  email = in_email_usuario.value;
+  cpf = in_cpf_usuario.value;
+  senha = in_senha_usuario.value;
+  confirmarSenha = in_conf_usuario.value;
+  termos = privacidade.value;
 
   div_alertas = alertas;
   

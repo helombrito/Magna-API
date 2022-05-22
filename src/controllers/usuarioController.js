@@ -269,6 +269,9 @@ function cadastrar_usuario (req, res) {
     }
 }
 
+
+
+
 module.exports = {
     entrar,
     cadastrar,
@@ -277,5 +280,6 @@ module.exports = {
     testar,
     validarId,
     enviar_email,
-    trocarSenha
+    trocarSenha,
+   
 };
