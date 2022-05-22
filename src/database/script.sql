@@ -2,7 +2,7 @@ CREATE DATABASE Magna;
 USE Magna;
 
 CREATE TABLE usuario(
-	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+	idUsuario INT PRIMARY KEY AUTO_INCREMENT, -- IDENTITY(1,1)
 	nome VARCHAR(100),
     email VARCHAR(100) NOT NULL UNIQUE,
     senha VARCHAR(60) NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE Shopping(
     telefone CHAR(11) NOT NULL,
     cep CHAR(8),
     numeroEndereco INT,
-    CONSTRAINT ct_ckNumeroEndereco CHECK (numeroEndereco > 0)
+    CONSTRAINT ct_ckNumeroEndereco CHECK (numeroEndereco > 0) -- CHECK
 );
 select * from shopping;
 -- ASSOCIATIVA MUITOS PARA MUITOS LOGIN
@@ -26,7 +26,7 @@ CREATE TABLE Login(
     fkShopping INT NOT NULL,
     fkUsuario INT NOT NULL,
     permissaoUsuario CHAR(3) DEFAULT 'ADM',
-    CONSTRAINT ct_ckPermissaoUsuario CHECK(permissaoUsuario in ('ADM', 'MAS', 'MON')),
+    CONSTRAINT ct_ckPermissaoUsuario CHECK(permissaoUsuario in ('ADM', 'MAS', 'MON')), --
     -- ADM = ADMINISTRADOR = PODE LER, ADICIONAR SETORES E SENSORES
     -- MAS = MASTER = PRIMEIRO CNPJ = PODE TUDO
     -- MON = MONITOR = PODE LER

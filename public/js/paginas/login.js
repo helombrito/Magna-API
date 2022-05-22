@@ -14,8 +14,8 @@ function entrar () {
     {
         emailVar = inp_email.value;
         senhaVar = inp_senha.value;
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
+        limparCampos();
+        document.querySelector('button').disabled = true;
 
         fetch("/usuarios/autenticar", {
             method: "POST",
@@ -27,32 +27,37 @@ function entrar () {
                 senhaServer: senhaVar
             })
         }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!");
-            if (resposta.ok)
+            document.querySelector('button').disabled = false;
+            console.log(resposta);
+            if (resposta.status == 200)
             {
-
                 resposta.json().then(json => {
                     console.log(json);
-                    console.log(JSON.stringify(json));
-
                     sessionStorage.LOGIN_USUARIO = json.login;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
+                    // sessionStorage.ID_SHOPPING = json.id;
 
-                    setTimeout(function () {
-                        window.location = "/dashboard.html";
-                    }, 1000);
+                    loadingElement(document.body, 3000)
+                        .then(val => {
+                            if (val)
+                            {
+                                window.location = 'dashboard.html';
+                            }
+                        });
                 });
 
             } else
             {
-                resposta.text().then(texto => {
-                    showMessageError(texto);
-                    // limparFormulario();
-
+                resposta.json().then(json => {
+                    console.log(json);
+                    showMessageError(json);
                 });
             }
 
+        }).catch(err => {
+            showMessageError(err);
+            limparCampos();
         });
     }
 }

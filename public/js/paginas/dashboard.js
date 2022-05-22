@@ -20,24 +20,7 @@ const data = {
         hoverOffset: 4
     } ]
 };
-/** @type {*} */
-const config = {
-    type: 'doughnut',
-    data: data,
-    options: {
-        plugins: {
-            legend: {
-                display: false,
-            }
-        }
-    }
-};
 
-
-const myChart = new Chart(
-    document.getElementById('myChart'),
-    config
-);
 const labelsLine = [
     '11:00',
     '12:00',
@@ -94,7 +77,7 @@ const labelsBar = [
 const dataBar = {
     labels: labelsBar,
     datasets: [ {
-        label: 'Dias por mês que a quantidade de pessoas ficou abaixo da média',
+        label: 'Dias',
         backgroundColor: '#e83847',
         borderColor: '#dc3545ff',
         borderRadius: 8,

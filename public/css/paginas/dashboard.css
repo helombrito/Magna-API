@@ -5,12 +5,12 @@
 }
 
 .dashboard h2 {
-    color: var(--color-dark);
-    font-weight: normal;
+    color: #E83847;
 }
 
-.dashboard h1 {
-    color: #E83847;
+.dashboard hr {
+    width: 90%;
+    border: 1px solid var(--gray);
 }
 
 .dashboard .container {
@@ -30,18 +30,6 @@
     padding: var(--padding-lg);
     margin: var(--margin);
     align-items: center;
-}
-
-.dashboard .box .donut canva {
-    width: 100%;
-}
-
-.dashboard .box .donut-number {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
-    color: var(--color-dark);
 }
 
 .dashboard .box2 {

@@ -1,10 +1,16 @@
 .conteudo-setor-list {
     background-color: var(--color-accent);
     border-radius: var(--radius-sm);
-    width: 90%;
     padding: 40px 20px;
     overflow: auto;
     color: var(--color-light);
+}
+
+.setores {
+    min-height: 100vh;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
 }
 
 .conteudo-setor-list .table-title {
@@ -49,4 +55,33 @@ div .table {
 .table-striped tbody tr:nth-child(odd) {
     background-color: var(--gray);
     color: var(--color-dark);
+}
+
+.container_input {
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--margin-lg);
+}
+
+.container_input.dividido {
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.container_input.dividido>* {
+    width: 100%;
+    height: 100%;
+    max-width: 48%;
+}
+
+.btn-setor {
+    width: 220px;
+    height: 40px;
+    margin-top: var(--margin-lg);
+    align-self: flex-end;
+}
+
+.container_input span {
+    margin-top: 10px;
 }

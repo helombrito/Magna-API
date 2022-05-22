@@ -154,10 +154,10 @@ function entrar (req, res) {
                         res.json(resultado[ 0 ]);
                     } else if (resultado.length == 0)
                     {
-                        console.log("Email e/ou senha inválido(s)");
+                        res.status(500).json('Email e/ou senha inválido(s)');
                     } else
                     {
-                        console.log("Mais de um usuário com o mesmo login e senha!");
+                        res.status(500).json('Mais de um usuário com o mesmo login e senha!');
                     }
                 }
             ).catch(

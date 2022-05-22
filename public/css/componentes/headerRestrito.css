@@ -1,3 +1,9 @@
+.body-perfil {
+    min-height: 100vh;
+    padding-top: 0;
+    padding-left: 280px;
+}
+
 .header-user {
     width: 280px;
     height: 100vh;

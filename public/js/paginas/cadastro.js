@@ -18,7 +18,7 @@ function cadastrar () {
   cep = in_cep;
   numLocal = in_numLocal;
   cnpj = in_cnpj;
-  telefone = in_tel;
+  tel = in_tel;
   senha = in_senha;
   confirmarSenha = in_conf;
   termos = privacidade;
@@ -27,39 +27,35 @@ function cadastrar () {
 
   if (validarCampos())
   {
-    // limparCampos();
+    let dataBody = {
+      emailServer: email.value,
+      nomeServer: nome.value,
+      cnpjServer: cnpj.value,
+      telServer: tel.value,
+      cepServer: cep.value,
+      numServer: numLocal.value,
+      senhaServer: senha.value,
+    };
+    limparCampos();
     /** @type {HTMLButtonElement} */
     let button = document.querySelector("button#btn_cadastrar");
-    // button.onclick = () => { };
-
+    button.onclick = () => { };
     // Rota Cadastrar dentro de usuarios.js
     fetch("usuarios/cadastrar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        // esses valores estão dentro de req.body
-        emailServer: in_email.value,
-        nomeServer: in_nome.value,
-        cnpjServer: in_cnpj.value,
-        telServer: in_tel.value,
-        cepServer: in_cep.value,
-        numServer: in_numLocal.value,
-        senhaServer: in_senha.value,
-      }),
+      body: JSON.stringify(dataBody),
     })
       .then(function (resposta) {
-        console.log("resposta: ", resposta);
 
         if (resposta.ok)
         {
           showMessageSuccess(
             "Cadastro realizado com sucesso!"
           );
-          loadingElement(button).then((val) => {
+          loadingElement(button, 4000).then((val) => {
             if (val)
             {
               window.location = "login.html";
@@ -73,7 +69,6 @@ function cadastrar () {
         }
       })
       .catch(function (resposta) {
-        // limparCampos();
         console.error(`Erro: ${resposta}`);
         showMessageError(resposta);
       });
@@ -88,14 +83,15 @@ function validarCampos () {
   var cnpjRegex = /^\d{14}$/gm;
 
   if (
+    
     checkInput(nome, 100, 3, /^[a-zA-Zà-úÀ-Ú\s]*$/gm) &&
     checkInput(email, 100, 5, emailRegex) &&
     // cpnj only numbers
     checkInput(cep, 8, 8, /^\d{8}$/gm) &&
     checkInput(numLocal, 7, 1, /^\d{1,7}$/) &&
     checkInput(cnpj, 14, 14, cnpjRegex) &&
-    // telefone only numbers
-    checkInput(telefone, 11, 9, /^\d{9,11}$/gm) &&
+    // tel only numbers
+    checkInput(tel, 11, 9, /^\d{9,11}$/gm) &&
     checkInput(senha, 60, 4) &&
     checkInput(confirmarSenha, 60, 4) &&
     checkCheckbox(termos, div_alertas)

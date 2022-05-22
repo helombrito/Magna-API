@@ -12,6 +12,8 @@ router.get("/listar", function (req, res) {
 });
 
 router.post("/cadastrar", function (req, res) {
+    console.log(req.body);
+
     usuarioController.cadastrar(req, res);
 });
 
@@ -36,7 +38,6 @@ router.post("/trocarSenha/:id", function (req, res) {
     if (req.params.id !== undefined)
     {
         let id = req.params.id;
-        console.log(req.body);
         usuarioController.trocarSenha(req, res, +id);
     }
 });
