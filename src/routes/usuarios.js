@@ -32,6 +32,8 @@ router.post("/enviar_email", function (req) {
     usuarioController.enviar_email(req);
 });
 
+
+
 router.put("/trocarSenha/:id",
     /**
      * 

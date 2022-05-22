@@ -92,6 +92,9 @@ function cadastrar_usuario (nomeCompleto, email, cpf, senha) {
     return database.executar(instrucao);
 }
 
+
+
+
 module.exports = {
     entrar: entrar,
     cadastrar: cadastrar,

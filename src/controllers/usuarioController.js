@@ -52,7 +52,6 @@ function validarId(req, res) {
 
 
 // esqueci minha senha
-// 
 async function enviar_email(req) {
 
 
@@ -245,6 +244,9 @@ function cadastrar_usuario(req, res) {
     }
 }
 
+
+
+
 module.exports = {
     entrar,
     cadastrar,
@@ -253,5 +255,6 @@ module.exports = {
     testar,
     validarId,
     enviar_email,
-    trocarSenha
+    trocarSenha,
+   
 };
