@@ -206,41 +206,44 @@ function cadastrar (req, res) {
     {
 
         usuarioModel.pesquisarCnpj(cnpj)
-        .then(val=>{
-            if(val.length == 0){
+            .then(val => {
+                if (val.length == 0)
+                {
+                    usuarioModel.pesquisarEmail(email)
+                        .then(valEmail => {
+                            if (valEmail.length == 0)
+                            {
+                                usuarioModel.cadastrar(nome, email, senha)
+                                    .then(valUser => {
+                                        usuarioModel.inserirShop(nome, cnpj, tel, cep, numLocal)
+                                            .then(valShop => {
 
-                usuarioModel.pesquisarEmail(email)
-                .then(valEmail=>{
-                    if(valEmail.length == 0){
-                        usuarioModel.cadastrar(nome,email,senha)
-                        .then(valUser=>{
-                            usuarioModel.inserirShop(nome, cnpj, tel, cep, numLocal)
-                            .then(valShop=>{
-                                
-                            })
-                        }).catch(
-                            function (erro) {
-                                console.log(erro);
-                                console.log(
-                                    "\nHouve um erro ao realizar o cadastro! Erro: ",
-                                    erro.sqlMessage
-                                );
-                                res.status(500).json(erro.sqlMessage);
+                                            });
+                                    }).catch(
+                                        function (erro) {
+                                            console.log(erro);
+                                            console.log(
+                                                "\nHouve um erro ao realizar o cadastro! Erro: ",
+                                                erro.sqlMessage
+                                            );
+                                            res.status(500).json(erro.sqlMessage);
+                                        }
+                                    );
+                            } else
+                            {
+                                res.status(402).json("Email já cadastrado");
                             }
-                        );
-                    }else{
-                        res.status(402).json("Email já cadastrado");
-                    }
-                })
+                        });
 
-               
-            }else{
-                res.status(403).json("CNPJ já cadastrado");
-            }
-        });
+
+                } else
+                {
+                    res.status(403).json("CNPJ já cadastrado");
+                }
+            });
         // return console.log(nome, cnpj, tel, email, senha, cep, numLocal);
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        
+
     }
 }
 
@@ -299,5 +302,5 @@ module.exports = {
     validarId,
     enviar_email,
     trocarSenha,
-   
+
 };
