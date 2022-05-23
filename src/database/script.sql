@@ -44,7 +44,7 @@ CREATE TABLE Setor(
 	fkShopping INT,
     FOREIGN KEY (fkShopping) REFERENCES Shopping(idShopping)
 );
-
+select Setor.apelidoSetor from Setor;
 CREATE TABLE Sensor(
 	idSensor INT PRIMARY KEY AUTO_INCREMENT,
 	fkSetor INT,
