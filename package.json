@@ -2,10 +2,11 @@
   "name": "magna",
   "version": "1.0.0",
   "private": true,
-  "description": "",
-  "main": "app.js",
   "scripts": {
     "start": "node ./site/app.js",
     "postinstall": "cd site && npm install"
+  },
+  "dependencies": {
+    "underscore": "^1.13.3"
   }
 }
