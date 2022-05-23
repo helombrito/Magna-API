@@ -5,6 +5,7 @@
     padding: 40px 20px;
     overflow: auto;
     color: var(--color-light);
+    margin-top: 5%;
 }
 
 .conteudo-sensor-list .table-title {
@@ -49,4 +50,24 @@ div .table {
 .table-striped tbody tr:nth-child(odd) {
     background-color: var(--gray);
     color: var(--color-dark);
+}
+
+.container_input{
+    background-color: var(--color-accent);
+    border-radius: var(--radius-sm);
+    width: 90%;
+    padding: 40px 20px;
+    overflow: auto;
+    color: var(--color-light);
+}
+
+.conteudo-add-sensor-list {
+    background-color: var(--color-accent);
+    border-radius: var(--radius-sm);
+    width: 90%;
+    padding: 40px 20px;
+    overflow: auto;
+    color: var(--color-light);
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
