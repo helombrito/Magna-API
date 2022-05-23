@@ -12,8 +12,6 @@ router.get("/listar", function (req, res) {
 });
 
 router.post("/cadastrar", function (req, res) {
-    console.log(req.body);
-
     usuarioController.cadastrar(req, res);
 });
 

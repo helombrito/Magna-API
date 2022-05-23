@@ -1,4 +1,3 @@
-
 /** @type {HTMLInputElement | string} */
 let apelidoSetor;
 /** @type {HTMLInputElement | number} */
@@ -6,9 +5,6 @@ let qtdeAssentos;
 
 /** @type {number} */
 let fkShopping;
-
-/** @type {Array<object>} */
-
 
 /**
  * @returns {Promise<Array<object>>}  
@@ -18,6 +14,7 @@ function pegarDadosSetores () {
         fetch('/setores/listar')
             .then(response => response.json())
             .then(json => {
+                console.log(json);
                 let array = [];
                 for (let i = 0; i < json.length; i++)
                 {
@@ -60,9 +57,7 @@ function plotarTabela (columns, data, table = document.querySelector('table#tabl
     for (let i = 0; i < columns.length; i++)
         tr.innerHTML += `<th scope="col">${columns[ i ]}</th>`;
 
-    console.log(typeof data);
     for (let i = 0; i < data.length; i++)
-    {
         tbody.innerHTML +=
             `
             <tr>
@@ -71,7 +66,6 @@ function plotarTabela (columns, data, table = document.querySelector('table#tabl
             <td>${data[ i ].Assentos}</th>
             </tr>
             `;
-    }
 
 }
 function inserirSetor () {
@@ -115,7 +109,7 @@ function validarCampos () {
         checkInput(apelidoSetor, 60, 3, /^[a-zA-Zà-úÀ-Ú\s]*$/gm) &&
         checkInput(qtdeAssentos, 10, 1, /^[\d]*$/))
     {
-        fkShopping = 1;
+        fkShopping = 1; // SESSION STORAGE
 
         if (fkShopping && fkShopping > 0 && fkShopping != undefined)
         {

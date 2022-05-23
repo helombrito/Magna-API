@@ -74,13 +74,36 @@ async function enviar_email (email) {
 }
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucao
-function cadastrar (nome, cnpj, tel, email, senha, cep, numLocal) {
-    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, cnpj, tel);
+function cadastrar (nome, email, senha) {
+    var instrucao = `INSERT INTO usuario (nome, email, senha) VALUES ('${nome}','${email}','${senha}');`;
+    return database.executar(instrucao);
+}
+function inserirShop(nome, cnpj, tel, cep, numLocal){
     var instrucao = `INSERT INTO shopping (nomeShopping, cnpj, telefone, cep, numeroEndereco) VALUES ('${nome}', '${cnpj}', '${tel}', '${cep}', '${numLocal}');`;
+    return database.executar(instrucao);
+}
+/**
+ * @param {number} cnpj Para ser pesquisado no banco de dados  
+ */
+function insereLogin(fkUser, fkShopping, permissao = 'MAS'){
+    var instrucao = `
+    INSERT INTO login (fkShopping, fkUsuario, permissaoUsuario)
+    VALUES (${fkShopping}, ${fkUser}, '${permissao}');
+    `;
+
+    return database.executar(instrucao);
+}
+function pesquisarCnpj(cnpj){
+    var instrucao = `select * from shopping where cnpj = '${cnpj}'`;
     //console.log("Executando a instrução SQL: \n" + instrucao);
-    var instrucao2 = `INSERT INTO usuario (nome, email, senha) VALUES ('${nome}','${email}','${senha}');`;
-    // return console.log(instrucao, instrucao2);
-    database.executar(instrucao2);
+    return database.executar(instrucao);
+}
+/**
+ * @param {string} email Para ser pesquisado no banco de dados  
+ */
+function pesquisarEmail(email){
+    var instrucao = `select * from usuario where email = '${email}'`;
+    //console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 function cadastrar_usuario (nomeCompleto, email, cpf, senha) {
@@ -91,10 +114,15 @@ function cadastrar_usuario (nomeCompleto, email, cpf, senha) {
     //console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
-
-
-
-
+function pesquisarIdUsuario(id){
+    var instrucao = `select * from usuario where idUsuario = ${id}`;
+    //console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+function pesquisarIdShopping(id){
+    var instrucao = `select * from shopping where idShopping = ${id}`;
+    return database.executar(instrucao);
+}
 module.exports = {
     entrar: entrar,
     cadastrar: cadastrar,
@@ -102,5 +130,11 @@ module.exports = {
     listar: listar,
     validar: validar,
     enviar_email: enviar_email,
-    trocarSenha: trocarSenha
+    trocarSenha: trocarSenha,
+    pesquisarCnpj,
+    pesquisarEmail,
+    insereLogin,
+    pesquisarIdShopping,
+    pesquisarIdUsuario,
+    inserirShop
 };

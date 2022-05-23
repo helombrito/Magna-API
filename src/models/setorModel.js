@@ -9,7 +9,8 @@ var database = require("../database/config");
  * @param {number} fkShopping De qual shopping este setor será inserido (pegar da sessionStorage) 
  */
 function inserirSetorBanco (apelidoSetor, qtdeAssentos, fkShopping) {
-    var instrucao = `
+    var instrucao =
+        `
         INSERT INTO setor (apelidoSetor, assentosDisponiveis, fkShopping) 
         VALUES ('${apelidoSetor}', '${qtdeAssentos}', '${fkShopping}');
     `;

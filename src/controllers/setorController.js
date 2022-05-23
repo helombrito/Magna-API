@@ -33,9 +33,6 @@ function pegarSetorId (req, res) {
 
 }
 /**
- * @description
- * @author Delfino
- * @date 22/05/2022
  * @param {Request} req
  * @param {Response} res
  */

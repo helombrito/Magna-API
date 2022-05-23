@@ -192,7 +192,7 @@ function cadastrar (req, res) {
         res.status(400).send("Seu CNPJ está undefined!");
     } else if (tel == undefined)
     {
-        res.status(400).send("Seu telefone está undefined!");
+        res.status(400).send("Seu tel está undefined!");
     } else if (senha == undefined)
     {
         res.status(400).send("Sua senha está undefined!");
@@ -201,28 +201,46 @@ function cadastrar (req, res) {
         res.status(400).send("Sua CEP está undefined!");
     } else if (numLocal == undefined)
     {
-        res.status(400).send("Sua CEP está undefined!");
+        res.status(400).send("Sua numLocal está undefined!");
     } else
     {
+
+        usuarioModel.pesquisarCnpj(cnpj)
+        .then(val=>{
+            if(val.length == 0){
+
+                usuarioModel.pesquisarEmail(email)
+                .then(valEmail=>{
+                    if(valEmail.length == 0){
+                        usuarioModel.cadastrar(nome,email,senha)
+                        .then(valUser=>{
+                            usuarioModel.inserirShop(nome, cnpj, tel, cep, numLocal)
+                            .then(valShop=>{
+                                
+                            })
+                        }).catch(
+                            function (erro) {
+                                console.log(erro);
+                                console.log(
+                                    "\nHouve um erro ao realizar o cadastro! Erro: ",
+                                    erro.sqlMessage
+                                );
+                                res.status(500).json(erro.sqlMessage);
+                            }
+                        );
+                    }else{
+                        res.status(402).json("Email já cadastrado");
+                    }
+                })
+
+               
+            }else{
+                res.status(403).json("CNPJ já cadastrado");
+            }
+        });
         // return console.log(nome, cnpj, tel, email, senha, cep, numLocal);
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, cnpj, tel, email, senha, cep, numLocal)
-            .then(
-                function (resultado) {
-
-                    res.json(resultado);
-                }
-            ).catch(
-                function (erro) {
-                    console.log(erro);
-                    console.log(
-                        "\nHouve um erro ao realizar o cadastro! Erro: ",
-                        erro.sqlMessage
-                    );
-                    res.status(500).json(erro.sqlMessage);
-
-                }
-            );
+        
     }
 }
 

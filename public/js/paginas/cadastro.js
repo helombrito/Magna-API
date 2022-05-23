@@ -49,8 +49,8 @@ function cadastrar () {
       body: JSON.stringify(dataBody),
     })
       .then(function (resposta) {
-
-        if (resposta.ok)
+        // console.log(resposta)
+        if (resposta.status == 200)
         {
           showMessageSuccess(
             "Cadastro realizado com sucesso!"
@@ -61,7 +61,13 @@ function cadastrar () {
               window.location = "login.html";
             }
           });
-        } else
+        } else if(resposta.status == 403) {
+          showMessageWarning('CNPJ já cadastrado!')
+        }
+        else if(resposta.status == 402) {
+          showMessageWarning('Email já cadastrado!')
+        }
+         else
         {
           // button.onclick = cadastrar();
           showMessageError("Houve um erro ao tentar realizar o cadastro!");
