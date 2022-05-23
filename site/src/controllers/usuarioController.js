@@ -1,5 +1,5 @@
 var usuarioModel = require("../models/usuarioModel");
-const nodemailer = require("nodemailer");
+// const nodemailer = require("nodemailer");
 
 var sessoes = [];
 
@@ -70,28 +70,28 @@ async function enviar_email (req, res) {
     // colocar a variavel dentro do to
 
     // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 587,
-        secure: false, // true for 465, false for other ports
-        auth: {
-            // mudar
-            user: "magna.sptech@gmail.com",
-            pass: "M@gna2020",
-        },
-    });
+    // let transporter = nodemailer.createTransport({
+    //     host: "smtp.gmail.com",
+    //     port: 587,
+    //     secure: false, // true for 465, false for other ports
+    //     auth: {
+    //         // mudar
+    //         user: "magna.sptech@gmail.com",
+    //         pass: "M@gna2020",
+    //     },
+    // });
 
-    // enviando email com o objeto de transporte definido 
-    let info = await transporter.sendMail({
-        from: '"Magna" <magna.sptech@gmail.com>', // Endereço de email de quem esta enviando
-        to: `${email}`, // lista de enviados
-        subject: "Recuperação de senha.", // Subject line
-        text: "Acesse o link para criar sua nova senha.", // plain text body
-        html: `<h2>Acesse o link para criar sua nova senha.</h2><br>
-        <a href='http://localhost:3333/trocarSenha.html?id=${id}'>http://localhost:3333/trocarSenha.html?id=${id} </a>`, // html body
-    });
+    // // enviando email com o objeto de transporte definido 
+    // let info = await transporter.sendMail({
+    //     from: '"Magna" <magna.sptech@gmail.com>', // Endereço de email de quem esta enviando
+    //     to: `${email}`, // lista de enviados
+    //     subject: "Recuperação de senha.", // Subject line
+    //     text: "Acesse o link para criar sua nova senha.", // plain text body
+    //     html: `<h2>Acesse o link para criar sua nova senha.</h2><br>
+    //     <a href='http://localhost:3333/trocarSenha.html?id=${id}'>http://localhost:3333/trocarSenha.html?id=${id} </a>`, // html body
+    // });
 
-    console.log("Message sent: %s", info.messageId);
+    // console.log("Message sent: %s", info.messageId);
 }
 
 /**
