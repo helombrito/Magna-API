@@ -217,7 +217,16 @@ function cadastrar (req, res) {
                                     .then(valUser => {
                                         usuarioModel.inserirShop(nome, cnpj, tel, cep, numLocal)
                                             .then(valShop => {
-
+                                                usuarioModel.pegarUltimoShop()
+                                                    .then(ultShop => {
+                                                        usuarioModel.pegarUltimoUser()
+                                                            .then(ultUser => {
+                                                                usuarioModel.insereLogin(ultUser[ 0 ].max,
+                                                                    ultShop[ 0 ].max, 'MAS');
+                                                            }).then(valLogin => {
+                                                                res.status(200).json("Shopping cadastrado com sucesso");
+                                                            });
+                                                    });
                                             });
                                     }).catch(
                                         function (erro) {
@@ -234,8 +243,6 @@ function cadastrar (req, res) {
                                 res.status(402).json("Email já cadastrado");
                             }
                         });
-
-
                 } else
                 {
                     res.status(403).json("CNPJ já cadastrado");
@@ -289,10 +296,6 @@ function cadastrar_usuario (req, res) {
             );
     }
 }
-
-
-
-
 module.exports = {
     entrar,
     cadastrar,

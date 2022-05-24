@@ -54,7 +54,7 @@ function cadastrar () {
           showMessageSuccess(
             "Cadastro realizado com sucesso!"
           );
-          loadingElement(button, 4000).then((val) => {
+          loadingElement(button, 2000).then((val) => {
             if (val)
             {
               window.location = "login.html";
