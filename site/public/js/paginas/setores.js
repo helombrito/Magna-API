@@ -6,35 +6,6 @@ let qtdeAssentos;
 /** @type {number} */
 let fkShopping;
 
-/**
- * @returns {Promise<Array<object>>}  
- */
-function pegarDadosSetores () {
-    return new Promise((resolve, reject) => {
-        fetch('/setores/listar')
-            .then(response => response.json())
-            .then(json => {
-                console.log(json);
-                let array = [];
-                for (let i = 0; i < json.length; i++)
-                {
-                    let linha = {};
-                    linha.ID = (json[ i ].idSetor);
-                    linha.Apelido = (json[ i ].apelidoSetor);
-                    linha.Assentos = (json[ i ].assentosDisponiveis);
-
-                    array.push(linha);
-                }
-                resolve(array);
-                return array;
-            })
-            .catch(error => {
-                showMessageError('Erro ao listar setores');
-                reject(error);
-                console.error(error);
-            });
-    });
-}
 pegarDadosSetores()
     .then(setores => {
         let colunasTabela = [ 'ID', 'Apelido', 'Assentos' ];
@@ -66,7 +37,6 @@ function plotarTabela (columns, data, table = document.querySelector('table#tabl
             <td>${data[ i ].Assentos}</th>
             </tr>
             `;
-
 }
 function inserirSetor () {
     // validar campos

@@ -77,8 +77,8 @@
   </div>
 
   <!-- CONTEUDO -->
-  <div class="container-lg flex-around flex-column container-users-pai">
-    <div class="conteudo-users-list shadow-lg">
+  <div class="container-lg  setores">
+    <div class="conteudo-setor-list shadow-lg">
       <h1 class="table-title title-3 mb">Usuários</h1>
       <table class="table table-striped shadow-sm">
         <thead>
@@ -94,31 +94,6 @@
             <td>Benass</td>
             <td>benassi@paulista.co</th=>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Delfino</td>
-            <td>delfino2@analia.com</th=>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Heloisa</td>
-            <td>lolo@tatuape.email.com</th=>
-          </tr>
-          <tr>
-            <th scope="row">4</th>
-            <td>Dusda</td>
-            <td>Dudada@s.center.net</th=>
-          </tr>
-          <tr>
-            <th scope="row">5</th>
-            <td>Lincoln</td>
-            <td>linco@itaquera.com</th=>
-          </tr>
-          <tr>
-            <th scope="row">6</th>
-            <td>Freitas</td>
-            <td>predo@aricanvuda.com.br</th=>
-          </tr>
         </tbody>
       </table>
 
@@ -126,26 +101,28 @@
 
 
 
-    <div class="conteudo-users-select flex-column shadow-lg ">
+    <div class="conteudo-setor-list shadow-lg ">
+        <div class="container_input dividido">
 
-      <div class="container-input" data-title="Nome ou ID">
-        <H1>Nome completo/ID:</H1>
-        <input type="text" placeholder="email" class="input" id="inp_senha" required autocomplete="current-password" />
+      <div class="container_input" data-title="Nome ou ID">
+        <label>Nome completo/ID:</label>
+        <select id="select_usuariosDisponiveis" class="input">
+          <option value="0">Selecione</option>
+        </select>
       </div>
-        <div class="container-selct" data-title="Selecione uma Permissão">
-
-
-          <H1>Permissão:</H1>
+        <div class="container_input" data-title="Selecione uma Permissão">
+          <label>Permissão:</label>
           <select class="input" id="select_permicao">
-            <option value="">Selecione</option>
-            <option value="adm">Administrador</option>
-            <option value="monitor">Monitor</option>
-
+            <option value="0">Selecione</option>
+            <option value="ADM">Administrador</option>
+            <option value="MON">Monitor</option>
           </select>
- 
         </div>
-      
-      <button onclick="" class="btn btn-primary mt "> Cadastrar </button>
+      </div>
+        <div class="container_input" data-title="Selecione uma Permissão">
+          <button onclick="" class="btn btn-primary btn-setor"> Cadastrar </button>
+</div>
+    </div>
     </div>
  
 </body>

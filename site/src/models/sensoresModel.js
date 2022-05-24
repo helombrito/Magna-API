@@ -8,13 +8,10 @@ var database = require("../database/config");
  * @param {number} qtdSensores Quantidade de assentos que o Sensores terá 
  * @param {number} fkShopping De qual shopping este Sensores será inserido (pegar da sessionStorage) 
  */
-function inserirSensoresBanco (apelidoSensores, qtdSensores, fkShopping) {
+function inserirSensoresBanco (fkSetor) {
     // select sensor.idSensor, setor.apelidoSetor, Setor.assentosDisponiveis from Sensor join setor on idSetor = fkSetor; 
     var instrucao = `
-    SELECT sensor.idSensor, setor.apelidoSetor, Setor.assentosDisponiveis from Sensor join setor on ${idSetor} = ${fkSetor}; 
-
-        INSERT INTO Sensores (apelidoSensores, assentosDisponiveis, fkShopping) 
-        VALUES ('${apelidoSensores}', '${qtdSensores}', '${fkShopping}');
+    insert into Sensor (fkSetor) values (${fkSetor});
     `;
     return database.executar(instrucao);
 }
@@ -25,7 +22,7 @@ function inserirSensoresBanco (apelidoSensores, qtdSensores, fkShopping) {
  */
 function listarTodosSensores () {
     var instrucao = `
-        SELECT * FROM Sensores;
+        SELECT * FROM Sensor join Setor on fkSetor = idSetor;
     `;
     return database.executar(instrucao);
 }
@@ -36,7 +33,7 @@ function listarTodosSensores () {
  */
 function listarSensoresId (id) {
     var instrucao = `
-        SELECT * FROM Sensores WHERE idSensores = ${id};
+        SELECT * FROM Sensor WHERE idSensor = ${id};
     `;
     return database.executar(instrucao);
 }

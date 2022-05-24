@@ -40,25 +40,16 @@ function pegarSensoresId (req, res) {
  * @param {Response} res
  */
 function inserirSensores (req, res) {
-    let apelido = req.body.apelidoSensorServer;
-    let qtdeAssentos = req.body.qtdeAssentosServer;
-    let fkShopping = req.body.fkShoppingServer;
+    let fkSetor = req.body.fkSetorServer;
 
-    if (apelido == undefined)
+    if (fkSetor == undefined)
     {
         res.status(400).send("Seu apelido está undefined!");
     }
-    else if (qtdeAssentos == undefined)
-    {
-        res.status(400).send("Seu qtdeAssentos está undefined!");
-    }
-    else if (fkShopping == undefined)
-    {
-        res.status(400).send("Seu fkShopping está undefined!");
-    } else
+    else
     {
 
-        SensorModel.inserirSensoresBanco(apelido, qtdeSensores)
+        SensorModel.inserirSensoresBanco(fkSetor)
             .then(resultado => {
                 res.json(resultado).status(200);
             })

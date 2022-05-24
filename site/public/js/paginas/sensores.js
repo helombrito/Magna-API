@@ -9,38 +9,12 @@ let fkSetor;
 /** @type {Array<object>} */
 
 
-/**
- * @returns {Promise<Array<object>>}  
- */
-function pegarDadosSensores() {
-    return new Promise((resolve, reject) => {
-        fetch('/sensores/listar')
-            .then(response => response.json())
-            .then(json => {
-                let array = [];
-                for (let i = 0; i < json.length; i++) {
-                    let linha = {};
-                    linha.ID = (json[i].idSetor);
-                    linha.fkSetor = (json[i].fkSetor);
-
-                    array.push(linha);
-                }
-                resolve(array);
-                return array;
-            })
-            .catch(error => {
-                showMessageError('Erro ao listar sensores');
-                reject(error);
-                console.error(error);
-            });
-    });
-}
 
 pegarDadosSensores()
     .then(sensor => {
-        let colunasTabela = ['ID', 'fkSetor'];
+        let colunasTabela = [ 'ID', 'Setor' ];
 
-        plotarTabela(colunasTabela, sensores, document.getElementById('table'));
+        plotarTabela(colunasTabela, sensor, document.getElementById('table'));
     });
 /**
  * @description
@@ -48,39 +22,51 @@ pegarDadosSensores()
  * @param {Array<object> | Promise<Array<object>>} data
  * @param {HTMLTableElement} table
  */
-function plotarTabela(columns, data, table = document.querySelector('table#table'),) {
-    const tr = table.tHead.children[0];
+function plotarTabela (columns, data, table = document.querySelector('table#table'),) {
+    const tr = table.tHead.children[ 0 ];
     const tbody = table.querySelector('tbody');
 
     tbody.innerHTML = '';
     tr.innerHTML = '';
 
     for (let i = 0; i < columns.length; i++)
-        tr.innerHTML += `<th scope="col">${columns[i]}</th>`;
+        tr.innerHTML += `<th scope="col">${columns[ i ]}</th>`;
 
-    console.log(typeof data);
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++)
+    {
         tbody.innerHTML +=
             `
             <tr>
-            <th scope="row">${data[i].ID}</th>
-            <td>${data[i].fkSetor}</td>
-            <td>${data[i].Assentos}</th>
+            <th scope="row">${data[ i ].ID}</th>
+            <td>${data[ i ].Setor}</td>
             </tr>
             `;
     }
 
 }
-function inserirSensores() {
-    // validar campos
-     apelidoSetor =select_setor;
-     qtdSensor = input_qtd_sensor;
+/**
+ * @description
+ * @param {Array<object> | Promise<Array<object>>} data
+ * @param {HTMLSelectElement} select
+ */
+function plotarSelect (data, select = document.querySelector('select#select')) {
 
-    if (validarCampos()) {
+    for (let i = 0; i < data.length; i++)
+        select.innerHTML +=
+            `
+            <option value='${data[ i ].ID}'>${data[ i ].Apelido}</option>
+        `;
+}
+pegarDadosSetores()
+    .then(setores => {
+        plotarSelect(setores, document.querySelector('#select_setor'));
+    });
+function inserirSensores () {
+    if (document.querySelector('#select_setor').value !== 0)
+    {
         // tudo validado aqui dentro
         data = {
-            apelidoSetorServer: apelidoSetor,
-            qtdSensorServer: qtdSensor,
+            fkSetorServer: document.querySelector('#select_setor').value,
         };
         limparCampos();
         fetch('/sensores/cadastrar', {
@@ -91,9 +77,11 @@ function inserirSensores() {
             .then(response => response.json().then(json => {
                 // nossa resposta vindo do controller
                 console.log(json, response);
-                if (response.status == 200) {
+                if (response.status == 200)
+                {
                     showMessageSuccess('sensor inserido com sucesso!');
-                } else {
+                } else
+                {
                     showMessageError('Houve algum erro ao inserir o sensor');
                 }
             }))
@@ -101,19 +89,8 @@ function inserirSensores() {
                 showMessageError(error);
             });
 
-    }
-}
-function validarCampos() {
-    if (
-        checkInput(apelidoSetor, 60, 3, /^[a-zA-Zà-úÀ-Ú\s]*$/gm) &&
-        checkInput(qtdeAssentos, 10, 1, /^[\d]*$/)) {
-        fkShopping = 1;
-
-        if (fkShopping && fkShopping > 0 && fkShopping != undefined) {
-            qtdSensor = qtdSensor.value;
-            apelidoSetor = apelidoSetor.value;
-            return true;
-        }
-        return false;
+    } else
+    {
+        showMessageWarning('Selecione um Setor');
     }
 }
