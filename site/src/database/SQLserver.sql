@@ -1,19 +1,19 @@
 
 USE Magna;
 
-CREATE TABLE usuario(
-	idUsuario INT PRIMARY KEY  IDENTITY(1,1),
-	nome VARCHAR(100),
-    email VARCHAR(100) NOT NULL UNIQUE,
+CREATE TABLE Usuario(
+	idUsuario INT PRIMARY KEY IDENTITY(1,1),
+	nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
     senha VARCHAR(60) NOT NULL,
-    cpf CHAR(11) UNIQUE,
+    cpf CHAR(11),
     dtNasc DATE,
-    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
 );
 CREATE TABLE Shopping(
-	idShopping INT PRIMARY KEY  IDENTITY(1,1),
+	idShopping INT PRIMARY KEY IDENTITY(1,1),
     nomeShopping VARCHAR(100) NOT NULL,
-    cnpj CHAR(14) UNIQUE NOT NULL,
+    cnpj CHAR(14) NOT NULL,
     telefone CHAR(11) NOT NULL,
     cep CHAR(8),
     numeroEndereco INT,
@@ -22,7 +22,7 @@ CREATE TABLE Shopping(
 select * from shopping;
 -- ASSOCIATIVA MUITOS PARA MUITOS LOGIN
 CREATE TABLE Login(
-	idLogin INT  IDENTITY(1,1),
+	idLogin INT IDENTITY(1,1),
     fkShopping INT NOT NULL,
     fkUsuario INT NOT NULL,
     permissaoUsuario CHAR(3) DEFAULT 'ADM',
@@ -38,7 +38,7 @@ CREATE TABLE Login(
 );
 
 CREATE TABLE Setor(
-	idSetor INT PRIMARY KEY  IDENTITY(1,1),
+	idSetor INT PRIMARY KEY IDENTITY(1,1),
     apelidoSetor VARCHAR(60) NOT NULL,
     assentosDisponiveis INT NOT NULL CHECK (assentosDisponiveis > 0),
 	fkShopping INT,
@@ -46,13 +46,13 @@ CREATE TABLE Setor(
 );
 
 CREATE TABLE Sensor(
-	idSensor INT PRIMARY KEY  IDENTITY(1,1),
+	idSensor INT PRIMARY KEY IDENTITY(1,1),
 	fkSetor INT,
     FOREIGN KEY (fkSetor) REFERENCES Setor(idSetor)
 );
 
 CREATE TABLE Registro(
-	idSensor INT  IDENTITY(1,1),
+	idSensor INT IDENTITY(1,1),
     dataCaptura DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     captura CHAR(1) NOT NULL DEFAULT 0 CHECK (captura in (0,1)),-- 0 não tem ngm e 1 tem
 	fkSensor INT NOT NULL,

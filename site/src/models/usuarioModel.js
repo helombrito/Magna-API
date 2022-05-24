@@ -32,10 +32,6 @@ function validar (email) {
     return database.executar(instrucao);
 }
 
-
-
-
-
 function trocarSenha (senha, id) {
     var instrucao = ` update usuario set senha = '${senha}'  where idUsuario = ${id}`;
     return database.executar(instrucao);
@@ -78,14 +74,14 @@ function cadastrar (nome, email, senha) {
     var instrucao = `INSERT INTO usuario (nome, email, senha) VALUES ('${nome}','${email}','${senha}');`;
     return database.executar(instrucao);
 }
-function inserirShop(nome, cnpj, tel, cep, numLocal){
+function inserirShop (nome, cnpj, tel, cep, numLocal) {
     var instrucao = `INSERT INTO shopping (nomeShopping, cnpj, telefone, cep, numeroEndereco) VALUES ('${nome}', '${cnpj}', '${tel}', '${cep}', '${numLocal}');`;
     return database.executar(instrucao);
 }
 /**
  * @param {number} cnpj Para ser pesquisado no banco de dados  
  */
-function insereLogin(fkUser, fkShopping, permissao = 'MAS'){
+function insereLogin (fkUser, fkShopping, permissao = 'MAS') {
     var instrucao = `
     INSERT INTO login (fkShopping, fkUsuario, permissaoUsuario)
     VALUES (${fkShopping}, ${fkUser}, '${permissao}');
@@ -93,7 +89,7 @@ function insereLogin(fkUser, fkShopping, permissao = 'MAS'){
 
     return database.executar(instrucao);
 }
-function pesquisarCnpj(cnpj){
+function pesquisarCnpj (cnpj) {
     var instrucao = `select * from shopping where cnpj = '${cnpj}'`;
     //console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -101,7 +97,7 @@ function pesquisarCnpj(cnpj){
 /**
  * @param {string} email Para ser pesquisado no banco de dados  
  */
-function pesquisarEmail(email){
+function pesquisarEmail (email) {
     var instrucao = `select * from usuario where email = '${email}'`;
     //console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -114,13 +110,21 @@ function cadastrar_usuario (nomeCompleto, email, cpf, senha) {
     //console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
-function pesquisarIdUsuario(id){
+function pesquisarIdUsuario (id) {
     var instrucao = `select * from usuario where idUsuario = ${id}`;
     //console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
-function pesquisarIdShopping(id){
+function pesquisarIdShopping (id) {
     var instrucao = `select * from shopping where idShopping = ${id}`;
+    return database.executar(instrucao);
+}
+function pegarUltimoShop () {
+    var instrucao = `select max(idShopping) as max from Shopping`;
+    return database.executar(instrucao);
+}
+function pegarUltimoUser () {
+    var instrucao = `select max(idUsuario) as max from usuario`;
     return database.executar(instrucao);
 }
 module.exports = {
@@ -136,5 +140,7 @@ module.exports = {
     insereLogin,
     pesquisarIdShopping,
     pesquisarIdUsuario,
-    inserirShop
+    inserirShop,
+    pegarUltimoShop,
+    pegarUltimoUser
 };

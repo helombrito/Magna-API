@@ -3,6 +3,7 @@
     border-radius: var(--radius-sm);
     padding: 40px 20px;
     overflow: auto;
+    height: min-content;
     color: var(--color-light);
 }
 

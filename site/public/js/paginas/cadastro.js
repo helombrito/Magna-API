@@ -49,25 +49,26 @@ function cadastrar () {
       body: JSON.stringify(dataBody),
     })
       .then(function (resposta) {
-        // console.log(resposta)
         if (resposta.status == 200)
         {
           showMessageSuccess(
             "Cadastro realizado com sucesso!"
           );
-          loadingElement(button, 4000).then((val) => {
+          loadingElement(button, 2000).then((val) => {
             if (val)
             {
               window.location = "login.html";
             }
           });
-        } else if(resposta.status == 403) {
-          showMessageWarning('CNPJ já cadastrado!')
+        } else if (resposta.status == 403)
+        {
+          showMessageWarning('CNPJ já cadastrado!');
         }
-        else if(resposta.status == 402) {
-          showMessageWarning('Email já cadastrado!')
+        else if (resposta.status == 402)
+        {
+          showMessageWarning('Email já cadastrado!');
         }
-         else
+        else
         {
           // button.onclick = cadastrar();
           showMessageError("Houve um erro ao tentar realizar o cadastro!");
@@ -89,7 +90,7 @@ function validarCampos () {
   var cnpjRegex = /^\d{14}$/gm;
 
   if (
-    
+
     checkInput(nome, 100, 3, /^[a-zA-Zà-úÀ-Ú\s]*$/gm) &&
     checkInput(email, 100, 5, emailRegex) &&
     // cpnj only numbers

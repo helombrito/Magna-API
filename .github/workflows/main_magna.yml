@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'magna'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_226DDC216E6A42FF821507178F02C3AE }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9CF4B80D3B114823963AFAE9702FBD1A }}
           package: .
