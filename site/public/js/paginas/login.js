@@ -26,7 +26,7 @@ function entrar () {
             body: JSON.stringify({
                 emailServer: emailVar,
                 senhaServer: senhaVar,
-                selectServer: selectShopVar
+                selectShopServer: selectShopVar
             })
         }).then(function (resposta) {
             document.querySelector('button').disabled = false;

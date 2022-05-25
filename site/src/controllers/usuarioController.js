@@ -138,15 +138,14 @@ function entrar(req, res) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
 
-        if (selectShop == 'nenhum') {
+        if (selectShop == '0') {
             usuarioModel.entrar(email, senha)
                 .then(
                     resultado => {
                         if (resultado.length == 1) {
                             console.log('este usuario tem login mas não selecionou nenhum shopping');
-                            console.log(resultado);
                         } else {
-                            console.log('usuario não encontrado')
+                            console.log('usuario não encontrado');
                         }
                     }
                 ).catch(
@@ -156,8 +155,8 @@ function entrar(req, res) {
                             res.status(500).json(erro.sqlMessage);
                         }
                     );
-        } else if (selectShop != 'nenhuma') {
-            usuarioModel.verificaUsuario(email, senha, selectShop, permissao)
+        } else if (selectShop != '0') {
+            usuarioModel.verificaUsuario(email, senha, selectShop)
                 .then(resultado => {
                     if (resultado.length == 1) {
                         console.log('este usuario selecionou o shopping do seu login e também tem uma conta criada no sistema');
