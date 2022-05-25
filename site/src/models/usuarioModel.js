@@ -20,6 +20,14 @@ function entrar (email, senha) {
     // console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+function verificaUsuario(email, senha, selectShop) {
+    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha);
+    var instrucao = `
+    SELECT * FROM login JOIN usuario ON idusuario = fkusuario JOIN shopping ON idShopping = fkShopping WHERE Usuario.email = '${email}' AND Usuario.senha = '${senha}' AND Shopping.nomeShopping = '${selectShop}';
+    `;
+    // console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 
 
 function validar (email) {
@@ -133,6 +141,7 @@ module.exports = {
     cadastrar_usuario: cadastrar_usuario,
     listar: listar,
     validar: validar,
+    verificaUsuario,
     // enviar_email: enviar_email,
     trocarSenha: trocarSenha,
     pesquisarCnpj,

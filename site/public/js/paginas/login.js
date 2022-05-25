@@ -14,6 +14,7 @@ function entrar () {
     {
         emailVar = inp_email.value;
         senhaVar = inp_senha.value;
+        selectShopVar = select_shop.value;
         limparCampos();
         document.querySelector('button').disabled = true;
 
@@ -24,7 +25,8 @@ function entrar () {
             },
             body: JSON.stringify({
                 emailServer: emailVar,
-                senhaServer: senhaVar
+                senhaServer: senhaVar,
+                selectServer: selectShopVar
             })
         }).then(function (resposta) {
             document.querySelector('button').disabled = false;
