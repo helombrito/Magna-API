@@ -143,6 +143,8 @@ function entrar(req, res) {
                 .then(
                     resultado => {
                         if (resultado.length == 1) {
+                            res.json(resultado)
+                            console.log(resultado);
                             console.log('este usuario tem login mas não selecionou nenhum shopping');
                         } else {
                             console.log('usuario não encontrado');

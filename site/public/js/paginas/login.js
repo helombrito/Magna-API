@@ -1,6 +1,29 @@
 showFooter();
 showMenu('login');
-function entrar () {
+plotarSelect();
+function plotarSelect(response, select = document.querySelector('select#select'), ) {
+    fetch('/usuarios/listar')
+        .then(response => {
+            response.json()
+                .then(shoppings =>{
+                    console.log(shoppings)
+                    for (let i = 0; i < shoppings.length; i++){
+                        select_shop.innerHTML +=
+                            `<option value="${shoppings[i].nomeShopping}">
+                                ${shoppings[i].nomeShopping}
+                            </option>
+                        `;
+                    }
+                })
+            return; 
+        })
+        .catch(error => {
+            showMessageError(error);
+        });
+
+}
+
+function entrar() {
     var emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/gm;
     /** @type {HTMLInputElement} */
     var emailVar = inp_email;
@@ -10,8 +33,7 @@ function entrar () {
     if (
         checkInput(emailVar, 100, 4, emailRegex) &&
         checkInput(senhaVar, 60, 4)
-    )
-    {
+    ) {
         emailVar = inp_email.value;
         senhaVar = inp_senha.value;
         selectShopVar = select_shop.value;
@@ -31,26 +53,23 @@ function entrar () {
         }).then(function (resposta) {
             document.querySelector('button').disabled = false;
             console.log(resposta);
-            if (resposta.status == 200)
-            {
+            if (resposta.status == 200) {
                 resposta.json().then(json => {
                     console.log(json);
-                    sessionStorage.LOGIN_USUARIO = json.login;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.setItem("user",json)
+                    console.log(json.permissaoUsuario);
                     // sessionStorage.ID_SHOPPING = json.id;
 
                     loadingElement(document.body, 3000)
                         .then(val => {
-                            if (val)
-                            {
-                                window.location = 'dashboard.html';
+                            if (val) {
+
+                                //window.location = 'dashboard.html';
                             }
                         });
                 });
 
-            } else
-            {
+            } else {
                 resposta.json().then(json => {
                     console.log(json);
                     showMessageError(json);
@@ -64,7 +83,7 @@ function entrar () {
     }
 }
 
-function validarSessao () {
+function validarSessao() {
 
 
     var login = sessionStorage.LOGIN_USUARIO;
@@ -72,19 +91,17 @@ function validarSessao () {
 
     var h1Titulo = document.getElementById("h1_titulo");
 
-    if (login != null && nome != null)
-    {
+    if (login != null && nome != null) {
         // window.alert(`Seja bem-vindo, ${nome}!`);
         h1Titulo.innerHTML = `${login}`;
 
         finalizar;
-    } else
-    {
+    } else {
         window.location = "login.html";
     }
 }
 
-function sair () {
+function sair() {
 
     sessionStorage.clear();
     finalizar;
