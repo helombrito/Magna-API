@@ -67,9 +67,9 @@ async function enviar_email (email) {
         to: `${email}`, // lista de enviados
         subject: "Recuperação de senha.", // Subject line
         text: "Acesse o link para criar sua nova senha.", // plain text body
-        html: `<b>Acesse o link para criar sua nova senha.</b><br> 
-        <a href=' magna.azurewebsites.net/trocarSenha.html?id=${id}'>
-        http://magna.azurewebsites.net/trocarSenha.html?id=${id} </a>`, // html body
+        html: `<b><h1>Acesse o link para criar sua nova senha.</h1></b><br> 
+        <a href='magna.azurewebsites.net/trocarSenha.html?id=${id}'>
+        http://magna.azurewebsites.net/trocarSenha.html?id=${id}</a>`, // html body
     });
 
     console.log(`E-mail enviado${id}`)
