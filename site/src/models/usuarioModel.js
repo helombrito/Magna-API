@@ -63,7 +63,7 @@ async function enviar_email(email) {
     subject: "Recuperação de senha.", // Subject line
     text: "Acesse o link para criar sua nova senha.", // plain text body
     html: `<b><h1>Acesse o link para criar sua nova senha.</h1></b><br> 
-        <a href='magna.azurewebsites.net/trocarSenha.html?id=${id}'>
+        <a href='http://magna.azurewebsites.net/trocarSenha.html?id=${id}'>
         http://magna.azurewebsites.net/trocarSenha.html?id=${id}</a>`, // html body
   });
 
