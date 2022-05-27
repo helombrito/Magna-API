@@ -1,53 +1,63 @@
 body {
-    /* Para empurrar pq o menu eh fixo */
-    padding-top: 60px;
+  /* Para empurrar pq o menu eh fixo */
+  padding-top: 60px;
 }
 
 #header {
-    /* Para nada sobrescrever o menu, pq ele eh fixo */
-    z-index: 999;
+  /* Para nada sobrescrever o menu, pq ele eh fixo */
+  z-index: 999;
 
-    height: 80px;
-    width: 100%;
-    /* usando as variaveis de cores */
-    background-color: var(--color-accent-dark);
+  height: 80px;
+  width: 100%;
+  /* usando as variaveis de cores */
+  background-color: var(--color-accent-dark);
 
-    box-shadow: 0 2px 8px var(--color-shadow);
+  box-shadow: 0 2px 8px var(--color-shadow);
 
-    /* Fixando o menu no topo */
-    position: fixed;
-    top: 0;
-    left: 0;
+  /* Fixando o menu no topo */
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 #header .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--color-white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-white);
 }
 
 #header .navbar .menu {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 #header .navbar .menu .item {
-    margin-right: var(--margin);
-    transition: all .2s ease;
-    opacity: .9;
+  margin-right: var(--margin);
+  transition: all 0.2s ease;
+  opacity: 0.9;
 }
-
+#header .navbar .menu .item.destaque {
+  background: var(--color-primary);
+  padding: 8px;
+  opacity: 1;
+  width: 120px;
+  text-align: center;
+  border-radius: 4px;
+}
 #header .navbar .menu .item:hover {
-    opacity: 1;
-    color: var(--color-primary);
+  opacity: 1;
+  color: var(--color-primary);
 }
-
+#header .navbar .menu .item.destaque:hover {
+  color: white;
+  font-weight: 500;
+}
 #header .navbar .menu .item .link {
-    padding: var(--padding-sm);
+  padding: var(--padding-sm);
 }
 
 #header .navbar img {
-    width: 80px;
+  width: 80px;
 }
