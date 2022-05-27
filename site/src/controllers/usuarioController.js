@@ -84,7 +84,7 @@ async function enviar_email(req, res) {
     // id indo como letras"id" e dando erro nos site
     html: `<b><h1>Acesse o link para criar sua nova senha.</h1></b><br> 
         <a href='magna.azurewebsites.net/trocarSenha.html?id=${id}'>
-        http://magna.azurewebsites.net/trocarSenha.html?id=${id} </a>`, // html body
+        http://magna.azurewebsites.net/trocarSenha.html?id=${id}</a>`, // html body
   });
 
   console.log(`E-mail enviado ${id}`);
