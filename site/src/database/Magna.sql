@@ -13,6 +13,7 @@ CREATE TABLE usuario(
     cpf CHAR(11) UNIQUE,
     dtNasc DATE,
     createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
+	disponibilidade CHAR(1) DEFAULT 'S' CHECK(disponibilidade in ('S', 'N'))
 );
 
 -- DADOS DA TABELA USUARIO

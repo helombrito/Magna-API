@@ -9,6 +9,7 @@ CREATE TABLE Usuario(
     cpf CHAR(11),
     dtNasc DATE,
     createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    disponibilidade CHAR(1) DEFAULT 'S' CHECK(disponibilidade in ('S', 'N'))
 );
 CREATE TABLE Shopping(
 	idShopping INT PRIMARY KEY IDENTITY(1,1),
