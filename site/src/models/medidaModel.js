@@ -59,6 +59,12 @@ function buscarMedidasEmTempoReal(idAquario) {
     return database.executar(instrucaoSql);
 }
 
+// aqui é a query já pronta puxando o id do shopping requerido
+function testeMostra(idShopping){
+    instrucaoSql = `select * from shopping where idShopping = 24;`
+
+    return database.executar(instrucaoSql);
+}
 function setorMaisCheio(idShopping, ) {
     instrucaoSql = `select apelidoSetor ,count(captura) as Qtde from registro
       join sensor on idSensor = fkSensor 
@@ -143,5 +149,6 @@ function diaSemanaMaisVazio(){
 }
 module.exports = {
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarMedidasEmTempoReal,
+    testeMostra
 }

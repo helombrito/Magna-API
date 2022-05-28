@@ -1,5 +1,22 @@
 var medidaModel = require("../models/medidaModel");
 
+function testeMostra(req,res){
+    medidaModel.testeMostra()
+        .then(function (resultado){
+            if (resultado.length > 0){
+                console.log(resultado[0].nomeShopping)
+
+                res.status(200).json(resultado);
+            } else{
+                res.status(204).send("NENHUM RESULTADO ENCONTRADO");
+            }
+        }).catch(
+            function (erro) {
+                res.status(500).json(erro);
+            }
+        );
+}
+
 function buscarUltimasMedidas(req, res) {
 
     const limite_linhas = 7;
@@ -43,6 +60,6 @@ function buscarMedidasEmTempoReal(req, res) {
 
 module.exports = {
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
-
+    buscarMedidasEmTempoReal,
+    testeMostra
 }
