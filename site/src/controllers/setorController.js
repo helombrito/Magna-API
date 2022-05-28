@@ -11,6 +11,7 @@ function pegarTodosSetores (req, res) {
         .then(function (resultado) {
             if (resultado.length > 0)
             {
+                console.log('controller')
                 res.status(200).json(resultado);
             } else
             {
@@ -57,7 +58,7 @@ function inserirSetor (req, res) {
 
         setorModel.inserirSetorBanco(apelido, qtdeAssentos, fkShopping)
             .then(resultado => {
-                res.json(resultado).status(200);
+                res.json({message : 'ok'}).status(200);
             })
             .catch(erro => {
                 res.status(500).json(erro);

@@ -35,6 +35,7 @@ function listarSensoresId (id) {
     var instrucao = `
         SELECT * FROM Sensor WHERE idSensor = ${id};
     `;
+    
     return database.executar(instrucao);
 }
 

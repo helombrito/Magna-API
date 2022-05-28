@@ -73,12 +73,13 @@ function inserirSensores() {
       .then((response) =>
         response.json().then((json) => {
           // nossa resposta vindo do controller
-          console.log(json, response);
-          if (response.status == 200) {
+          if (json.message == 'ok') {
             showMessageSuccess("sensor inserido com sucesso!");
           } else {
             showMessageError("Houve algum erro ao inserir o sensor");
-          }
+          }setTimeout(() => {
+              window.location.reload()
+          }, 2000);
         })
       )
       .catch((error) => {

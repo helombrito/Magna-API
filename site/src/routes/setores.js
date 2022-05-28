@@ -18,6 +18,7 @@ router.get("/listar/:id", function (req, res) {
 });
 
 router.post("/cadastrar", function (req, res) {
+
     setorController.inserirSetor(req, res);
 });
 

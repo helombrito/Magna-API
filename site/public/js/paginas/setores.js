@@ -44,13 +44,13 @@ function inserirSetor() {
   // validar campos
   apelidoSetor = input_apelido_setor;
   qtdeAssentos = input_qts_assentos;
-
+  
   if (validarCampos()) {
     // tudo validado aqui dentro
     data = {
       apelidoSetorServer: apelidoSetor,
       qtdeAssentosServer: qtdeAssentos,
-      fkShoppingServer: fkShopping,
+      fkShoppingServer: get_user_session().fkShopping,
     };
     limparCampos();
     fetch("/setores/cadastrar", {
@@ -64,6 +64,10 @@ function inserirSetor() {
           console.log(json, response);
           if (response.status == 200) {
             showMessageSuccess("Setor inserido com sucesso!");
+            setTimeout(() => {
+            location.reload()
+              
+            }, 2000);              
           } else {
             showMessageError("Houve algum erro ao inserir o setor");
           }

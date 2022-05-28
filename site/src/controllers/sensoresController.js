@@ -51,7 +51,8 @@ function inserirSensores (req, res) {
 
         SensorModel.inserirSensoresBanco(fkSetor)
             .then(resultado => {
-                res.json(resultado).status(200);
+                
+                res.json({message : 'ok'}).status(200);
             })
             .catch(erro => {
                 res.status(500).json(erro);
