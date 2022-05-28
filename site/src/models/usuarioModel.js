@@ -48,7 +48,6 @@ function trocarSenha(senha, id) {
 async function enviar_email(email) {
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
-    name: "magna.sptech@gmail.com",
     host: "smtp.gmail.com",
     port: 587,
     secure: false, // true for 465, false for other ports
