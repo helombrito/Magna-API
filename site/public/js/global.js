@@ -2,6 +2,7 @@ function logout() {
   sessionStorage.removeItem("user");
   window.location.href = "login.html";
 }
+
 function showFooter(container = "footer") {
   var place = document.getElementById(container);
   var html = `
@@ -339,29 +340,7 @@ function pegarDadosSensores() {
   });
 }
 
-function pegarDadosKPI() {
-  return new Promise((resolve, reject) => {
-    fetch("/medidas/testemostra")
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json[0].idShopping);
-        for (let i = 0; i < json.length; i++) {
-          box1.innerHTML = `
-          <h3 class="font-md bold mb">Dia da semana mais</h3>
-          <span class="font-sm">Vazio</span>
-          <h2 class="title-3">Terça</h2>
-          <hr />
-          <span class="font-sm">Cheio</span>
-          <h2 class="title-3">${json[0].idShopping}</h2>`
-        }
-      })
-      .catch((error) => {
-        showMessageError("Erro ao listar sensores");
-        reject(error);
-        console.error(error);
-      });
-  });
-}
+
 function showMenuRestrito(
   container = document.getElementById("header-restrito")
 ) {

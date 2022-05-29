@@ -1,12 +1,59 @@
 var medidaModel = require("../models/medidaModel");
 
-function testeMostra(req,res){
-    medidaModel.testeMostra()
-        .then(function (resultado){
-            if (resultado.length > 0){
-                console.log(resultado[0].nomeShopping)
-
-                res.status(200).json(resultado);
+function kpiSetor(req,res){
+    medidaModel.setorMaisLotado()
+        .then(function (setorMaisLotado){
+            if (setorMaisLotado.length > 0){
+                console.log(setorMaisLotado)
+                medidaModel.setorMenosLotado()
+                    .then((setorMenosLotado) => {
+                        console.log(setorMenosLotado)
+                        if(setorMenosLotado.length > 0){
+                            res.status(200).json({setorMaisLotado, setorMenosLotado});
+                        }
+                    })
+            } else{
+                res.status(204).send("NENHUM RESULTADO ENCONTRADO");
+            }
+        }).catch(
+            function (erro) {
+                res.status(500).json(erro);
+            }
+        );
+}
+function pegarDiaSemana(req,res){
+    medidaModel.diaSemanaMaisCheio()
+        .then(function (diaSemanaMaisCheio){
+            if (diaSemanaMaisCheio.length > 0){
+                console.log(diaSemanaMaisCheio)
+                medidaModel.diaSemanaMaisVazio()
+                    .then((diaSemanaMaisVazio) => {
+                        console.log(diaSemanaMaisVazio)
+                        if(diaSemanaMaisVazio.length > 0){
+                            res.status(200).json({diaSemanaMaisCheio, diaSemanaMaisVazio});
+                        }
+                    })
+            } else{
+                res.status(204).send("NENHUM RESULTADO ENCONTRADO");
+            }
+        }).catch(
+            function (erro) {
+                res.status(500).json(erro);
+            }
+        );
+}
+function pegarMes(req,res){
+    medidaModel.mesCheio()
+        .then(function (mesCheio){
+            if (mesCheio.length > 0){
+                console.log(mesCheio)
+                medidaModel.mesVazio()
+                    .then((mesVazio) => {
+                        console.log(mesVazio)
+                        if(mesVazio.length > 0){
+                            res.status(200).json({mesCheio, mesVazio});
+                        }
+                    })
             } else{
                 res.status(204).send("NENHUM RESULTADO ENCONTRADO");
             }
@@ -61,5 +108,6 @@ function buscarMedidasEmTempoReal(req, res) {
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
-    testeMostra
+    kpiSetor,
+    pegarDiaSemana
 }
