@@ -37,4 +37,8 @@ router.post("/trocarSenha/:id", function (req, res) {
   }
 });
 
+router.put("/mudarDisponibilidade", (req, res) => {
+  usuarioController.mudarDisponibilidade(req, res);
+});
+
 module.exports = router;

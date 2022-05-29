@@ -352,7 +352,7 @@ function pegarDadosKPI() {
           <h2 class="title-3">Terça</h2>
           <hr />
           <span class="font-sm">Cheio</span>
-          <h2 class="title-3">${json[0].idShopping}</h2>`
+          <h2 class="title-3">${json[0].idShopping}</h2>`;
         }
       })
       .catch((error) => {
@@ -428,12 +428,68 @@ function showMenuRestrito(
 
   setPopUpChatTomTicket();
 }
+function showMenuRestritoUser(
+  container = document.getElementById("header-restrito")
+) {
+  let user = get_user_session();
+  if (user !== undefined && user.none !== "N") {
+    if (container) {
+      let headerHTML = `
+      <div class="header-user shadow-lg">
+      <div class="container-sm">
+        <div class="top">
+          <div class="icon flex-center shadow-sm">
+            <span>${user.nome[0].toUpperCase() || "U"}</span>
+          </div>
+          <span class="nome-empresa">${user.nome.toUpperCase() || "User"}</span>
+          <span class="cnpj-empresa">${
+            user.cpf !== "null" ? user.cpf : "user shopping"
+          }</span>
+        </div>
+
+        <ul class="menu">
+          <li class="menu-item agora">
+            <a class="menu-link" href="./perfil.html">
+              <i class="fa-solid fa-user"></i>
+              <span>Perfil</span>
+            </a>
+          </li>
+
+          <li class="menu-item">
+            <a class="menu-link" href="./dashboard.html">
+              <i class="fa-solid fa-building"></i>
+              <span>Cargos</span>
+            </a>
+          </li>
+
+          <li class="menu-item" onclick="logout()">
+            <a class="menu-link">
+              <i class="fa-solid fa-right-from-bracket"></i>
+              <span>Sair</span>
+            </a>
+          </li>
+        </ul>
+        <span class="copy">
+          Copyright © 2010-2022 Magna Company S.L.Todos os direitos reservados.
+        </span>
+      </div>
+    </div>
+      `;
+      container.innerHTML = headerHTML;
+    } else {
+      window.alert("container is not defined");
+    }
+  } else {
+    window.location = `login.html?erro=404`;
+  }
+
+  setPopUpChatTomTicket();
+}
 /**
  * @description Função para retornar Dados do usuario no sessionStorage
  * @returns {string}
  */
 const get_user_session = () => {
-  console.log(sessionStorage.getItem("user"));
   if (sessionStorage.getItem("user")) {
     return JSON.parse(sessionStorage.getItem("user"));
   }
