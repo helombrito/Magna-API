@@ -2,6 +2,7 @@ function logout() {
   sessionStorage.removeItem("user");
   window.location.href = "login.html";
 }
+
 function showFooter(container = "footer") {
   var place = document.getElementById(container);
   var html = `
@@ -372,6 +373,9 @@ function pegarDadosSensores() {
   });
 }
 
+<<<<<<< HEAD
+
+=======
 function pegarDadosKPI() {
   return new Promise((resolve, reject) => {
     fetch("/medidas/testemostra")
@@ -395,6 +399,7 @@ function pegarDadosKPI() {
       });
   });
 }
+>>>>>>> 95a436551dbe1c49ff2ce11c729fb59ec6d42dea
 function showMenuRestrito(
   container = document.getElementById("header-restrito")
 ) {
