@@ -1,6 +1,9 @@
 var medidaModel = require("../models/medidaModel");
 
 function kpiSetor(req,res){
+    let fkShopping = req.body.fkShoppingServer;
+    console.log(fkShopping)
+
     medidaModel.setorMaisLotado()
         .then(function (setorMaisLotado){
             if (setorMaisLotado.length > 0){

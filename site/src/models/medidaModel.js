@@ -156,7 +156,7 @@ function diaSemanaMaisCheio(idShopping) {
     return database.executar(instrucaoSql);
 
 }
-function diaSemanaMaisCheio(idShopping) {
+function diaSemanaMaisVazio(idShopping) {
     var instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
@@ -238,7 +238,7 @@ function mesCheio(idShopping) {
     return database.executar(instrucaoSql);
 
 }
-function mesCheio(idShopping) {
+function mesVazio(idShopping) {
     var instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {

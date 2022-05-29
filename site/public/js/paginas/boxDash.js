@@ -1,7 +1,10 @@
-
-
 function pegarDadosKPI() {
-    fetch("/medidas/kpiSetor")
+    data = {
+        fkShoppingServer: get_user_session().fkShopping,
+    }
+    fetch("/medidas/kpiSetor", {
+            body: JSON.stringify(data),
+        })
         .then((response) => response.json())
         .then((json) => {
             kpiSetor.innerHTML = `
@@ -40,6 +43,7 @@ function pegarDiaSemana() {
             console.error(error);
         });
 }
+
 function pegarMes() {
     fetch("/medidas/kpiMes")
         .then((response) => response.json())
