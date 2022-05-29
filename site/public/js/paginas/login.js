@@ -2,7 +2,11 @@ showFooter();
 showMenu("login");
 plotarSelect();
 if (get_user_session() !== undefined) {
-  window.location.href = "dashboard.html";
+  if (get_user_session().none == "N") {
+    window.location.href = "dashboard.html";
+  } else if (get_user_session().none == "S") {
+    window.location.href = "perfilUser.html";
+  }
 }
 function plotarSelect(
   response,
@@ -11,7 +15,6 @@ function plotarSelect(
   fetch("/usuarios/listar")
     .then((response) => {
       response.json().then((shoppings) => {
-        console.log(shoppings);
         for (let i = 0; i < shoppings.length; i++) {
           select_shop.innerHTML += `<option value="${shoppings[i].nomeShopping}">
                                 ${shoppings[i].nomeShopping}
@@ -54,20 +57,24 @@ function entrar() {
     })
       .then(function (resposta) {
         document.querySelector("button").disabled = false;
-        console.log(resposta);
         if (resposta.status == 200) {
           resposta.json().then((json) => {
-            sessionStorage.setItem("user", JSON.stringify(json));
+            json.resultado[0].none = json.none;
+            sessionStorage.setItem("user", JSON.stringify(json.resultado[0]));
 
             loadingElement(document.body, 3000).then((val) => {
               if (val) {
-                window.location = "dashboard.html";
+                if (json.none == "N") {
+                  window.location = "dashboard.html";
+                } else if (json.none == "S") {
+                  window.location = "perfilUser.html";
+                }
               }
             });
           });
         } else {
           resposta.json().then((json) => {
-            showMessageError(json);
+            showMessageWarning(json.error || "Erro");
           });
         }
       })
@@ -76,26 +83,4 @@ function entrar() {
         limparCampos();
       });
   }
-}
-
-function validarSessao() {
-  var login = sessionStorage.LOGIN_USUARIO;
-  var nome = sessionStorage.NOME_USUARIO;
-
-  var h1Titulo = document.getElementById("h1_titulo");
-
-  if (login != null && nome != null) {
-    // window.alert(`Seja bem-vindo, ${nome}!`);
-    h1Titulo.innerHTML = `${login}`;
-
-    finalizar;
-  } else {
-    window.location = "login.html";
-  }
-}
-
-function sair() {
-  sessionStorage.clear();
-  finalizar;
-  window.location = "login.html";
 }

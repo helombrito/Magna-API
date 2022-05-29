@@ -138,18 +138,13 @@ function entrar(req, res) {
         .entrar(email, senha)
         .then((resultado) => {
           if (resultado.length == 1) {
-            res.json(resultado);
-            console.log(resultado);
-            console.log(
-              "este usuario tem login mas não selecionou nenhum shopping"
-            );
+            res.json({ resultado, none: "S" });
           } else {
             console.log("usuario não encontrado");
           }
         })
         .catch(function (erro) {
           console.log(erro);
-          console.log("\nErro no login! Erro: ", erro.sqlMessage);
           res.status(500).json(erro.sqlMessage);
         });
     } else if (selectShop != "0") {
@@ -157,51 +152,40 @@ function entrar(req, res) {
         .verificaUsuario(email, senha, selectShop)
         .then((resultado) => {
           if (resultado.length == 1) {
-            console.log(
-              "este usuario selecionou o shopping do seu login e também tem uma conta criada no sistema"
-            );
-            res.json(resultado[0]);
+            res.json({ resultado, none: "N" });
           } else if (resultado.length == 0) {
-            console.log("Precisa verificar as credenciais");
+            res.status(404).json({ error: "Precisa verificar as credenciais" });
           }
         })
         .catch(function (erro) {
           console.log(erro);
-          console.log("\nErro no login! Erro: ", erro.sqlMessage);
           res.status(500).json(erro.sqlMessage);
         });
     }
   }
 }
+/**
+ *
+ * @param {Request} req
+ * @param {Response} res
+ * @returns
+ */
+function mudarDisponibilidade(req, res) {
+  let id = req.body.id;
+  let disponibilidade = req.body.disponibilidade;
 
-//         usuarioModel.entrar(email, senha)
-//             .then(
-//                 function (resultado) {
-//                     console.log(`\nResultados encontrados: ${resultado.length}`);
-//                     console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
-
-//                     if (resultado.length == 1)
-//                     {
-//                         console.log(resultado);
-//                         res.json(resultado[ 0 ]);
-//                     } else if (resultado.length == 0)
-//                     {
-//                         res.status(500).json('Email e/ou senha inválido(s)');
-//                     } else
-//                     {
-//                         res.status(500).json('Mais de um usuário com o mesmo login e senha!');
-//                     }
-//                 }
-//             ).catch(
-//                 function (erro) {
-//                     console.log(erro);
-//                     console.log("\nErro no login! Erro: ", erro.sqlMessage);
-//                     res.status(500).json(erro.sqlMessage);
-//                 }
-//             );
-//     }
-
-// }
+  if (id && disponibilidade) {
+    usuarioModel
+      .mudarDisponibilidade(disponibilidade, id)
+      .then((val) => {
+        usuarioModel.pesquisarIdUsuario(id).then((user) => {
+          user[0].none = "S";
+          res.json(user[0]).status(200);
+        });
+      })
+      .catch((err) => res.status(500).json({ message: err }));
+  }
+}
 function cadastrar(req, res) {
   var nome = req.body.nomeServer;
   var cnpj = req.body.cnpjServer;
@@ -318,4 +302,5 @@ module.exports = {
   validarId,
   enviar_email,
   trocarSenha,
+  mudarDisponibilidade,
 };

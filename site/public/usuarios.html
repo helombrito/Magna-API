@@ -1,75 +1,80 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Mudar em toda página o titulo -->
+    <title>Magna | Usuários</title>
+    <!-- Padrão CSS e Icones FA -->
+    <link rel="stylesheet" href="css/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="shortcut icon"
+      href="image/magna/favicon.ico"
+      type="image/x-icon"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Mudar em toda página o titulo -->
-  <title>Magna | Usuários</title>
-  <!-- Padrão CSS e Icones FA -->
-  <link rel="stylesheet" href="css/index.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="shortcut icon" href="image/magna/favicon.ico" type="image/x-icon" />
-</head>
+  <body class="body-perfil flex-center">
+    <!-- HEADER -->
+    <div id="header-restrito"></div>
 
-<body class="body-perfil flex-center">
-  <!-- HEADER -->
-  <div id="header-restrito"></div>
-
-  <!-- CONTEUDO -->
-  <div class="container-lg  setores">
-    <div class="conteudo-setor-list shadow-lg">
-      <h1 class="table-title title-3 mb">Usuários</h1>
-      <table class="table table-striped shadow-sm">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Login</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
+    <!-- CONTEUDO -->
+    <div class="container-lg setores">
+      <div class="conteudo-setor-list shadow-lg">
+        <h1 class="table-title title-3 mb">Usuários</h1>
+        <table class="table table-striped shadow-sm">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Cargo</th>
+              <th scope="col">Login</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr>
             <th scope="row">1</th>
             <td>Benass</td>
             <td>benassi@paulista.co</th=>
-          </tr>
-        </tbody>
-      </table>
-
-    </div>
-
-
-
-    <div class="conteudo-setor-list shadow-lg ">
-        <div class="container_input dividido">
-
-      <div class="container_input" data-title="Nome ou ID">
-        <label>Nome completo/ID:</label>
-        <select id="select_usuariosDisponiveis" class="input">
-          <option value="0">Selecione</option>
-        </select>
+          </tr> -->
+          </tbody>
+        </table>
       </div>
+
+      <div class="conteudo-setor-list shadow-lg">
+        <div class="container_input dividido">
+          <div class="container_input" data-title="Nome ou ID">
+            <label>Nome completo/ID:</label>
+            <select id="select_usuariosDisponiveis" class="input">
+              <option value="0">Selecione</option>
+            </select>
+          </div>
+          <div class="container_input" data-title="Selecione uma Permissão">
+            <label>Permissão:</label>
+            <select class="input" id="select_permicao">
+              <option value="0">Selecione</option>
+              <option value="ADM">Administrador</option>
+              <option value="MON">Monitor</option>
+            </select>
+          </div>
+        </div>
         <div class="container_input" data-title="Selecione uma Permissão">
-          <label>Permissão:</label>
-          <select class="input" id="select_permicao">
-            <option value="0">Selecione</option>
-            <option value="ADM">Administrador</option>
-            <option value="MON">Monitor</option>
-          </select>
+          <button onclick="" class="btn btn-primary btn-setor">
+            Cadastrar
+          </button>
         </div>
       </div>
-        <div class="container_input" data-title="Selecione uma Permissão">
-          <button onclick="" class="btn btn-primary btn-setor"> Cadastrar </button>
-</div>
     </div>
-    </div>
- 
+
     <script src="./js/global.js"></script>
     <script src="./js/paginas/usuarios.js"></script>
-</body>
-
+  </body>
 </html>
