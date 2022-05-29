@@ -34,28 +34,22 @@ function cadastrarUsuario() {
         senhaServer: senha,
         dtNascServer: dtNasc,
       }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
-
-        if (resposta.ok) {
-          showMessageSuccess(
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login..."
-          );
-          loadingElement(button).then((val) => {
-            if (val) {
-              window.location = "login.html";
-            }
-          });
-        } else {
-          showMessageError("Houve um erro ao tentar realizar o cadastro!");
-          throw "Houve um erro ao tentar realizar o cadastro!";
-        }
-      })
-      .catch(function (resposta) {
-        console.error(`Erro: ${resposta}`);
-        showMessageError(resposta);
-      });
+    }).then(function (resposta) {
+      console.log("resposta: ", resposta);
+      if (resposta.ok) {
+        showMessageSuccess(
+          "Cadastro realizado com sucesso! Redirecionando para tela de Login..."
+        );
+        loadingElement().then((val) => {
+          if (val) {
+            window.location = "login.html";
+          }
+        });
+      } else {
+        showMessageError("Houve um erro ao tentar realizar o cadastro!");
+        throw "Houve um erro ao tentar realizar o cadastro!";
+      }
+    });
 
     return false;
   }

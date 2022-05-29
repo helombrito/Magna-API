@@ -41,4 +41,16 @@ router.put("/mudarDisponibilidade", (req, res) => {
   usuarioController.mudarDisponibilidade(req, res);
 });
 
+router.get("/listarDisponiveis", (req, res) => {
+  usuarioController.pegarUsersDisponiveis(req, res);
+});
+
+router.post("/cadastrarLogin", (req, res) => {
+  usuarioController.cadastrarLogin(req, res);
+});
+
+router.get("/shop/:id", (req, res) => {
+  usuarioController.pegarUsuariosShopping(req, res);
+});
+
 module.exports = router;

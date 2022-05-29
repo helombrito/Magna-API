@@ -265,7 +265,6 @@ function cadastrar_usuario(req, res) {
   var cpf = req.body.cpfServer;
   var senha = req.body.senhaServer;
   var dtNasc = req.body.dtNascServer;
-
   if (nomeCompleto == undefined) {
     res.status(400).send("Seu nome completo está undefined!");
   } else if (email == undefined) {
@@ -278,19 +277,59 @@ function cadastrar_usuario(req, res) {
     res.status(400).send("Seu dtNasc está undefined!");
   } else {
     // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+    //! verificar cpf e email igual mas so se der tempo
     usuarioModel
-      .cadastrar_usuario(nomeCompleto, email, cpf, senha)
+      .cadastrar_usuario(nomeCompleto, email, cpf, senha, dtNasc)
       .then(function (resultado) {
-        res.json(resultado);
+        res.json(resultado).status(200);
       })
       .catch(function (erro) {
-        console.log(erro);
-        console.log(
-          "\nHouve um erro ao realizar o cadastro! Erro: ",
-          erro.sqlMessage
-        );
         res.status(500).json(erro.sqlMessage);
       });
+  }
+}
+
+function pegarUsersDisponiveis(req, res) {
+  usuarioModel
+    .pegarUsersDisponiveis()
+    .then((val) => {
+      res.json(val).status(200);
+    })
+    .catch((err) => res.json(err).status(500));
+}
+
+function pegarUsuariosShopping(req, res) {
+  if (+req.params.id > 0) {
+    usuarioModel
+      .pegarUsuariosShopping(+req.params.id)
+      .then((val) => {
+        res.json(val).status(200);
+      })
+      .catch((err) => res.json(err).status(500));
+  }
+}
+
+/**
+ * @param {Request} req
+ * @param {Response} res
+ */
+function cadastrarLogin(req, res) {
+  let fkShopping = req.body.fkShopping;
+  let fkUser = req.body.fkUser;
+  let cargo = req.body.cargo;
+  if (fkShopping && fkUser && cargo) {
+    if (cargo == "MAS" || cargo == "MON" || cargo == "ADM") {
+      usuarioModel
+        .insereLogin(fkUser, fkShopping, cargo)
+        .then((val) => {
+          res.status(200).json({ message: "Login criado com sucesso" });
+        })
+        .catch((err) =>
+          res.status(500).json({ message: "Cargo errado", erro: err })
+        );
+    }
+  } else {
+    res.json({ message: "Falta parametros" }).status(500);
   }
 }
 module.exports = {
@@ -303,4 +342,7 @@ module.exports = {
   enviar_email,
   trocarSenha,
   mudarDisponibilidade,
+  pegarUsersDisponiveis,
+  cadastrarLogin,
+  pegarUsuariosShopping,
 };

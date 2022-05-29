@@ -30,26 +30,22 @@
     <div class="container-lg setores">
       <div class="conteudo-setor-list shadow-lg">
         <h1 class="table-title title-3 mb">Usuários</h1>
-        <table class="table table-striped shadow-sm">
+        <table class="table table-striped shadow-sm" id="table">
           <thead>
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Nome</th>
+              <th scope="col">Email</th>
               <th scope="col">Cargo</th>
-              <th scope="col">Login</th>
             </tr>
           </thead>
-          <tbody>
-            <!-- <tr>
-            <th scope="row">1</th>
-            <td>Benass</td>
-            <td>benassi@paulista.co</th=>
-          </tr> -->
-          </tbody>
+          <tbody></tbody>
         </table>
       </div>
 
       <div class="conteudo-setor-list shadow-lg">
+        <h1 class="table-title title-3 mb">Cadastrar login</h1>
+        <div id="alertas"></div>
         <div class="container_input dividido">
           <div class="container_input" data-title="Nome ou ID">
             <label>Nome completo/ID:</label>
@@ -66,8 +62,8 @@
             </select>
           </div>
         </div>
-        <div class="container_input" data-title="Selecione uma Permissão">
-          <button onclick="" class="btn btn-primary btn-setor">
+        <div class="container_input">
+          <button onclick="cadastrar()" class="btn btn-primary btn-setor">
             Cadastrar
           </button>
         </div>

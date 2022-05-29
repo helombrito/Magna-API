@@ -313,6 +313,39 @@ function pegarDadosSetores() {
 }
 
 /**
+ * @description
+ * @author GuilhermeDelfino
+ * @param {number} id ID do shopping a pesquisar
+ * @return {Promise<Array<object>>}
+ */
+function pegarUsuariosShopping(id) {
+  return new Promise((resolve, reject) => {
+    fetch(`/usuarios/shop/${id}`)
+      .then((response) => response.json())
+      .then((json) => {
+        if (json) {
+          let array = [];
+          for (let i = 0; i < json.length; i++) {
+            let linha = {};
+            linha.ID = json[i].idUsuario;
+            linha.Nome = json[i].nome;
+            linha.Email = json[i].email;
+            linha.Permissao = json[i].permissaoUsuario;
+
+            array.push(linha);
+          }
+          resolve(array);
+          return array;
+        }
+      })
+      .catch((error) => {
+        showMessageError("Erro ao listar usuarios");
+        reject(error);
+      });
+  });
+}
+
+/**
  * @returns {Promise<Array<object>>}
  */
 function pegarDadosSensores() {
@@ -396,12 +429,14 @@ function showMenuRestrito(
             </a>
           </li>
           ${
-            user.permissaoUsuario !== "MON" &&
-            "<li class='menu-item'><a class='menu-link' href='./setores.html'><i class='fa-regular fa-hard-drive'></i><span>Setores</span></a></li><li class='menu-item'><a class='menu-link' href='./sensores.html'><i class='fa-solid fa-tower-broadcast'></i><span>Sensores</span></a></li>"
+            user.permissaoUsuario !== "MON"
+              ? "<li class='menu-item'><a class='menu-link' href='./setores.html'><i class='fa-regular fa-hard-drive'></i><span>Setores</span></a></li><li class='menu-item'><a class='menu-link' href='./sensores.html'><i class='fa-solid fa-tower-broadcast'></i><span>Sensores</span></a></li>"
+              : ""
           }
           ${
-            user.permissaoUsuario === "MAS" &&
-            "<li class='menu-item'><a class='menu-link' href='./usuarios.html'><i class='fa-solid fa-users'></i><span>Usuários</span></a></li>"
+            user.permissaoUsuario === "MAS"
+              ? "<li class='menu-item'><a class='menu-link' href='./usuarios.html'><i class='fa-solid fa-users'></i><span>Usuários</span></a></li>"
+              : ""
           }
 
           <li class="menu-item" onclick="logout()">

@@ -103,9 +103,10 @@ function pesquisarEmail(email) {
   //console.log("Executando a instrução SQL: \n" + instrucao);
   return database.executar(instrucao);
 }
-function cadastrar_usuario(nomeCompleto, email, cpf, senha) {
+function cadastrar_usuario(nomeCompleto, email, cpf, senha, dtNasc) {
   console.log("models");
-  var instrucao = `INSERT INTO usuario (nome, email, cpf, senha) VALUES ('${nomeCompleto}', '${email}', '${cpf}', '${senha}')`;
+  // insirir data de nasciemnto
+  var instrucao = `INSERT INTO usuario (nome, email, cpf, senha, dtNasc) VALUES ('${nomeCompleto}', '${email}', '${cpf}', '${senha}', '${dtNasc}')`;
   return database.executar(instrucao);
 }
 function pesquisarIdUsuario(id) {
@@ -128,6 +129,14 @@ function pegarUltimoUser() {
   var instrucao = `select max(idUsuario) as max from usuario`;
   return database.executar(instrucao);
 }
+function pegarUsersDisponiveis() {
+  var instrucao = `select * from Usuario left join login on fkUsuario = idUsuario where disponibilidade = 'S' and cpf is not null;`;
+  return database.executar(instrucao);
+}
+function pegarUsuariosShopping(shop) {
+  var instrucao = `select * from login join Usuario on fkUsuario = idUsuario where fkShopping = ${shop}`;
+  return database.executar(instrucao);
+}
 module.exports = {
   entrar: entrar,
   cadastrar: cadastrar,
@@ -146,4 +155,6 @@ module.exports = {
   pegarUltimoShop,
   pegarUltimoUser,
   mudarDisponibilidade,
+  pegarUsersDisponiveis,
+  pegarUsuariosShopping,
 };
