@@ -1,16 +1,14 @@
 var medidaModel = require("../models/medidaModel");
-
+//KPI SOBRE SETOR MAIS LOTADO
 function kpiSetor(req,res){
-    let fkShopping = req.body.fkShoppingServer;
+    var fkShopping = req.params.fkShopping;
     console.log(fkShopping)
-
-    medidaModel.setorMaisLotado()
+    medidaModel.setorMaisLotado(fkShopping)
         .then(function (setorMaisLotado){
             if (setorMaisLotado.length > 0){
                 console.log(setorMaisLotado)
-                medidaModel.setorMenosLotado()
+                medidaModel.setorMenosLotado(fkShopping)
                     .then((setorMenosLotado) => {
-                        console.log(setorMenosLotado)
                         if(setorMenosLotado.length > 0){
                             res.status(200).json({setorMaisLotado, setorMenosLotado});
                         }
@@ -24,6 +22,7 @@ function kpiSetor(req,res){
             }
         );
 }
+//KPI SOBRE DIA DA SEMANA MAIS LOTADO
 function pegarDiaSemana(req,res){
     medidaModel.diaSemanaMaisCheio()
         .then(function (diaSemanaMaisCheio){
@@ -45,6 +44,7 @@ function pegarDiaSemana(req,res){
             }
         );
 }
+// KPI SOBRE MÊS DO ANO MAIS LOTADO
 function pegarMes(req,res){
     medidaModel.mesCheio()
         .then(function (mesCheio){
@@ -112,5 +112,6 @@ module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
     kpiSetor,
-    pegarDiaSemana
+    pegarDiaSemana,
+    pegarMes
 }

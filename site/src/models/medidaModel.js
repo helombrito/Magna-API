@@ -23,11 +23,11 @@ function buscarUltimasMedidas(idAquario, limite_linhas) {
                     where fk_aquario = ${idAquario}
                     order by id desc limit ${limite_linhas}`;
     } else {
-        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        //console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
     }
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    //console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
@@ -51,16 +51,17 @@ function buscarMedidasEmTempoReal(idAquario) {
                         from medida where fk_aquario = ${idAquario} 
                     order by id desc limit 1`;
     } else {
-        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        //console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
     }
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    //console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
 // aqui é a query já pronta puxando o id do shopping requerido
-function setorMaisLotado(idShopping) {
+function setorMaisLotado(fkShopping) {
+
     // dia setor mais lotado
     var instrucaoSql = ''
 
@@ -68,7 +69,7 @@ function setorMaisLotado(idShopping) {
         instrucaoSql = `select top 1 apelidoSetor ,count(captura) as Qtde from registro
         join sensor on Sensor.idSensor = fkSensor
                 join setor on idSetor = fkSetor
-                        where captura = 1 and fkShopping = 24
+                        where captura = 1 and fkShopping = ${fkShopping}
                                group by apelidoSetor order by count(captura) desc;`
 
 
@@ -76,20 +77,20 @@ function setorMaisLotado(idShopping) {
         instrucaoSql = `select apelidoSetor ,count(captura) as Qtde from registro
         join sensor on idSensor = fkSensor 
         join setor on idSetor = fkSetor 
-        where captura = 1 and fkShopping = 24
+        where captura = 1 and fkShopping = ${idShopping}
         group by fkSensor order by count(captura) desc limit 1;`;
 
 
     } else {
-        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+       // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
     }
 
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-function setorMenosLotado(idShopping) {
+function setorMenosLotado(fkShopping) {
     //dia setor menos lotado
     var instrucaoSql = ''
 
@@ -97,7 +98,7 @@ function setorMenosLotado(idShopping) {
         instrucaoSql = `select top 1 apelidoSetor ,count(captura) as Qtde from registro
         join sensor on Sensor.idSensor = fkSensor
                 join setor on idSetor = fkSetor
-                        where captura = 1 and fkShopping = 24
+                        where captura = 1 and fkShopping = ${fkShopping}
                                group by apelidoSetor order by count(captura) asc;`
 
 
@@ -105,21 +106,21 @@ function setorMenosLotado(idShopping) {
         instrucaoSql = `select apelidoSetor ,count(captura) as Qtde from registro
         join sensor on idSensor = fkSensor 
         join setor on idSetor = fkSetor 
-        where captura = 1 and fkShopping = 24
+        where captura = 1 and fkShopping = ${idShopping}
         group by fkSensor order by count(captura) asc limit 1;`;
 
 
     } else {
-        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+       // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
     }
 
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function diaSemanaMaisCheio(idShopping) {
+function diaSemanaMaisCheio(fkShopping) {
     var instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
@@ -133,7 +134,7 @@ function diaSemanaMaisCheio(idShopping) {
         when weekday (dataCaptura) = 5 then 'Sábado'
         when weekday (dataCaptura) = 6 then 'Domingo'
         else 0 end  as Dia from Registro 
-		where captura = 1 and fkShopping = ${idShopping}
+		where captura = 1 and fkShopping = ${fkShopping}
         group by dia order by QtdeRegistro desc limit 1;
            `
 
@@ -142,21 +143,21 @@ function diaSemanaMaisCheio(idShopping) {
         instrucaoSql = `select apelidoSetor ,count(captura) as Qtde from registro
         join sensor on idSensor = fkSensor 
         join setor on idSetor = fkSetor 
-        where captura = 1 and fkShopping = 24
+        where captura = 1 and fkShopping = ${fkShopping}
         group by fkSensor order by count(captura) asc limit 1;`;
 
 
     } else {
-        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+       // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
     }
 
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 
 }
-function diaSemanaMaisVazio(idShopping) {
+function diaSemanaMaisVazio(fkShopping) {
     var instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
@@ -170,7 +171,7 @@ function diaSemanaMaisVazio(idShopping) {
         when weekday (dataCaptura) = 5 then 'Sábado'
         when weekday (dataCaptura) = 6 then 'Domingo'
         else 0 end  as Dia from Registro 
-		where captura = 1 and fkShopping = ${idShopping}
+		where captura = 1 and fkShopping = ${fkShopping}
         group by dia order by QtdeRegistro asc limit 1;
            `
 
@@ -179,22 +180,22 @@ function diaSemanaMaisVazio(idShopping) {
         instrucaoSql = `select apelidoSetor ,count(captura) as Qtde from registro
         join sensor on idSensor = fkSensor 
         join setor on idSetor = fkSetor 
-        where captura = 1 and fkShopping = 24
+        where captura = 1 and fkShopping = ${fkShopping}
         group by fkSensor order by count(captura) asc limit 1;`;
 
 
     } else {
-        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+       // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
     }
 
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 
 }
 
-function mesCheio(idShopping) {
+function mesCheio(fkShopping) {
     var instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
@@ -215,7 +216,7 @@ function mesCheio(idShopping) {
 		when month (dataCaptura) = 12 then 'Dezembro'
         else 0 end  as Mes, 
     count(datacaptura) as MesCheio
-    from registro where fkShopping = ${idShopping} group by mes order by MesCheio desc limit 1;
+    from registro where fkShopping = ${fkShopping} group by mes order by MesCheio desc limit 1;
     
            `
 
@@ -224,21 +225,21 @@ function mesCheio(idShopping) {
         instrucaoSql = `select apelidoSetor ,count(captura) as Qtde from registro
         join sensor on idSensor = fkSensor 
         join setor on idSetor = fkSetor 
-        where captura = 1 and fkShopping = 24
+        where captura = 1 and fkShopping = ${fkShopping}
         group by fkSensor order by count(captura) asc limit 1;`;
 
 
     } else {
-        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+       // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
     }
 
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 
 }
-function mesVazio(idShopping) {
+function mesVazio(fkShopping) {
     var instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
@@ -259,7 +260,7 @@ function mesVazio(idShopping) {
 		when month (dataCaptura) = 12 then 'Dezembro'
         else 0 end  as Mes, 
     count(datacaptura) as MesCheio
-    from registro where fkShopping = ${idShopping} group by mes order by MesCheio asc limit 1;
+    from registro where fkShopping = ${fkShopping} group by mes order by MesCheio asc limit 1;
     
            `
 
@@ -268,17 +269,17 @@ function mesVazio(idShopping) {
         instrucaoSql = `select apelidoSetor ,count(captura) as Qtde from registro
         join sensor on idSensor = fkSensor 
         join setor on idSetor = fkSetor 
-        where captura = 1 and fkShopping = 24
+        where captura = 1 and fkShopping = ${fkShopping}
         group by fkSensor order by count(captura) asc limit 1;`;
 
 
     } else {
-        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+       // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
     }
 
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 
 }

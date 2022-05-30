@@ -3,17 +3,24 @@ var router = express.Router();
 
 var medidaController = require("../controllers/medidaController");
 
-router.get("/kpiSetor", function (req,res){
-    medidaController.kpiSetor(req, res);
+router.get("/kpiSetor/:fkShopping", function (req,res){
+        let fkShopping = req.params.fkShopping;
+
+        medidaController.kpiSetor(req, res, +fkShopping);
 });
-router.get("/kpiSemana", function (req,res){
-    medidaController.kpiSetor(req, res);
+router.get("/kpiSemana/:fkShopping", function (req,res){
+    let fkShopping = req.params.fkShopping;
+    medidaController.pegarDiaSemana(req, res, +fkShopping);
+
 });
-router.get("/kpiMes", function (req,res){
-    medidaController.kpiSetor(req, res);
+router.get("/kpiMes/:fkShopping", function (req,res){
+    let fkShopping = req.params.fkShopping;
+    medidaController.pegarMes(req, res, +fkShopping);
+
 });
 router.get("/ultimas/:idAquario", function (req, res) {
     medidaController.buscarUltimasMedidas(req, res);
+    
 });
 
 router.get("/tempo-real/:idAquario", function (req, res) {

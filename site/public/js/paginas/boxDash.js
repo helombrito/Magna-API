@@ -1,10 +1,10 @@
+
+
 function pegarDadosKPI() {
-    data = {
-        fkShoppingServer: get_user_session().fkShopping,
-    }
-    fetch("/medidas/kpiSetor", {
-            body: JSON.stringify(data),
-        })
+    let fkShopping = get_user_session().fkShopping;
+    console.log(fkShopping)
+
+    fetch(`/medidas/kpiSetor/${fkShopping}`)
         .then((response) => response.json())
         .then((json) => {
             kpiSetor.innerHTML = `
@@ -24,7 +24,10 @@ function pegarDadosKPI() {
 }
 
 function pegarDiaSemana() {
-    fetch("/medidas/kpiSemana")
+    let fkShopping = get_user_session().fkShopping;
+
+
+    fetch(`/medidas/kpiSemana/${fkShopping}`)
         .then((response) => response.json())
         .then((json) => {
             kpiSemana.innerHTML = `
@@ -43,9 +46,11 @@ function pegarDiaSemana() {
             console.error(error);
         });
 }
-
 function pegarMes() {
-    fetch("/medidas/kpiMes")
+    let fkShopping = get_user_session().fkShopping;
+
+
+    fetch(`/medidas/kpiMes/${fkShopping}`)
         .then((response) => response.json())
         .then((json) => {
             kpiMes.innerHTML = `
@@ -65,4 +70,5 @@ function pegarMes() {
         });
 }
 pegarDadosKPI();
-pegarDiaSemana();
+// pegarDiaSemana();
+// pegarMes();
