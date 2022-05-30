@@ -8,16 +8,26 @@ router.get("/kpiSetor/:fkShopping", function (req,res){
 
         medidaController.kpiSetor(req, res, +fkShopping);
 });
+
 router.get("/kpiSemana/:fkShopping", function (req,res){
     let fkShopping = req.params.fkShopping;
     medidaController.pegarDiaSemana(req, res, +fkShopping);
 
 });
+
 router.get("/kpiMes/:fkShopping", function (req,res){
     let fkShopping = req.params.fkShopping;
     medidaController.pegarMes(req, res, +fkShopping);
 
 });
+
+router.get("/graficoLinha/:fkShopping/:horario", function (req, res){
+    let fkShopping = req.params.fkShopping;
+    let horario = Number(req.params.horario);
+    console.log(horario);
+    medidaController.graficoLinha(req, res, +fkShopping, +horario);
+});
+
 router.get("/ultimas/:idAquario", function (req, res) {
     medidaController.buscarUltimasMedidas(req, res);
     

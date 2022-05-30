@@ -33,10 +33,10 @@ function pegarDiaSemana() {
             kpiSemana.innerHTML = `
               <h3 class="font-md bold mb">Dia da semana mais</h3>
               <span class="font-sm">Vazio</span>
-              <h2 class="title-3">Terça</h2>
+              <h2 class="title-3">${json.diaSemanaMaisCheio[0]}</h2>
               <hr />
               <span class="font-sm">Cheio</span>
-              <h2 class="title-3">Sexta</h2>
+              <h2 class="title-3">${json.diaSemanaMaisVazio[0]}</h2>
               `;
 
         })
@@ -56,10 +56,10 @@ function pegarMes() {
             kpiMes.innerHTML = `
               <h3 class="font-md bold mb">Dia da semana mais</h3>
               <span class="font-sm">Vazio</span>
-              <h2 class="title-3">Terça</h2>
+              <h2 class="title-3">${json.mesCheio[0]}</h2>
               <hr />
               <span class="font-sm">Cheio</span>
-              <h2 class="title-3">Sexta</h2>
+              <h2 class="title-3">${json.MesVazio[0]}</h2>
               `;
 
         })

@@ -24,11 +24,13 @@ function kpiSetor(req,res){
 }
 //KPI SOBRE DIA DA SEMANA MAIS LOTADO
 function pegarDiaSemana(req,res){
-    medidaModel.diaSemanaMaisCheio()
+    var fkShopping = req.params.fkShopping;
+
+    medidaModel.diaSemanaMaisCheio(fkShopping)
         .then(function (diaSemanaMaisCheio){
             if (diaSemanaMaisCheio.length > 0){
                 console.log(diaSemanaMaisCheio)
-                medidaModel.diaSemanaMaisVazio()
+                medidaModel.diaSemanaMaisVazio(fkShopping)
                     .then((diaSemanaMaisVazio) => {
                         console.log(diaSemanaMaisVazio)
                         if(diaSemanaMaisVazio.length > 0){
@@ -46,11 +48,13 @@ function pegarDiaSemana(req,res){
 }
 // KPI SOBRE MÊS DO ANO MAIS LOTADO
 function pegarMes(req,res){
-    medidaModel.mesCheio()
+    var fkShopping = req.params.fkShopping;
+
+    medidaModel.mesCheio(fkShopping)
         .then(function (mesCheio){
             if (mesCheio.length > 0){
                 console.log(mesCheio)
-                medidaModel.mesVazio()
+                medidaModel.mesVazio(fkShopping)
                     .then((mesVazio) => {
                         console.log(mesVazio)
                         if(mesVazio.length > 0){
@@ -66,7 +70,21 @@ function pegarMes(req,res){
             }
         );
 }
-
+function graficoLinha(req, res){
+    var fkShopping = req.params.fkShopping;
+    var horario = req.params.horario;
+    console.log(`horario:${horario}`)
+    var dados = [];
+    medidaModel.graficoLinha(fkShopping, dados, horario)
+    .then(function(resultado){
+            console.log(horario)
+            console.log(resultado);
+        }).catch(
+            function (erro) {
+                res.status(500).json(erro);
+            }
+        );
+}
 function buscarUltimasMedidas(req, res) {
 
     const limite_linhas = 7;
@@ -113,5 +131,6 @@ module.exports = {
     buscarMedidasEmTempoReal,
     kpiSetor,
     pegarDiaSemana,
-    pegarMes
+    pegarMes,
+    graficoLinha
 }
