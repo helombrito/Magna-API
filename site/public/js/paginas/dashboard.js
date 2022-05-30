@@ -10,23 +10,28 @@ function pegaHorarioPico() {
       hoverOffset: 4,
     }, ],
   };
-  
+
   const labelsLine = [];
   var horario = 8;
   let fkShopping = get_user_session().fkShopping;
-
+  const dados = [];
   for (var i = 0; i < 6; i++) {
     horario += 2;
     formataHorario = `${horario}:00`;
+    labelsLine.push(formataHorario);
     fetch(`/medidas/graficoLinha/${fkShopping}/${horario}`)
-      .catch((error) => {
-        showMessageError("Erro ao listar dados");
-        reject(error);
-        console.error(error);
-      });
-    labelsLine.push(`${horario}:00`);
-  }
-console.log(labelsLine);
+      .then((response) => {
+        response.json().then((json) => {
+            dados.push(json);
+          })
+          console.log(dados);
+        })
+        .catch((error) => {
+          showMessageError("Erro ao listar dados");
+          reject(error);
+          console.error(error);
+        });
+      }
   const dataLine = {
     labels: labelsLine,
     datasets: [{

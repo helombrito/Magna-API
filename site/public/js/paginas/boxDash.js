@@ -2,7 +2,6 @@
 
 function pegarDadosKPI() {
     let fkShopping = get_user_session().fkShopping;
-    console.log(fkShopping)
 
     fetch(`/medidas/kpiSetor/${fkShopping}`)
         .then((response) => response.json())
@@ -31,13 +30,13 @@ function pegarDiaSemana() {
         .then((response) => response.json())
         .then((json) => {
             kpiSemana.innerHTML = `
-              <h3 class="font-md bold mb">Dia da semana mais</h3>
-              <span class="font-sm">Vazio</span>
-              <h2 class="title-3">${json.diaSemanaMaisCheio[0]}</h2>
-              <hr />
-              <span class="font-sm">Cheio</span>
-              <h2 class="title-3">${json.diaSemanaMaisVazio[0]}</h2>
-              `;
+            <h3 class="font-md bold mb">Dia da semana mais</h3>
+            <span class="font-sm">Vazio</span>
+            <h2 class="title-3">${json.diaSemanaMaisCheio[0].dia}</h2>
+            <hr />
+            <span class="font-sm">Cheio</span>
+            <h2 class="title-3">${json.diaSemanaMaisVazio[0].dia}</h2>
+            `;
 
         })
         .catch((error) => {
@@ -70,5 +69,5 @@ function pegarMes() {
         });
 }
 pegarDadosKPI();
-// pegarDiaSemana();
+pegarDiaSemana();
 // pegarMes();

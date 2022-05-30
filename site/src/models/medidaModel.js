@@ -77,7 +77,7 @@ function setorMaisLotado(fkShopping) {
         instrucaoSql = `select apelidoSetor ,count(captura) as Qtde from registro
         join sensor on idSensor = fkSensor 
         join setor on idSetor = fkSetor 
-        where captura = 1 and fkShopping = ${idShopping}
+        where captura = 1 and fkShopping = ${fkShopping}
         group by fkSensor order by count(captura) desc limit 1;`;
 
 
@@ -107,7 +107,7 @@ function setorMenosLotado(fkShopping) {
         instrucaoSql = `select apelidoSetor ,count(captura) as Qtde from registro
         join sensor on idSensor = fkSensor 
         join setor on idSetor = fkSetor 
-        where captura = 1 and fkShopping = ${idShopping}
+        where captura = 1 and fkShopping = 24
         group by fkSensor order by count(captura) asc limit 1;`;
 
 
@@ -125,27 +125,40 @@ function diaSemanaMaisCheio(fkShopping) {
     var instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select count(datacaptura) as QtdeRegistro,
-	case 
-		when weekday (dataCaptura) = 0 then 'Segunda-Feira'
-        when weekday (dataCaptura) = 1 then 'Terça-Feira'
-        when weekday (dataCaptura) = 2 then 'Quarta-Feira'
-        when weekday (dataCaptura) = 3 then 'Quinta-Feira'
-        when weekday (dataCaptura) = 4 then 'Sexta-Feira'
-        when weekday (dataCaptura) = 5 then 'Sábado'
-        when weekday (dataCaptura) = 6 then 'Domingo'
-        else 0 end  as Dia from Registro 
-		where captura = 1 and fkShopping = ${fkShopping}
-        group by dia order by QtdeRegistro desc limit 1;
-           `
-
+        instrucaoSql = ` select count(datacaptura) as QtdeRegistro,
+        case 
+            when datename(WEEKDAY, dataCaptura) = 'Monday' then 'Segunda-Feira'
+            when datename(WEEKDAY, dataCaptura) = 'Tuesday' then 'Terça-Feira'
+            when datename(WEEKDAY, dataCaptura) = 'Wednesday' then 'Quarta-Feira'
+            when datename(WEEKDAY, dataCaptura) = 'Thursday' then 'Quinta-Feira'
+            when datename(WEEKDAY, dataCaptura) = 'Friday' then 'Sexta-Feira'
+            when datename(WEEKDAY, dataCaptura) = 'Saturday' then 'Sábado'
+            when datename(WEEKDAY, dataCaptura) = 'Sunday' then 'Domingo'
+            else 'error' end as 'dia'
+        from shopping join setor on idShopping = fkShopping 
+        join sensor on idSetor = fkSetor 
+        join registro on idSensor = fkSensor
+        where captura = 1 and fkShopping = ${fkShopping}
+        group by datename(WEEKDAY, dataCaptura)
+        order by QtdeRegistro desc;`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select apelidoSetor ,count(captura) as Qtde from registro
-        join sensor on idSensor = fkSensor 
-        join setor on idSetor = fkSetor 
+        instrucaoSql =` select count(datacaptura) as QtdeRegistro,
+        case 
+            when datename(WEEKDAY, dataCaptura) = 'Monday' then 'Segunda-Feira'
+            when datename(WEEKDAY, dataCaptura) = 'Tuesday' then 'Terça-Feira'
+            when datename(WEEKDAY, dataCaptura) = 'Wednesday' then 'Quarta-Feira'
+            when datename(WEEKDAY, dataCaptura) = 'Thursday' then 'Quinta-Feira'
+            when datename(WEEKDAY, dataCaptura) = 'Friday' then 'Sexta-Feira'
+            when datename(WEEKDAY, dataCaptura) = 'Saturday' then 'Sábado'
+            when datename(WEEKDAY, dataCaptura) = 'Sunday' then 'Domingo'
+            else 'error' end as 'dia'
+        from shopping join setor on idShopping = fkShopping 
+        join sensor on idSetor = fkSetor 
+        join registro on idSensor = fkSensor
         where captura = 1 and fkShopping = ${fkShopping}
-        group by fkSensor order by count(captura) asc limit 1;`;
+        group by datename(WEEKDAY, dataCaptura)
+        order by QtdeRegistro desc;`;
 
 
     } else {
@@ -153,37 +166,51 @@ function diaSemanaMaisCheio(fkShopping) {
         return
     }
 
-
     // console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
-
 }
 
 function diaSemanaMaisVazio(fkShopping) {
     var instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select count(datacaptura) as QtdeRegistro,
-	case 
-		when weekday (dataCaptura) = 0 then 'Segunda-Feira'
-        when weekday (dataCaptura) = 1 then 'Terça-Feira'
-        when weekday (dataCaptura) = 2 then 'Quarta-Feira'
-        when weekday (dataCaptura) = 3 then 'Quinta-Feira'
-        when weekday (dataCaptura) = 4 then 'Sexta-Feira'
-        when weekday (dataCaptura) = 5 then 'Sábado'
-        when weekday (dataCaptura) = 6 then 'Domingo'
-        else 0 end  as Dia from Registro 
-		where captura = 1 and fkShopping = ${fkShopping}
-        group by dia order by QtdeRegistro asc limit 1;
-           `
+        instrucaoSql =`
+        select count(datacaptura) as QtdeRegistro,
+            case 
+                when datename(WEEKDAY, dataCaptura) = 'Monday' then 'Segunda-Feira'
+                when datename(WEEKDAY, dataCaptura) = 'Tuesday' then 'Terça-Feira'
+                when datename(WEEKDAY, dataCaptura) = 'Wednesday' then 'Quarta-Feira'
+                when datename(WEEKDAY, dataCaptura) = 'Thursday' then 'Quinta-Feira'
+                when datename(WEEKDAY, dataCaptura) = 'Friday' then 'Sexta-Feira'
+                when datename(WEEKDAY, dataCaptura) = 'Saturday' then 'Sábado'
+                when datename(WEEKDAY, dataCaptura) = 'Sunday' then 'Domingo'
+                else 'error' end as 'dia'
+            from shopping join setor on idShopping = fkShopping 
+            join sensor on idSetor = fkSetor 
+            join registro on idSensor = fkSensor
+            where captura = 1 AND fkShopping = 24
+            group by datename(WEEKDAY, dataCaptura)
+            order by QtdeRegistro desc;`;
 
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select apelidoSetor ,count(captura) as Qtde from registro
-        join sensor on idSensor = fkSensor 
-        join setor on idSetor = fkSetor 
-        where captura = 1 and fkShopping = ${fkShopping}
-        group by fkSensor order by count(captura) asc limit 1;`;
+        instrucaoSql = `
+        select count(datacaptura) as QtdeRegistro,
+            case 
+                when datename(WEEKDAY, dataCaptura) = 'Monday' then 'Segunda-Feira'
+                when datename(WEEKDAY, dataCaptura) = 'Tuesday' then 'Terça-Feira'
+                when datename(WEEKDAY, dataCaptura) = 'Wednesday' then 'Quarta-Feira'
+                when datename(WEEKDAY, dataCaptura) = 'Thursday' then 'Quinta-Feira'
+                when datename(WEEKDAY, dataCaptura) = 'Friday' then 'Sexta-Feira'
+                when datename(WEEKDAY, dataCaptura) = 'Saturday' then 'Sábado'
+                when datename(WEEKDAY, dataCaptura) = 'Sunday' then 'Domingo'
+                else 'error' end as 'dia'
+            from shopping join setor on idShopping = fkShopping 
+            join sensor on idSetor = fkSetor 
+            join registro on idSensor = fkSensor
+            where captura = 1 AND fkShopping = 24
+            group by datename(WEEKDAY, dataCaptura)
+            order by QtdeRegistro desc;`;
 
 
     } else {
@@ -292,13 +319,8 @@ function graficoLinha(fkShopping, horario, horario2) {
     join Setor on idShopping = fkShopping 
     join Sensor on idSetor = fkSetor 
     join registro on idSensor = fkSensor 
-<<<<<<< HEAD
-    where dataCaptura between '2022/03/29 ${Number(horario)}:00:00'
-    and '2022/03/29 ${Number(horario2)}:00:00'
-=======
     where dataCaptura between '2022-03-29 ${Number(horario)}:00:00'
     and '2022-03-29 ${Number(horario2)}:00:00'
->>>>>>> 17e6318d09164340bd5afc1c9ae25ce3c38e53e5
     and idShopping = '${fkShopping}'
     group by apelidoSetor`;
     return database.executar(instrucaoSql);
