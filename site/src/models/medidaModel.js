@@ -292,8 +292,13 @@ function graficoLinha(fkShopping, horario, horario2) {
     join Setor on idShopping = fkShopping 
     join Sensor on idSetor = fkSetor 
     join registro on idSensor = fkSensor 
+<<<<<<< HEAD
     where dataCaptura between '2022/03/29 ${Number(horario)}:00:00'
     and '2022/03/29 ${Number(horario2)}:00:00'
+=======
+    where dataCaptura between '2022-03-29 ${Number(horario)}:00:00'
+    and '2022-03-29 ${Number(horario2)}:00:00'
+>>>>>>> 17e6318d09164340bd5afc1c9ae25ce3c38e53e5
     and idShopping = '${fkShopping}'
     group by apelidoSetor`;
     return database.executar(instrucaoSql);

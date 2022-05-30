@@ -74,7 +74,6 @@ function graficoLinha(req, res){
     var fkShopping = req.params.fkShopping;
     var horario = Number(req.params.horario);
     var horario2 = horario + 2;
-    texto = Number(horario)
     console.log(horario);
     var dados = [];
     medidaModel.graficoLinha(fkShopping, dados, horario, horario2)

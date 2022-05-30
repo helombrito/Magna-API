@@ -24,7 +24,7 @@ function pegaHorarioPico() {
         reject(error);
         console.error(error);
       });
-    labelsLine.push(formataHorario);
+    labelsLine.push(`${horario}:00`);
   }
 console.log(labelsLine);
   const dataLine = {
