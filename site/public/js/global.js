@@ -507,3 +507,32 @@ const get_user_session = () => {
     return JSON.parse(sessionStorage.getItem("user"));
   }
 };
+
+function showModalAlerta(type, title, body) {
+  let icon = '<i class="fa fa-check"></i>';
+  closeAlerta();
+  if (type == "error") {
+    icon = '<i class="fa fa-exclamation-circle"></i>';
+  } else if (type == "warning") {
+    icon = '<i class="fa fa-warning"></i>';
+  }
+
+  document.body.innerHTML += `
+  <div class="modal" onclick='closeAlerta()'></div>
+  <div class='alerta ${type}'>
+     ${icon}
+      <h2 class="title-3 mb mt">${title}</h2>
+      <p>
+       ${body}
+      </p>
+      <div class="divisorHorizontal"></div>
+      <button class="btn" onclick='closeAlerta()'>Fechar</button>
+    </div>
+  `;
+}
+
+function closeAlerta() {
+  document.querySelector(".modal") && document.querySelector(".modal").remove();
+  document.querySelector(".alerta") &&
+    document.querySelector(".alerta").remove();
+}
