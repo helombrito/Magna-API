@@ -72,13 +72,15 @@ function pegarMes(req,res){
 }
 function graficoLinha(req, res){
     var fkShopping = req.params.fkShopping;
-    var horario = req.params.horario;
+    var horario = Number(req.params.horario);
+    var horario2 = horario + 2;
+    texto = Number(horario)
     console.log(horario);
     var dados = [];
-    medidaModel.graficoLinha(fkShopping, dados, horario)
+    medidaModel.graficoLinha(fkShopping, dados, horario, horario2)
     .then(function(resultado){
-            console.log(horario)
-            console.log(resultado);
+            console.log(resultado)
+            console.log(resultado[0][1].apelidoSetor)
         }).catch(
             function (erro) {
                 res.status(500).json(erro);

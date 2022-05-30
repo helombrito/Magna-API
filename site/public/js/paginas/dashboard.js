@@ -15,7 +15,7 @@ function pegaHorarioPico() {
   var horario = 8;
   let fkShopping = get_user_session().fkShopping;
 
-  for (var i = 0; i < 7; i++) {
+  for (var i = 0; i < 6; i++) {
     horario += 2;
     formataHorario = `${horario}:00`;
     fetch(`/medidas/graficoLinha/${fkShopping}/${horario}`)

@@ -287,13 +287,13 @@ function mesVazio(fkShopping) {
 
 }
 
-function graficoLinha(fkShopping, horario, textoFormatado) {
+function graficoLinha(fkShopping, horario, horario2) {
     var instrucaoSql = `select apelidoSetor, count(idRegistro) as 'registro' from Shopping 
     join Setor on idShopping = fkShopping 
     join Sensor on idSetor = fkSetor 
     join registro on idSensor = fkSensor 
-    where dataCaptura between '2022-03-29 ${horario}:00:00'
-    and '2022-03-29 ${horario}:00:00'
+    where dataCaptura between '2022/03/29 ${Number(horario)}:00:00'
+    and '2022/03/29 ${Number(horario2)}:00:00'
     and idShopping = '${fkShopping}'
     group by apelidoSetor`;
     return database.executar(instrucaoSql);

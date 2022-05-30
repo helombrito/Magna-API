@@ -23,9 +23,8 @@ router.get("/kpiMes/:fkShopping", function (req,res){
 
 router.get("/graficoLinha/:fkShopping/:horario", function (req, res){
     let fkShopping = req.params.fkShopping;
-    let horario = req.params.horario;
-    console.log(fkShopping);
-    console.log(horario);
+    let horario = String(new Date(req.params.horario));
+
     medidaController.graficoLinha(req, res, +fkShopping, +horario);
 });
 
