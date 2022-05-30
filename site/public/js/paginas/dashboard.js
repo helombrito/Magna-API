@@ -76,3 +76,16 @@ const configBar = {
 const barChart = new Chart(document.getElementById("barChart"), configBar);
 
 showMenuRestrito();
+let listar1minuto = async () => {
+  let req = await fetch(
+    `http://localhost:8080/avisos/1minuto/${get_user_session().idShopping}`
+  );
+  let res = await req.json();
+  return res;
+};
+
+setInterval(() => {
+  listar1minuto().then((val) => {
+    console.log(val);
+  });
+}, 1000 * 10);
