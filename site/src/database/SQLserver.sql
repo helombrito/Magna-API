@@ -53,7 +53,7 @@ CREATE TABLE Sensor(
 );
 
 CREATE TABLE Registro(
-	idSensor INT IDENTITY(1,1),
+	idRegistro INT IDENTITY(1,1),
     dataCaptura DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     captura CHAR(1) NOT NULL DEFAULT 0 CHECK (captura in (0,1)),-- 0 não tem ngm e 1 tem
 	fkSensor INT NOT NULL,

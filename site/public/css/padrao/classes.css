@@ -330,12 +330,60 @@ body > .modal {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 99999;
+  z-index: 1000;
   background-color: #2228;
   width: 100%;
   min-width: 100vw;
   height: 100%;
   min-height: 100vh;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+.alerta {
+  z-index: 2000;
+  width: 400px;
+  padding: 40px var(--padding-lg);
+  border-radius: var(--radius-lg);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 2px 4px 8px var(--color-shadow);
+  background-color: var(--gray);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--color-dark);
+}
+.alerta i {
+  font-size: 3em;
+  color: inherit;
+}
+.alerta .btn {
+  height: 40px;
+  box-shadow: none;
+  color: inherit;
+  background-color: inherit;
+  text-transform: uppercase;
+  padding: 0 var(--padding-lg);
+  opacity: 1;
+  font-weight: 700;
+}
+.alerta.warning {
+  background-color: var(--warning);
+  color: var(--warning-text);
+}
+.alerta.success {
+  background-color: var(--success);
+  color: var(--success-text);
+}
+.alerta.error {
+  background-color: var(--danger);
+  color: var(--danger-text);
 }
 .divisorHorizontal {
   width: 90%;

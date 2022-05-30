@@ -3,13 +3,13 @@
   --gray: #c8cfd3;
   --gray-dark: #3c3f41;
   --gray-light: #ecf8ff;
-  --success: #7efd9c;
+  --success: #97ffaf;
   --success-text: #118d2e;
   --info: #17a2b8;
-  --warning: #ffdb70;
-  --warning-text: #b88a00;
-  --danger: #f3453f;
-  --danger-text: #f8cbd0;
+  --warning: #ffde84;
+  --warning-text: #8d6c00;
+  --danger: #f75651;
+  --danger-text: #ffe6e8;
   --danger-placeholder: #f85b5b;
 
   /* Project */
