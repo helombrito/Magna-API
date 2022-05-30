@@ -18,7 +18,7 @@ function pegaHorarioPico() {
   for (var i = 0; i < 7; i++) {
     horario += 2;
     formataHorario = `${horario}:00`;
-    fetch(`/medidas/graficoLinha/:${fkShopping}/${horario}`)
+    fetch(`/medidas/graficoLinha/${fkShopping}/${horario}`)
       .catch((error) => {
         showMessageError("Erro ao listar dados");
         reject(error);
