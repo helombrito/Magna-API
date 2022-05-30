@@ -15,23 +15,26 @@ function pegaHorarioPico() {
   var horario = 8;
   let fkShopping = get_user_session().fkShopping;
   const dados = [];
-  for (var i = 0; i < 6; i++) {
+  for (var i = 0; i < 7; i++) {
     horario += 2;
-    formataHorario = `${horario}:00`;
-    labelsLine.push(formataHorario);
+    labelsLine.push(`${horario}:00`);
     fetch(`/medidas/graficoLinha/${fkShopping}/${horario}`)
       .then((response) => {
         response.json().then((json) => {
             dados.push(json);
           })
-          console.log(dados);
         })
         .catch((error) => {
           showMessageError("Erro ao listar dados");
           reject(error);
           console.error(error);
         });
+        console.log(horario)
       }
+      setTimeout(() => {
+        console.log(dados[0][0].hora);
+        
+      }, 3000);
   const dataLine = {
     labels: labelsLine,
     datasets: [{
@@ -62,28 +65,8 @@ function pegaHorarioPico() {
   };
   const lineChart = new Chart(document.getElementById("lineChart"), configLine);
 
-  const labelsBar = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho"];
+  
 
-  const dataBar = {
-    labels: labelsBar,
-    datasets: [{
-      label: "Dias",
-      backgroundColor: "#e83847",
-      borderColor: "#dc3545ff",
-      borderRadius: 8,
-      data: [6, 10, 15, 20, 21, 15, 18],
-    }, ],
-  };
-
-  const configBar = {
-    type: "bar",
-    data: dataBar,
-    options: {},
-  };
-
-  const barChart = new Chart(document.getElementById("barChart"), configBar);
-
-<<<<<<< HEAD
 showMenuRestrito();
 let listar1minuto = async () => {
   let req = await fetch(
@@ -93,13 +76,11 @@ let listar1minuto = async () => {
   return res;
 };
 
-setInterval(() => {
-  listar1minuto().then((val) => {
-    console.log(val);
-  });
-}, 1000 * 10);
-=======
+// setInterval(() => {
+//   listar1minuto().then((val) => {
+//     console.log(val);
+//   });
+// }, 1000 * 10);
 }
 pegaHorarioPico();
 showMenuRestrito();
->>>>>>> 78cdac8f0ac4546fda1dc662394fce2544b2e2cd

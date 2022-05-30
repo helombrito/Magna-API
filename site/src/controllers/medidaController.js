@@ -84,10 +84,14 @@ function graficoLinha(req, res) {
     var fkShopping = req.params.fkShopping;
     var horario = Number(req.params.horario);
     var horario2 = horario + 2;
-
+    if(horario == 22){
+     horario2 = '23';
+        
+    }
     medidaModel.graficoLinha(fkShopping, horario, horario2)
         .then(function (resultado) {
             console.log(resultado)
+
             res.status(200).json(resultado);
         }).catch(
             function (erro) {
