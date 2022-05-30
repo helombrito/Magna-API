@@ -82,14 +82,15 @@ function setorMaisLotado(fkShopping) {
 
 
     } else {
-       // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
     }
 
 
-   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
 function setorMenosLotado(fkShopping) {
     //dia setor menos lotado
     var instrucaoSql = ''
@@ -111,12 +112,12 @@ function setorMenosLotado(fkShopping) {
 
 
     } else {
-       // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
     }
 
 
-   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
@@ -148,15 +149,16 @@ function diaSemanaMaisCheio(fkShopping) {
 
 
     } else {
-       // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
     }
 
 
-   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 
 }
+
 function diaSemanaMaisVazio(fkShopping) {
     var instrucaoSql = ''
 
@@ -185,12 +187,12 @@ function diaSemanaMaisVazio(fkShopping) {
 
 
     } else {
-       // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
     }
 
 
-   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 
 }
@@ -200,7 +202,7 @@ function mesCheio(fkShopping) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
 
-    instrucaoSql = `select month(dataCaptura) mes, count(idRegistro),
+        instrucaoSql = `select month(dataCaptura) mes, count(idRegistro),
 	case 
 		when month (dataCaptura) = 1 then 'Janeiro'
 		when month (dataCaptura) = 2 then 'Fevereiro'
@@ -230,21 +232,22 @@ function mesCheio(fkShopping) {
 
 
     } else {
-       // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
     }
 
 
-   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 
 }
+
 function mesVazio(fkShopping) {
     var instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
 
-    instrucaoSql = `select month(dataCaptura) mes, count(idRegistro),
+        instrucaoSql = `select month(dataCaptura) mes, count(idRegistro),
 	case 
 		when month (dataCaptura) = 1 then 'Janeiro'
 		when month (dataCaptura) = 2 then 'Fevereiro'
@@ -274,13 +277,32 @@ function mesVazio(fkShopping) {
 
 
     } else {
-       // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
     }
 
 
-   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
+
+}
+
+function graficoLinha(fkShopping, horario, horario2) {
+    var instrucaoSql = `select apelidoSetor, count(idRegistro) as 'registro' from Shopping 
+    join Setor on idShopping = fkShopping 
+    join Sensor on idSetor = fkSetor 
+    join registro on idSensor = fkSensor 
+<<<<<<< HEAD
+    where dataCaptura between '2022/03/29 ${Number(horario)}:00:00'
+    and '2022/03/29 ${Number(horario2)}:00:00'
+=======
+    where dataCaptura between '2022-03-29 ${Number(horario)}:00:00'
+    and '2022-03-29 ${Number(horario2)}:00:00'
+>>>>>>> 17e6318d09164340bd5afc1c9ae25ce3c38e53e5
+    and idShopping = '${fkShopping}'
+    group by apelidoSetor`;
+    return database.executar(instrucaoSql);
+    // console.log("Executando a instrução SQL: \n" + instrucaoSql);
 
 }
 module.exports = {
@@ -291,5 +313,6 @@ module.exports = {
     diaSemanaMaisCheio,
     diaSemanaMaisVazio,
     mesCheio,
-    mesVazio
+    mesVazio,
+    graficoLinha
 }
