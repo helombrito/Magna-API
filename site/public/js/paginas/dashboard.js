@@ -83,6 +83,23 @@ function pegaHorarioPico() {
 
   const barChart = new Chart(document.getElementById("barChart"), configBar);
 
+<<<<<<< HEAD
+showMenuRestrito();
+let listar1minuto = async () => {
+  let req = await fetch(
+    `http://localhost:8080/avisos/1minuto/${get_user_session().idShopping}`
+  );
+  let res = await req.json();
+  return res;
+};
+
+setInterval(() => {
+  listar1minuto().then((val) => {
+    console.log(val);
+  });
+}, 1000 * 10);
+=======
 }
 pegaHorarioPico();
 showMenuRestrito();
+>>>>>>> 78cdac8f0ac4546fda1dc662394fce2544b2e2cd

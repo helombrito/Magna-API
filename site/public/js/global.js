@@ -13,9 +13,12 @@ function showFooter(container = "footer") {
             </a>
         </div>
         <div class="footer-meio flex-center">
-            <span class="endereco">Av. Angélica, 1048 São Paulo - SP, 01227100
-            </span>
-            <span class="copyright">Copyright © 2010-2022 Magna Company S.L. Todos os direitos reservados.</span>
+        <span class="endereco">Av. Angélica, 1048 São Paulo - SP, 01227100
+        </span>
+        <span class="copyright">Copyright © 2010-2022 Magna Company S.L. Todos os direitos reservados.</span>
+            <div class='divisorHorizontal'></div>
+      <a href="https://magnasptec.tomticket.com/chat/?id=EP57469&ac=3678016P25052022122936" target="_blank" title="Acessar Atendimento Online">Falar com suporte</a>
+
         </div>
         <div class="footer-redes">
             <span class="email">magna.sptech@gmail.com</span>
@@ -289,7 +292,7 @@ function limparCampos() {
  */
 function pegarDadosSetores() {
   return new Promise((resolve, reject) => {
-    fetch("/setores/listar")
+    fetch(`/setores/listar/${get_user_session().idShopping}`)
       .then((response) => response.json())
       .then((json) => {
         if (json) {
@@ -351,7 +354,7 @@ function pegarUsuariosShopping(id) {
  */
 function pegarDadosSensores() {
   return new Promise((resolve, reject) => {
-    fetch("/sensores/listar")
+    fetch(`/sensores/listar/${get_user_session().idShopping}`)
       .then((response) => response.json())
       .then((json) => {
         let array = [];

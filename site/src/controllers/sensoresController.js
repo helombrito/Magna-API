@@ -1,4 +1,4 @@
-const SensorModel = require('../models/sensoresModel');
+const SensorModel = require("../models/sensoresModel");
 /**
  * @description
  * @author pedro e lincoln
@@ -6,21 +6,16 @@ const SensorModel = require('../models/sensoresModel');
  * @param {Request} req
  * @param {Response} res
  */
-function pegarTodosSensores (req, res) {
-    SensorModel.listarTodosSensores()
-        .then(function (resultado) {
-            if (resultado.length > 0)
-            {
-                res.status(200).json(resultado);
-            } else
-            {
-                res.status(204).send("Nenhum resultado encontrado!");
-            }
-        }).catch(
-            function (erro) {
-                res.status(500).json(erro);
-            }
-        );
+function pegarTodosSensores(req, res) {
+  if (req.params.id) {
+    SensorModel.listarTodosSensores(req.params.id)
+      .then(function (resultado) {
+        res.status(200).json(resultado);
+      })
+      .catch(function (erro) {
+        res.status(500).json(erro);
+      });
+  }
 }
 /**
  * @description
@@ -29,9 +24,7 @@ function pegarTodosSensores (req, res) {
  * @param {Request} req
  * @param {Response} res
  */
-function pegarSensoresId (req, res) {
-
-}
+function pegarSensoresId(req, res) {}
 /**
  * @description
  * @author pedro e lincoln
@@ -39,30 +32,24 @@ function pegarSensoresId (req, res) {
  * @param {Request} req
  * @param {Response} res
  */
-function inserirSensores (req, res) {
-    let fkSetor = req.body.fkSetorServer;
+function inserirSensores(req, res) {
+  let fkSetor = req.body.fkSetorServer;
 
-    if (fkSetor == undefined)
-    {
-        res.status(400).send("Seu apelido está undefined!");
-    }
-    else
-    {
-
-        SensorModel.inserirSensoresBanco(fkSetor)
-            .then(resultado => {
-                
-                res.json({message : 'ok'}).status(200);
-            })
-            .catch(erro => {
-                res.status(500).json(erro);
-            });
-    }
+  if (fkSetor == undefined) {
+    res.status(400).send("Seu apelido está undefined!");
+  } else {
+    SensorModel.inserirSensoresBanco(fkSetor)
+      .then((resultado) => {
+        res.json({ message: "ok" }).status(200);
+      })
+      .catch((erro) => {
+        res.status(500).json(erro);
+      });
+  }
 }
 
-module.exports =
-{
-    pegarTodosSensores,
-    pegarSensoresId,
-    inserirSensores
+module.exports = {
+  pegarTodosSensores,
+  pegarSensoresId,
+  inserirSensores,
 };
