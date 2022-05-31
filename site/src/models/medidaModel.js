@@ -113,11 +113,11 @@ function diaSemanaMaisCheio(fkShopping) {
   if (process.env.AMBIENTE_PROCESSO == "producao") {
     instrucaoSql = ` select count(datacaptura) as QtdeRegistro,
         case 
-            when datename(WEEKDAY, dataCaptura) = 'Monday' then 'Segunda-Feira'
-            when datename(WEEKDAY, dataCaptura) = 'Tuesday' then 'Terça-Feira'
-            when datename(WEEKDAY, dataCaptura) = 'Wednesday' then 'Quarta-Feira'
-            when datename(WEEKDAY, dataCaptura) = 'Thursday' then 'Quinta-Feira'
-            when datename(WEEKDAY, dataCaptura) = 'Friday' then 'Sexta-Feira'
+            when datename(WEEKDAY, dataCaptura) = 'Monday' then 'Segunda'
+            when datename(WEEKDAY, dataCaptura) = 'Tuesday' then 'Terça'
+            when datename(WEEKDAY, dataCaptura) = 'Wednesday' then 'Quarta'
+            when datename(WEEKDAY, dataCaptura) = 'Thursday' then 'Quinta'
+            when datename(WEEKDAY, dataCaptura) = 'Friday' then 'Sexta'
             when datename(WEEKDAY, dataCaptura) = 'Saturday' then 'Sábado'
             when datename(WEEKDAY, dataCaptura) = 'Sunday' then 'Domingo'
             else 'error' end as 'dia'
@@ -130,11 +130,11 @@ function diaSemanaMaisCheio(fkShopping) {
   } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
     instrucaoSql = ` select count(datacaptura) as QtdeRegistro,
         case 
-            when datename(WEEKDAY, dataCaptura) = 'Monday' then 'Segunda-Feira'
-            when datename(WEEKDAY, dataCaptura) = 'Tuesday' then 'Terça-Feira'
-            when datename(WEEKDAY, dataCaptura) = 'Wednesday' then 'Quarta-Feira'
-            when datename(WEEKDAY, dataCaptura) = 'Thursday' then 'Quinta-Feira'
-            when datename(WEEKDAY, dataCaptura) = 'Friday' then 'Sexta-Feira'
+            when datename(WEEKDAY, dataCaptura) = 'Monday' then 'Segunda'
+            when datename(WEEKDAY, dataCaptura) = 'Tuesday' then 'Terça'
+            when datename(WEEKDAY, dataCaptura) = 'Wednesday' then 'Quarta'
+            when datename(WEEKDAY, dataCaptura) = 'Thursday' then 'Quinta'
+            when datename(WEEKDAY, dataCaptura) = 'Friday' then 'Sexta'
             when datename(WEEKDAY, dataCaptura) = 'Saturday' then 'Sábado'
             when datename(WEEKDAY, dataCaptura) = 'Sunday' then 'Domingo'
             else 'error' end as 'dia'
@@ -160,11 +160,11 @@ function diaSemanaMaisVazio(fkShopping) {
     instrucaoSql = `
         select count(datacaptura) as QtdeRegistro,
             case 
-                when datename(WEEKDAY, dataCaptura) = 'Monday' then 'Segunda-Feira'
-                when datename(WEEKDAY, dataCaptura) = 'Tuesday' then 'Terça-Feira'
-                when datename(WEEKDAY, dataCaptura) = 'Wednesday' then 'Quarta-Feira'
-                when datename(WEEKDAY, dataCaptura) = 'Thursday' then 'Quinta-Feira'
-                when datename(WEEKDAY, dataCaptura) = 'Friday' then 'Sexta-Feira'
+                when datename(WEEKDAY, dataCaptura) = 'Monday' then 'Segunda'
+                when datename(WEEKDAY, dataCaptura) = 'Tuesday' then 'Terça'
+                when datename(WEEKDAY, dataCaptura) = 'Wednesday' then 'Quarta'
+                when datename(WEEKDAY, dataCaptura) = 'Thursday' then 'Quinta'
+                when datename(WEEKDAY, dataCaptura) = 'Friday' then 'Sexta'
                 when datename(WEEKDAY, dataCaptura) = 'Saturday' then 'Sábado'
                 when datename(WEEKDAY, dataCaptura) = 'Sunday' then 'Domingo'
                 else 'error' end as 'dia'
@@ -178,11 +178,11 @@ function diaSemanaMaisVazio(fkShopping) {
     instrucaoSql = `
         select count(datacaptura) as QtdeRegistro,
             case 
-                when datename(WEEKDAY, dataCaptura) = 'Monday' then 'Segunda-Feira'
-                when datename(WEEKDAY, dataCaptura) = 'Tuesday' then 'Terça-Feira'
-                when datename(WEEKDAY, dataCaptura) = 'Wednesday' then 'Quarta-Feira'
-                when datename(WEEKDAY, dataCaptura) = 'Thursday' then 'Quinta-Feira'
-                when datename(WEEKDAY, dataCaptura) = 'Friday' then 'Sexta-Feira'
+                when datename(WEEKDAY, dataCaptura) = 'Monday' then 'Segunda'
+                when datename(WEEKDAY, dataCaptura) = 'Tuesday' then 'Terça'
+                when datename(WEEKDAY, dataCaptura) = 'Wednesday' then 'Quarta'
+                when datename(WEEKDAY, dataCaptura) = 'Thursday' then 'Quinta'
+                when datename(WEEKDAY, dataCaptura) = 'Friday' then 'Sexta'
                 when datename(WEEKDAY, dataCaptura) = 'Saturday' then 'Sábado'
                 when datename(WEEKDAY, dataCaptura) = 'Sunday' then 'Domingo'
                 else 'error' end as 'dia'
@@ -277,13 +277,13 @@ function mesVazio(fkShopping) {
   return database.executar(instrucaoSql);
 }
 
-function graficoLinha(fkShopping, horario, horario2) {
+function graficoLinha(fkShopping, horario, horario2, dataformatada) {
   var instrucaoSql = `select top 4 '${horario}' as hora, apelidoSetor, count(idRegistro) as registro from Shopping 
     join Setor on idShopping = fkShopping 
     join Sensor on idSetor = fkSetor 
     join registro on idSensor = fkSensor 
     where dataCaptura between '2022-05-29 ${horario}:00:00'
-    and '2022-05-29 ${horario2}:00:00'
+    and '${dataformatada} ${horario2}:00:00'
     and idShopping = '${fkShopping}'
     group by apelidoSetor order by registro`;
   return database.executar(instrucaoSql);
