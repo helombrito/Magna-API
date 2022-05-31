@@ -3,7 +3,11 @@
     height: 100%;
     padding: 40px var(--padding-md);
 }
+#data{
+    margin-top: 20px;
+    color: #9c9c9c;
 
+}
 .dashboard h2 {
     color: #E83847;
 }
