@@ -17,7 +17,7 @@ function showFooter(container = "footer") {
         </span>
         <span class="copyright">Copyright © 2010-2022 Magna Company S.L. Todos os direitos reservados.</span>
             <div class='divisorHorizontal'></div>
-      <a href="https://magnasptec.tomticket.com/chat/?id=EP57469&ac=3678016P25052022122936" target="_blank" title="Acessar Atendimento Online">Falar com suporte</a>
+            <a href="https://magnasptec.tomticket.com/chat/?id=EP57469&ac=3678016P30052022100637" title="Acessar Atendimento Online" target="_blank">Falar com suporte</a>
 
         </div>
         <div class="footer-redes">
@@ -50,7 +50,7 @@ function setPopUpChatTomTicket() {
   ttChatLoaderS.src =
     "https://magnasptec.tomticket.com/scripts-chat/chat.min.js" +
     "?id=EP57469" +
-    "&account=3678016P25052022122936" +
+    "&account=3678016P30052022100637" +
     "&autoOpen=0" +
     "&hideWhenOffline=0" +
     "&d=magnasptec" +
@@ -513,23 +513,22 @@ const get_user_session = () => {
 
 function showModalAlerta(type, title, body) {
   let icon = '<i class="fa fa-check"></i>';
-  closeAlerta();
   if (type == "error") {
     icon = '<i class="fa fa-exclamation-circle"></i>';
   } else if (type == "warning") {
     icon = '<i class="fa fa-warning"></i>';
   }
-
+  closeAlerta();
   document.body.innerHTML += `
-  <div class="modal" onclick='closeAlerta()'></div>
-  <div class='alerta ${type}'>
-     ${icon}
-      <h2 class="title-3 mb mt">${title}</h2>
-      <p>
-       ${body}
-      </p>
-      <div class="divisorHorizontal"></div>
-      <button class="btn" onclick='closeAlerta()'>Fechar</button>
+    <div class="modal" onclick='closeAlerta()'></div>
+    <div class='alerta ${type}'>
+      ${icon}
+        <h2 class="title-3 mb mt">${title}</h2>
+        <p>
+        ${body}
+        </p>
+        <div class="divisorHorizontal"></div>
+        <button class="btn" onclick='closeAlerta()'>Fechar</button>
     </div>
   `;
 }

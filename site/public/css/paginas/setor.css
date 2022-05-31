@@ -54,7 +54,7 @@ div .table {
   max-width: 300px;
   text-align: center;
   padding: 6px 8px;
-  font-size: var(--font-sm);
+  font-size: var(--font-md);
 }
 
 .table-striped tbody tr:nth-child(odd) {
