@@ -76,6 +76,7 @@
           </h2>
           <div>
             <canvas id="lineChart" height="100"></canvas>
+            <div id="data"></div>
           </div>
         </div>
       </div>
@@ -86,3 +87,12 @@
   <script src="js/paginas/boxDash.js"></script>
   <script src="js/paginas/dashboard.js"></script>
 </html>
+<script>
+    var ontem = new Date().setHours(-1); //"-1" ele pega a ultima hora do dia anterior
+  ontem = new Date(ontem) // o comando setHours devolve a data em milisegundos então precisamos converter isso
+  
+  var dataformatada = ontem.toLocaleDateString('pt-BR'); // como a data do brasil é diferente da americana, precisamos inverter ano, mês e ano, mas precisamos receber ela vinda do Brasil o toLocaleDateString só define de que lugar ela vai pegar os dados de dia e horario
+  dataformatada = dataformatada.split('/').reverse().join('-') // para formatar a data vamos usar o 
+  data.innerHTML = dataformatada;
+  console.log(dataformatada);
+</script>

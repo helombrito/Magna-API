@@ -83,11 +83,19 @@ function graficoLinha(req, res) {
   var fkShopping = req.params.fkShopping;
   var horario = Number(req.params.horario);
   var horario2 = horario + 2;
+  var ontem = new Date().setHours(-1); //"-1" ele pega a ultima hora do dia anterior
+  ontem = new Date(ontem) // o comando setHours devolve a data em milisegundos então precisamos converter isso
+  
+  var dataformatada = ontem.toLocaleDateString('pt-BR'); // como a data do brasil é diferente da americana, precisamos inverter ano, mês e ano, mas precisamos receber ela vinda do Brasil o toLocaleDateString só define de que lugar ela vai pegar os dados de dia e horario
+  dataformatada = dataformatada.split('/').reverse().join('-') // para formatar a data vamos usar o 
+  
+  console.log(dataformatada.split('/').reverse().join(''));
+
   if (horario == 22) {
     horario2 = "23";
   }
   medidaModel
-    .graficoLinha(fkShopping, horario, horario2)
+    .graficoLinha(fkShopping, horario, horario2, dataformatada)
     .then(function (resultado) {
       console.log(resultado);
 

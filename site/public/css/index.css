@@ -5,7 +5,6 @@
 @import url(./variaveis/tamanhos.css);
 @import url(./variaveis/cores.css);
 @import url(./variaveis/fontes.css);
-
 /* Padrões  */
 @import url(./padrao/reset.css);
 @import url(./padrao/keyframes.css);
