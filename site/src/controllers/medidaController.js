@@ -8,6 +8,7 @@ function kpiSetor(req, res) {
     .then(function (setorMaisLotado) {
       // console.log(setorMaisLotado);
       medidaModel.setorMenosLotado(fkShopping).then((setorMenosLotado) => {
+        
         res.status(200).json({
           setorMaisLotado,
           setorMenosLotado,

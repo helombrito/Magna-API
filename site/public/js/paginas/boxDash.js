@@ -6,7 +6,7 @@ function pegarDadosKPI() {
     fetch(`/medidas/kpiSetor/${fkShopping}`)
         .then((response) => response.json())
         .then((json) => {
-            if(json.length > 0){
+            if(json){
                 kpiSetor.innerHTML = `
                   <h3 class="font-md bold mb">Setor</h3>
                   <span class="font-sm">Mais utilizado</span>
@@ -21,7 +21,7 @@ function pegarDadosKPI() {
 
         })
         .catch((error) => {
-            showMessageError("Erro ao listar sensores");
+            showMessageError("Erro ao listar dados");
             console.error(error);
         }).finally(()=>closeLoad());
 }
@@ -33,7 +33,7 @@ function pegarDiaSemana() {
     fetch(`/medidas/kpiSemana/${fkShopping}`)
         .then((response) => response.json())
         .then((json) => {
-            if(json.length > 0){
+            if(json){
                 kpiSemana.innerHTML = `
                 <h3 class="font-md bold mb">Dia da semana mais</h3>
                 <span class="font-sm">Vazio</span>
@@ -60,7 +60,7 @@ function pegarMes() {
     fetch(`/medidas/kpiMes/${fkShopping}`)
         .then((response) => response.json())
         .then((json) => {
-            if(json.length > 0){
+            if(json){
                 kpiMes.innerHTML = `
                   <h3 class="font-md bold mb">Dia da semana mais</h3>
                   <span class="font-sm">Vazio</span>
@@ -80,5 +80,5 @@ function pegarMes() {
         }).finally(()=>closeLoad());
 }
 pegarDadosKPI();
-// pegarDiaSemana();
-// pegarMes();
+pegarDiaSemana();
+pegarMes();

@@ -5,7 +5,6 @@ var medidaController = require("../controllers/medidaController");
 
 router.get("/kpiSetor/:fkShopping", function (req,res){
         let fkShopping = req.params.fkShopping;
-
         medidaController.kpiSetor(req, res, +fkShopping);
 });
 
