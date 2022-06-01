@@ -291,6 +291,7 @@ function limparCampos() {
  * @returns {Promise<Array<object>>}
  */
 function pegarDadosSetores() {
+  openLoad();
   return new Promise((resolve, reject) => {
     fetch(`/setores/listar/${get_user_session().idShopping}`)
       .then((response) => response.json())
@@ -312,7 +313,7 @@ function pegarDadosSetores() {
       .catch((error) => {
         showMessageWarning("Você nao tem setores cadastrados ainda!");
         reject(error);
-      });
+      }).finally(()=>closeLoad());
   });
 }
 
@@ -323,6 +324,7 @@ function pegarDadosSetores() {
  * @return {Promise<Array<object>>}
  */
 function pegarUsuariosShopping(id) {
+  openLoad()
   return new Promise((resolve, reject) => {
     fetch(`/usuarios/shop/${id}`)
       .then((response) => response.json())
@@ -345,7 +347,7 @@ function pegarUsuariosShopping(id) {
       .catch((error) => {
         showMessageError("Erro ao listar usuarios");
         reject(error);
-      });
+      }).finally(()=>closeLoad());
   });
 }
 
@@ -353,6 +355,7 @@ function pegarUsuariosShopping(id) {
  * @returns {Promise<Array<object>>}
  */
 function pegarDadosSensores() {
+  openLoad();
   return new Promise((resolve, reject) => {
     fetch(`/sensores/listar/${get_user_session().idShopping}`)
       .then((response) => response.json())
@@ -372,7 +375,7 @@ function pegarDadosSensores() {
         showMessageWarning("Você nao tem sensores cadastrados ainda!");
         reject(error);
         console.error(error);
-      });
+      }).finally(()=>closeLoad());
   });
 }
 

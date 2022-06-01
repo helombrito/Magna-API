@@ -1,5 +1,6 @@
 showMenuRestrito();
 const plotarSelectUsuariosDisponiveis = () => {
+  openLoad();
   fetch("/usuarios/listarDisponiveis")
     .then((res) =>
       res
@@ -17,7 +18,8 @@ const plotarSelectUsuariosDisponiveis = () => {
         })
         .catch((err) => showMessageError(err))
     )
-    .catch((err) => showMessageError(err));
+    .catch((err) => showMessageError(err))
+    .finally(()=>closeLoad());
 };
 
 plotarSelectUsuariosDisponiveis();
@@ -27,6 +29,7 @@ const cadastrar = () => {
   let cargo = select_permicao.value;
 
   if (user != "0" && cargo != "0") {
+    openLoad();
     fetch("usuarios/cadastrarLogin", {
       cache: "default",
       headers: { "Content-Type": "application/json" },
@@ -46,7 +49,8 @@ const cadastrar = () => {
           }, 2000);
         })
       )
-      .catch((err) => showMessageWarning(err));
+      .catch((err) => showMessageWarning(err))
+      .finally(()=>closeLoad());
   } else {
     showMessageWarning("Selecione as opções corretamente");
   }

@@ -108,7 +108,7 @@ function deletar(idAviso) {
   return database.executar(instrucao);
 }
 function listarUltimoRegistro1Minuto(horaAtual, hora1MinutoAntes, id) {
-  console.log(hora1MinutoAntes, horaAtual);
+  // console.log(hora1MinutoAntes, horaAtual);
   let query = `
   select
   count(idRegistro) as qtde,

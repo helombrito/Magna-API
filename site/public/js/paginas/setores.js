@@ -44,9 +44,10 @@ function inserirSetor() {
   // validar campos
   apelidoSetor = input_apelido_setor;
   qtdeAssentos = input_qts_assentos;
-  
+
   if (validarCampos()) {
     // tudo validado aqui dentro
+    openLoad();
     data = {
       apelidoSetorServer: apelidoSetor,
       qtdeAssentosServer: qtdeAssentos,
@@ -65,9 +66,8 @@ function inserirSetor() {
           if (response.status == 200) {
             showMessageSuccess("Setor inserido com sucesso!");
             setTimeout(() => {
-            location.reload()
-              
-            }, 2000);              
+              location.reload()
+            }, 2000);
           } else {
             showMessageError("Houve algum erro ao inserir o setor");
           }
@@ -75,7 +75,7 @@ function inserirSetor() {
       )
       .catch((error) => {
         showMessageError(error);
-      });
+      }).finally(()=>closeLoad());
   }
 }
 function validarCampos() {

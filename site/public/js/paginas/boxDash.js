@@ -80,5 +80,5 @@ function pegarMes() {
         }).finally(()=>closeLoad());
 }
 pegarDadosKPI();
-pegarDiaSemana();
-pegarMes();
+// pegarDiaSemana();
+// pegarMes();

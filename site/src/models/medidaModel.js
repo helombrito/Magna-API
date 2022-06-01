@@ -271,12 +271,11 @@ function graficoLinha(fkShopping, horario, horario2, dataformatada) {
     join Setor on idShopping = fkShopping 
     join Sensor on idSetor = fkSetor 
     join registro on idSensor = fkSensor 
-    where dataCaptura between '2022-05-29 ${horario}:00:00'
+    where dataCaptura between '${dataformatada} ${horario}:00:00'
     and '${dataformatada} ${horario2}:00:00'
     and idShopping = '${fkShopping}'
     group by apelidoSetor order by registro`;
   return database.executar(instrucaoSql);
-  // console.log("Executando a instrução SQL: \n" + instrucaoSql);
 }
 module.exports = {
   buscarUltimasMedidas,
