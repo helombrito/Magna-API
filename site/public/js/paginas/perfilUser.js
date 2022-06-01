@@ -7,7 +7,7 @@ if (user) {
     <span>Email: ${user.email || "shopping@gmail.com"}</span>
     ${user.cpf ? `<span>CPF: ${user.cpf}</span>` : ""}
     ${user.dtNasc ? `<span>Data de Nascimento: ${user.dtNasc}</span>` : ""}
-    <span>
+    ${user.cpf ? `<span>
     Disponibilidade
     </span>
     <small style='font-size: 16px'>Disponivel</small> 
@@ -17,7 +17,8 @@ if (user) {
     <small style='font-size: 16px'>Não disponível</small> 
     <input type='radio' value='N' name='disp' ${
       user.disponibilidade == "N" && "checked"
-    }>
+    }>` : ''}
+    
     `;
 
   document.querySelectorAll("[name='disp']").forEach((el, k) => {
@@ -26,6 +27,7 @@ if (user) {
     el.addEventListener("change", (ev) => {
       let conf = confirm("Certeza que deseja alterar a disponibilidade?");
       if (conf) {
+        openLoad();
         el.checked = true;
         fetch("usuarios/mudarDisponibilidade", {
           cache: "default",
@@ -52,7 +54,8 @@ if (user) {
               }
             })
           )
-          .catch((err) => showMessageError(err));
+          .catch((err) => showMessageError(err))
+          .finally(()=>closeLoad());
         console.log("req");
       } else {
         el.checked = false;

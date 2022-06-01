@@ -12,7 +12,7 @@ var termos = "";
 
 var div_alertas = "";
 
-function cadastrar () {
+function cadastrar() {
   email = in_email;
   nome = in_nome;
   cep = in_cep;
@@ -25,8 +25,7 @@ function cadastrar () {
 
   div_alertas = alertas;
 
-  if (validarCampos())
-  {
+  if (validarCampos()) {
     let dataBody = {
       emailServer: email.value,
       nomeServer: nome.value,
@@ -41,6 +40,7 @@ function cadastrar () {
     let button = document.querySelector("button#btn_cadastrar");
     button.onclick = () => { };
     // Rota Cadastrar dentro de usuarios.js
+    openLoad()
     fetch("usuarios/cadastrar", {
       method: "POST",
       headers: {
@@ -49,27 +49,21 @@ function cadastrar () {
       body: JSON.stringify(dataBody),
     })
       .then(function (resposta) {
-        if (resposta.status == 200)
-        {
+        // console.log(resposta);
+        if (resposta.status == 200) {
           showMessageSuccess(
             "Cadastro realizado com sucesso!"
           );
-          loadingElement(button, 2000).then((val) => {
-            if (val)
-            {
-              window.location = "login.html";
-            }
-          });
-        } else if (resposta.status == 403)
-        {
+          setTimeout(() => {
+            window.location.href = 'login.html'
+          }, 4000)
+        } else if (resposta.status == 403) {
           showMessageWarning('CNPJ já cadastrado!');
         }
-        else if (resposta.status == 402)
-        {
+        else if (resposta.status == 402) {
           showMessageWarning('Email já cadastrado!');
         }
-        else
-        {
+        else {
           // button.onclick = cadastrar();
           showMessageError("Houve um erro ao tentar realizar o cadastro!");
           throw "Houve um erro ao tentar realizar o cadastro!";
@@ -78,13 +72,14 @@ function cadastrar () {
       .catch(function (resposta) {
         console.error(`Erro: ${resposta}`);
         showMessageError(resposta);
-      });
+      })
+      .finally(() => { closeLoad(); });
 
     return false;
   }
 }
 
-function validarCampos () {
+function validarCampos() {
   var emailRegex =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/gm;
   var cnpjRegex = /^\d{14}$/gm;
@@ -102,13 +97,10 @@ function validarCampos () {
     checkInput(senha, 60, 4) &&
     checkInput(confirmarSenha, 60, 4) &&
     checkCheckbox(termos, div_alertas)
-  )
-  {
-    if (senha.value.trim() !== confirmarSenha.value.trim())
-    {
+  ) {
+    if (senha.value.trim() !== confirmarSenha.value.trim()) {
       return inputErrorMessage(confirmarSenha, "Senhas não são identicas");
-    } else
-    {
+    } else {
       inputErrorMessageClear(confirmarSenha);
     }
     return true;

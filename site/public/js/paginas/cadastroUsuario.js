@@ -19,6 +19,7 @@ function cadastrarUsuario() {
 
   if (validarCampos()) {
     // Rota Cadastrar dentro de usuarios.js
+    openLoad();
     fetch("usuarios/cadastrar_usuario", {
       method: "POST",
       headers: {
@@ -40,15 +41,16 @@ function cadastrarUsuario() {
         showMessageSuccess(
           "Cadastro realizado com sucesso! Redirecionando para tela de Login..."
         );
-        loadingElement().then((val) => {
-          if (val) {
-            window.location = "login.html";
-          }
-        });
+        setTimeout(() => {
+          window.location = "login.html";
+        }, 3000);
+        
       } else {
         showMessageError("Houve um erro ao tentar realizar o cadastro!");
         throw "Houve um erro ao tentar realizar o cadastro!";
       }
+    }).finally(() => {
+      closeLoad();
     });
 
     return false;

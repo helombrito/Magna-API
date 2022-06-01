@@ -12,20 +12,33 @@ function plotarSelect(
   response,
   select = document.querySelector("select#select")
 ) {
+  openLoad();
   fetch("/usuarios/listar")
     .then((response) => {
+      // console.log(response);
       response.json().then((shoppings) => {
-        for (let i = 0; i < shoppings.length; i++) {
-          select_shop.innerHTML += `<option value="${shoppings[i].nomeShopping}">
-                                ${shoppings[i].nomeShopping}
-                            </option>
-                        `;
+        console.log(shoppings);
+        if (shoppings.length > 0) {
+          for (let i = 0; i < shoppings.length; i++) {
+            select_shop.innerHTML +=
+              `
+            <option value="${shoppings[i].nomeShopping}">
+                ${shoppings[i].nomeShopping}
+            </option>
+            `;
+          }
+        } else {
+          showMessageWarning('Sem Shoppings cadastrados')
         }
-      });
+      }
+      );
       return;
     })
     .catch((error) => {
       showMessageError(error);
+    })
+    .finally(()=>{
+      closeLoad();
     });
 }
 
@@ -43,6 +56,7 @@ function entrar() {
     selectShopVar = select_shop.value;
     limparCampos();
     document.querySelector("button").disabled = true;
+    openLoad();
 
     fetch("/usuarios/autenticar", {
       method: "POST",
@@ -62,15 +76,14 @@ function entrar() {
             json.resultado[0].none = json.none;
             sessionStorage.setItem("user", JSON.stringify(json.resultado[0]));
 
-            loadingElement(document.body, 3000).then((val) => {
-              if (val) {
-                if (json.none == "N") {
+            setTimeout(() => {
+              if (json.none == "N") {
                   window.location = "dashboard.html";
                 } else if (json.none == "S") {
                   window.location = "perfilUser.html";
-                }
               }
-            });
+            }, 2000);
+
           });
         } else {
           resposta.json().then((json) => {
@@ -81,6 +94,9 @@ function entrar() {
       .catch((err) => {
         showMessageError(err);
         limparCampos();
+      })
+      .finally(()=>{
+        closeLoad();
       });
   }
 }

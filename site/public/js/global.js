@@ -455,8 +455,8 @@ function showMenuRestritoUser(
             <span>${user.nome[0].toUpperCase() || "U"}</span>
           </div>
           <span class="nome-empresa">${user.nome.toUpperCase() || "User"}</span>
-          <span class="cnpj-empresa">${user.cpf !== "null" ? user.cpf : "user shopping"
-        }</span>
+          ${user.cpf != `<span class="cnpj-empresa">${user.cpf}</span>` ? user.cpf : "user shopping"}
+          
         </div>
 
         <ul class="menu">
@@ -464,13 +464,6 @@ function showMenuRestritoUser(
             <a class="menu-link" href="./perfil.html">
               <i class="fa-solid fa-user"></i>
               <span>Perfil</span>
-            </a>
-          </li>
-
-          <li class="menu-item">
-            <a class="menu-link" href="./dashboard.html">
-              <i class="fa-solid fa-building"></i>
-              <span>Cargos</span>
             </a>
           </li>
 
@@ -498,8 +491,12 @@ function showMenuRestritoUser(
   setPopUpChatTomTicket();
 }
 /**
+ * 
+ * @typedef Session 
+ */
+/**
  * @description Função para retornar Dados do usuario no sessionStorage
- * @returns {string}
+ * @returns {{cpf: string | null, createdAt: string ,disponibilidade: string ,dtNasc: string | null ,email: string ,idUsuario: number ,nome: string ,none: string | null ,senha: string}}
  */
 const get_user_session = () => {
   if (sessionStorage.getItem("user")) {
@@ -559,6 +556,7 @@ function openLoad() {
 }
 function closeLoad() {
   setTimeout(() => {
-    document.querySelector('.modal').remove();
+    
+    document.querySelector('.modal') && document.querySelector('.modal').remove();
   }, 1000);
 }

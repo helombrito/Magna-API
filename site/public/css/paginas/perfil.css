@@ -32,13 +32,9 @@
   font-size: var(--font-lg);
 }
 
-.conteudo-perfil .box img {
-  width: 35%;
-}
-
 .conteudo-perfil .box .dados {
   /* border: 3px solid red; */
-  width: 50%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   height: 100%;

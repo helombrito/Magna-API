@@ -15,49 +15,55 @@ function pegaHorarioPico() {
    * @type {Array<Array<{hora: number, apelidoSetor: string, registro: string}>>}
    */
   const dados = [];
-
+  openLoad();
   for (var i = 0; i < 7; i++) {
     horario += 2;
     labelsLine.push(`${horario}:00`);
     fetch(`/medidas/graficoLinha/${fkShopping}/${horario}`)
       .then((response) => {
         response.json().then((json) => {
-          dados.push(json);
+          if(json.length > 0){
+            dados.push(json);
+          }
         });
       })
       .catch((error) => {
         showMessageError("Erro ao listar dados");
-        reject(error);
         console.error(error);
-      });
+      }).finally(()=>closeLoad());
   }
-  setTimeout(() => {
-    let registros = dados.map((hora, index) => {
-      return hora.map((val) => val.registro);
-    });
-    let datasets = dados[0].map((hora, i) => {
-      return {
-        label: hora.apelidoSetor || "Setor",
-        backgroundColor: colors[i][0],
-        borderColor: colors[i][1],
-        data: registros.map((dado) => dado[i]),
-      };
-    });
-    const dataLine = {
-      labels: labelsLine,
-      datasets: datasets,
-    };
+  if(dados.length > 0){
 
-    const configLine = {
-      type: "line",
-      data: dataLine,
-      options: {},
-    };
-    const lineChart = new Chart(
-      document.getElementById("lineChart"),
-      configLine
-    );
-  }, 3000);
+    setTimeout(() => {
+      let registros = dados.map((hora, index) => {
+        return hora.map((val) => val.registro);
+      });
+      let datasets = dados[0].map((hora, i) => {
+        return {
+          label: hora.apelidoSetor || "Setor",
+          backgroundColor: colors[i][0],
+          borderColor: colors[i][1],
+          data: registros.map((dado) => dado[i]),
+        };
+      });
+      const dataLine = {
+        labels: labelsLine,
+        datasets: datasets,
+      };
+  
+      const configLine = {
+        type: "line",
+        data: dataLine,
+        options: {},
+      };
+      const lineChart = new Chart(
+        document.getElementById("lineChart"),
+        configLine
+      );
+    }, 3000);
+  }else{
+    showModalAlerta('warning', 'Ops...', 'Sem registros recentes...')
+  }
 
   let listar1minuto = async () => {
     let req = await fetch(

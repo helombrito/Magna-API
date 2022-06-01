@@ -21,11 +21,7 @@ function buscarUltimasMedidas(idAquario, limite_linhas) {
                     from medida
                     where fk_aquario = ${idAquario}
                     order by id desc limit ${limite_linhas}`;
-  } else {
-    //console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-    return;
-  }
-
+  } 
   //console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
@@ -47,10 +43,7 @@ function buscarMedidasEmTempoReal(idAquario) {
                         fk_aquario 
                         from medida where fk_aquario = ${idAquario} 
                     order by id desc limit 1`;
-  } else {
-    //console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-    return;
-  }
+  } 
 
   //console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -73,10 +66,7 @@ function setorMaisLotado(fkShopping) {
         join setor on idSetor = fkSetor 
         where captura = 1 and fkShopping = ${fkShopping}
         group by fkSensor order by count(captura) desc limit 1;`;
-  } else {
-    // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-    return;
-  }
+  } 
 
   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -98,9 +88,6 @@ function setorMenosLotado(fkShopping) {
         join setor on idSetor = fkSetor 
         where captura = 1 and fkShopping = 24
         group by fkSensor order by count(captura) asc limit 1;`;
-  } else {
-    // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-    return;
   }
 
   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -144,9 +131,6 @@ function diaSemanaMaisCheio(fkShopping) {
         where captura = 1 and fkShopping = ${fkShopping}
         group by datename(WEEKDAY, dataCaptura)
         order by QtdeRegistro desc;`;
-  } else {
-    // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-    return;
   }
 
   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -192,10 +176,7 @@ function diaSemanaMaisVazio(fkShopping) {
             where captura = 1 AND fkShopping = 24
             group by datename(WEEKDAY, dataCaptura)
             order by QtdeRegistro;`;
-  } else {
-    // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-    return;
-  }
+  } 
 
   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -205,8 +186,10 @@ function mesCheio(fkShopping) {
   var instrucaoSql = "";
 
   if (process.env.AMBIENTE_PROCESSO == "producao") {
-    instrucaoSql = `select month(dataCaptura) mes, count(idRegistro),
-	case 
+    instrucaoSql = `
+    
+    select top 1
+    case 
 		when month (dataCaptura) = 1 then 'Janeiro'
 		when month (dataCaptura) = 2 then 'Fevereiro'
 		when month (dataCaptura) = 3 then 'Março'
@@ -219,9 +202,13 @@ function mesCheio(fkShopping) {
 		when month (dataCaptura) = 10 then 'Outubro'
 		when month (dataCaptura) = 11 then 'Novembro'
 		when month (dataCaptura) = 12 then 'Dezembro'
-        else 0 end  as Mes, 
-    count(datacaptura) as MesCheio
-    from registro where fkShopping = ${fkShopping} group by mes order by MesCheio desc limit 1;
+        else 'erro' end  as Mes
+        , count(idRegistro) as qtd
+        from Registro
+        join sensor on fkSensor = idSensor
+        join Setor on fkSetor = idSetor 
+        where fkShopping = 1
+        GROUP BY MONTH(dataCaptura) order by qtd desc;
     
            `;
   } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -230,10 +217,7 @@ function mesCheio(fkShopping) {
         join setor on idSetor = fkSetor 
         where captura = 1 and fkShopping = ${fkShopping}
         group by fkSensor order by count(captura) asc limit 1;`;
-  } else {
-    // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-    return;
-  }
+  } 
 
   // console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -243,8 +227,9 @@ function mesVazio(fkShopping) {
   var instrucaoSql = "";
 
   if (process.env.AMBIENTE_PROCESSO == "producao") {
-    instrucaoSql = `select month(dataCaptura) mes, count(idRegistro),
-	case 
+    instrucaoSql = `
+    select top 1
+    case 
 		when month (dataCaptura) = 1 then 'Janeiro'
 		when month (dataCaptura) = 2 then 'Fevereiro'
 		when month (dataCaptura) = 3 then 'Março'
@@ -257,9 +242,13 @@ function mesVazio(fkShopping) {
 		when month (dataCaptura) = 10 then 'Outubro'
 		when month (dataCaptura) = 11 then 'Novembro'
 		when month (dataCaptura) = 12 then 'Dezembro'
-        else 0 end  as Mes, 
-    count(datacaptura) as MesCheio
-    from registro where fkShopping = ${fkShopping} group by mes order by MesCheio asc limit 1;
+        else 'erro' end  as Mes
+        , count(idRegistro) as qtd
+        from Registro
+        join sensor on fkSensor = idSensor
+        join Setor on fkSetor = idSetor 
+        where fkShopping = 1
+        GROUP BY MONTH(dataCaptura) order by qtd;
     
            `;
   } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {

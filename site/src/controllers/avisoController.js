@@ -138,6 +138,15 @@ function listarRegistros1Minuto(req, res) {
   }
 }
 
+function formatarDate(data) {
+  let dia = data.getDate().toString().padStart(2, "0"),
+    mes = (data.getMonth() + 1).toString().padStart(2, "0"),
+    hora = data.getHours().toString().padStart(2, "0"),
+    minuto = data.getMinutes().toString().padStart(2, "0"),
+    segundo = data.getSeconds().toString().padStart(2, "0"),
+    ano = data.getFullYear();
+  return `${ano}/${mes}/${dia} ${hora}:${minuto}:${segundo}`;
+}
 module.exports = {
   testar,
   listar,

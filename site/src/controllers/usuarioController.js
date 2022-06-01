@@ -12,11 +12,7 @@ function listar(req, res) {
   usuarioModel
     .listar()
     .then(function (resultado) {
-      if (resultado.length > 0) {
         res.status(200).json(resultado);
-      } else {
-        res.status(204).send("Nenhum resultado encontrado!");
-      }
     })
     .catch(function (erro) {
       console.log(erro);
@@ -34,20 +30,10 @@ function validarId(req, res) {
   usuarioModel
     .validar(email)
     .then(function (resultado) {
-      console.log(`\nResultados encontrados: ${resultado.length}`);
-      console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
-
-      if (resultado.length == 1) {
-        console.log(resultado);
-        res.json(resultado[0]);
-      } else if (resultado.length == 0) {
-        res.status(403).send("Email e/ou senha inválido(s)");
-      }
+        res.json(resultado).status(200);
     })
     .catch(function (erro) {
-      // console.log(erro);
-      // console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
-      res.status(500).json(erro.sqlMessage);
+      res.status(500).json(erro);
     });
 }
 
@@ -59,11 +45,11 @@ async function enviar_email(req, res) {
   console.log(req.body);
   if (email == undefined) {
     res.status(400).send("Seu email está undefined!");
+  }else
+  if (id == undefined) {
+    res.status(400).send("Seu email está undefined!");
   }
 
-  // colocar a variavel dentro do to
-
-  // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 25,
@@ -87,7 +73,7 @@ async function enviar_email(req, res) {
         http://magna.azurewebsites.net/trocarSenha.html?id=${id}</a>`, // html body
   });
 
-  console.log(`E-mail enviado ${id}`);
+  res.json({message: 'Enviado com sucesso'}).status(200)
 }
 
 /**

@@ -10,6 +10,7 @@ async function trocarSenha () {
             checkInput(novaSenha, 60, 4) &&
             checkInput(confSenha, 60, 4))
       {
+            openLoad();
             let id = document.URL.split('?id=')[ 1 ];
 
 
@@ -24,9 +25,15 @@ async function trocarSenha () {
             });
             if (req.ok)
             {
+                  closeLoad();
                   showMessageSuccess('Sua senha foi alterada!');
+
+                  setTimeout(() => {
+                        window.location.href = 'login.html'
+                  }, 3000);
             } else
             {
+                  closeLoad();
                   showMessageError('Houve um erro ao trocar senha');
             }
 
