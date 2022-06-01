@@ -389,9 +389,8 @@ function showMenuRestrito(
           <div class="icon flex-center shadow-sm">
             <span>${user.nomeShopping[0].toUpperCase() || "X"}</span>
           </div>
-          <span class="nome-empresa">${
-            user.nomeShopping.toUpperCase() || "XPTO"
-          }</span>
+          <span class="nome-empresa">${user.nomeShopping.toUpperCase() || "XPTO"
+        }</span>
           <span class="cnpj-empresa">${user.cnpj}</span>
         </div>
 
@@ -409,16 +408,14 @@ function showMenuRestrito(
               <span>Dashboard</span>
             </a>
           </li>
-          ${
-            user.permissaoUsuario !== "MON"
-              ? "<li class='menu-item'><a class='menu-link' href='./setores.html'><i class='fa-regular fa-hard-drive'></i><span>Setores</span></a></li><li class='menu-item'><a class='menu-link' href='./sensores.html'><i class='fa-solid fa-tower-broadcast'></i><span>Sensores</span></a></li>"
-              : ""
-          }
-          ${
-            user.permissaoUsuario === "MAS"
-              ? "<li class='menu-item'><a class='menu-link' href='./usuarios.html'><i class='fa-solid fa-users'></i><span>Usuários</span></a></li>"
-              : ""
-          }
+          ${user.permissaoUsuario !== "MON"
+          ? "<li class='menu-item'><a class='menu-link' href='./setores.html'><i class='fa-regular fa-hard-drive'></i><span>Setores</span></a></li><li class='menu-item'><a class='menu-link' href='./sensores.html'><i class='fa-solid fa-tower-broadcast'></i><span>Sensores</span></a></li>"
+          : ""
+        }
+          ${user.permissaoUsuario === "MAS"
+          ? "<li class='menu-item'><a class='menu-link' href='./usuarios.html'><i class='fa-solid fa-users'></i><span>Usuários</span></a></li>"
+          : ""
+        }
 
           <li class="menu-item" onclick="logout()">
             <a class="menu-link">
@@ -458,9 +455,8 @@ function showMenuRestritoUser(
             <span>${user.nome[0].toUpperCase() || "U"}</span>
           </div>
           <span class="nome-empresa">${user.nome.toUpperCase() || "User"}</span>
-          <span class="cnpj-empresa">${
-            user.cpf !== "null" ? user.cpf : "user shopping"
-          }</span>
+          <span class="cnpj-empresa">${user.cpf !== "null" ? user.cpf : "user shopping"
+        }</span>
         </div>
 
         <ul class="menu">
@@ -537,4 +533,19 @@ function closeAlerta() {
   document.querySelector(".modal") && document.querySelector(".modal").remove();
   document.querySelector(".alerta") &&
     document.querySelector(".alerta").remove();
+}
+
+function openLoad() {
+  document.body.classList.add("loading");
+  document.body.innerHTML +=
+    `
+    <div class='modal container-md flex-center'>
+        <img src='../image/loading.gif' width='50' />
+    </div>
+  `;
+}
+function closeLoad() {
+  setTimeout(() => {
+    document.querySelector('.modal').remove();
+  }, 1000);
 }
