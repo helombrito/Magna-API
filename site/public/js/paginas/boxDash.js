@@ -6,7 +6,7 @@ function pegarDadosKPI() {
     fetch(`/medidas/kpiSetor/${fkShopping}`)
         .then((response) => response.json())
         .then((json) => {
-            if(json){
+            if (json) {
                 kpiSetor.innerHTML = `
                   <h3 class="font-md bold mb">Setor</h3>
                   <span class="font-sm">Mais utilizado</span>
@@ -14,16 +14,15 @@ function pegarDadosKPI() {
                   <hr />
                   <span class="font-sm">Menos utilizado</span>
                   <h2 class="title-3">${json.setorMenosLotado[0].apelidoSetor}</h2>`;
-            }else{
-                showModalAlerta('warning', 'Ops...', 'Sem registros recentes...')
-
+            } else {
+                showModalAlerta('warning', 'Ops...', 'Sem registros recentes...');
             }
 
         })
         .catch((error) => {
             showMessageError("Erro ao listar dados");
             console.error(error);
-        }).finally(()=>closeLoad());
+        }).finally(() => closeLoad());
 }
 
 function pegarDiaSemana() {
@@ -33,7 +32,7 @@ function pegarDiaSemana() {
     fetch(`/medidas/kpiSemana/${fkShopping}`)
         .then((response) => response.json())
         .then((json) => {
-            if(json){
+            if (json) {
                 kpiSemana.innerHTML = `
                 <h3 class="font-md bold mb">Dia da semana mais</h3>
                 <span class="font-sm">Vazio</span>
@@ -42,7 +41,7 @@ function pegarDiaSemana() {
                 <span class="font-sm">Cheio</span>
                 <h2 class="title-3">${json.diaSemanaMaisVazio[0].dia}</h2>
                 `;
-            }else{
+            } else {
                 showModalAlerta('warning', 'Ops...', 'Sem registros recentes...')
 
             }
@@ -51,7 +50,7 @@ function pegarDiaSemana() {
         .catch((error) => {
             showMessageError("Erro ao listar sensores");
             console.error(error);
-        }).finally(()=>closeLoad());
+        }).finally(() => closeLoad());
 }
 function pegarMes() {
     let fkShopping = get_user_session().fkShopping;
@@ -60,7 +59,7 @@ function pegarMes() {
     fetch(`/medidas/kpiMes/${fkShopping}`)
         .then((response) => response.json())
         .then((json) => {
-            if(json){
+            if (json) {
                 kpiMes.innerHTML = `
                   <h3 class="font-md bold mb">Dia da semana mais</h3>
                   <span class="font-sm">Vazio</span>
@@ -69,7 +68,7 @@ function pegarMes() {
                   <span class="font-sm">Cheio</span>
                   <h2 class="title-3">${json.MesVazio[0]}</h2>
                   `;
-            }else{
+            } else {
                 showModalAlerta('warning', 'Ops...', 'Sem registros recentes...')
             }
 
@@ -77,7 +76,7 @@ function pegarMes() {
         .catch((error) => {
             showMessageError("Erro ao listar sensores");
             console.error(error);
-        }).finally(()=>closeLoad());
+        }).finally(() => closeLoad());
 }
 pegarDadosKPI();
 pegarDiaSemana();

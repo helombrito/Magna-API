@@ -8,7 +8,7 @@ function kpiSetor(req, res) {
     .then(function (setorMaisLotado) {
       // console.log(setorMaisLotado);
       medidaModel.setorMenosLotado(fkShopping).then((setorMenosLotado) => {
-        
+
         res.status(200).json({
           setorMaisLotado,
           setorMenosLotado,
@@ -27,17 +27,17 @@ function pegarDiaSemana(req, res) {
   medidaModel
     .diaSemanaMaisCheio(fkShopping)
     .then(function (diaSemanaMaisCheio) {
-        // console.log(diaSemanaMaisCheio);
-        medidaModel
-          .diaSemanaMaisVazio(fkShopping)
-          .then((diaSemanaMaisVazio) => {
-            // console.log(diaSemanaMaisVazio);
-              res.status(200).json({
-                diaSemanaMaisCheio,
-                diaSemanaMaisVazio,
-              });
+      // console.log(diaSemanaMaisCheio);
+      medidaModel
+        .diaSemanaMaisVazio(fkShopping)
+        .then((diaSemanaMaisVazio) => {
+          // console.log(diaSemanaMaisVazio);
+          res.status(200).json({
+            diaSemanaMaisCheio,
+            diaSemanaMaisVazio,
           });
-      
+        });
+
     })
     .catch(function (erro) {
       res.status(500).json(erro);
@@ -50,15 +50,15 @@ function pegarMes(req, res) {
   medidaModel
     .mesCheio(fkShopping)
     .then(function (mesCheio) {
-        // console.log(mesCheio);
-        medidaModel.mesVazio(fkShopping).then((mesVazio) => {
-          // console.log(mesVazio);
-            res.status(200).json({
-              mesCheio,
-              mesVazio,
-            });
+      // console.log(mesCheio);
+      medidaModel.mesVazio(fkShopping).then((mesVazio) => {
+        // console.log(mesVazio);
+        res.status(200).json({
+          mesCheio,
+          mesVazio,
         });
-     
+      });
+
     })
     .catch(function (erro) {
       res.status(500).json(erro);
@@ -70,12 +70,11 @@ function graficoLinha(req, res) {
   var horario = Number(req.params.horario);
   var horario2 = horario + 2;
   var ontem = new Date().setHours(-1); //"-1" ele pega a ultima hora do dia anterior
-  ontem = new Date(ontem) // o comando setHours devolve a data em milisegundos então precisamos converter isso
+  ontem = new Date(ontem); // o comando setHours devolve a data em milisegundos então precisamos converter isso
 
   var dataformatada = ontem.toLocaleDateString('pt-BR'); // como a data do brasil é diferente da americana, precisamos inverter ano, mês e ano, mas precisamos receber ela vinda do Brasil o toLocaleDateString só define de que lugar ela vai pegar os dados de dia e horario
-  dataformatada = dataformatada.split('/').reverse().join('-') // para formatar a data vamos usar o 
-
-  // console.log(dataformatada.split('/').reverse().join(''));
+  dataformatada = dataformatada.split('/').reverse().join('-'); // para formatar a data vamos usar o 
+  console.log(dataformatada);
 
   if (horario == 22) {
     horario2 = "23";

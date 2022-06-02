@@ -83,9 +83,6 @@ function setorMaisLotado(fkShopping) {
 `
 
 
-    } else {
-        // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-        return
     }
 
 
@@ -114,9 +111,6 @@ function setorMenosLotado(fkShopping) {
                                group by apelidoSetor order by count(captura) asc;
 `
 
-    } else {
-        // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-        return
     }
 
 
@@ -146,7 +140,7 @@ function diaSemanaMaisCheio(fkShopping) {
         order by QtdeRegistro desc;`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql =` select count(datacaptura) as QtdeRegistro,
+        instrucaoSql = ` select count(datacaptura) as QtdeRegistro,
         case 
             when datename(WEEKDAY, dataCaptura) = 'Monday' then 'Segunda-Feira'
             when datename(WEEKDAY, dataCaptura) = 'Tuesday' then 'Terça-Feira'
@@ -164,9 +158,6 @@ function diaSemanaMaisCheio(fkShopping) {
         order by QtdeRegistro desc;`;
 
 
-    } else {
-        // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-        return
     }
 
     // console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -177,7 +168,7 @@ function diaSemanaMaisVazio(fkShopping) {
     var instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql =`
+        instrucaoSql = `
         select count(datacaptura) as QtdeRegistro,
             case 
                 when datename(WEEKDAY, dataCaptura) = 'Monday' then 'Segunda-Feira'
@@ -216,9 +207,6 @@ function diaSemanaMaisVazio(fkShopping) {
             order by QtdeRegistro desc;`;
 
 
-    } else {
-        // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-        return
     }
 
 
@@ -232,24 +220,27 @@ function mesCheio(fkShopping) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
 
-        instrucaoSql = `select month(dataCaptura) mes, count(idRegistro),
-	case 
-		when month (dataCaptura) = 1 then 'Janeiro'
-		when month (dataCaptura) = 2 then 'Fevereiro'
-		when month (dataCaptura) = 3 then 'Março'
-		when month (dataCaptura) = 4 then 'Abril'
-		when month (dataCaptura) = 5 then 'Maio'
-		when month (dataCaptura) = 6 then 'Junho'
-		when month (dataCaptura) = 7 then 'Julho'
-		when month (dataCaptura) = 8 then 'Agosto'
-		when month (dataCaptura) = 9 then 'Setembro'
-		when month (dataCaptura) = 10 then 'Outubro'
-		when month (dataCaptura) = 11 then 'Novembro'
-		when month (dataCaptura) = 12 then 'Dezembro'
-        else 0 end  as Mes, 
-    count(datacaptura) as MesCheio
-    from registro where fkShopping = ${fkShopping} group by mes order by MesCheio desc limit 1;
-    
+        instrucaoSql = `select top 1 count(idRegistro) qtd,
+        case 
+            when month (dataCaptura) = 1 then 'Janeiro'
+            when month (dataCaptura) = 2 then 'Fevereiro'
+            when month (dataCaptura) = 3 then 'Março'
+            when month (dataCaptura) = 4 then 'Abril'
+            when month (dataCaptura) = 5 then 'Maio'
+            when month (dataCaptura) = 6 then 'Junho'
+            when month (dataCaptura) = 7 then 'Julho'
+            when month (dataCaptura) = 8 then 'Agosto'
+            when month (dataCaptura) = 9 then 'Setembro'
+            when month (dataCaptura) = 10 then 'Outubro'
+            when month (dataCaptura) = 11 then 'Novembro'
+            when month (dataCaptura) = 12 then 'Dezembro'
+            else 'err' end  as Mes
+        from registro
+        join sensor on idSensor = fkSensor
+        join setor on idSetor = fkSetor
+        where fkShopping = ${fkShopping}
+        group by month (dataCaptura)
+        order by qtd desc
            `
 
 
@@ -261,9 +252,6 @@ function mesCheio(fkShopping) {
         group by fkSensor order by count(captura) asc limit 1;`;
 
 
-    } else {
-        // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-        return
     }
 
 
@@ -273,30 +261,32 @@ function mesCheio(fkShopping) {
 }
 
 function mesVazio(fkShopping) {
-    var instrucaoSql = ''
+    var instrucaoSql = '';
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
 
-        instrucaoSql = `select month(dataCaptura) mes, count(idRegistro),
-	case 
-		when month (dataCaptura) = 1 then 'Janeiro'
-		when month (dataCaptura) = 2 then 'Fevereiro'
-		when month (dataCaptura) = 3 then 'Março'
-		when month (dataCaptura) = 4 then 'Abril'
-		when month (dataCaptura) = 5 then 'Maio'
-		when month (dataCaptura) = 6 then 'Junho'
-		when month (dataCaptura) = 7 then 'Julho'
-		when month (dataCaptura) = 8 then 'Agosto'
-		when month (dataCaptura) = 9 then 'Setembro'
-		when month (dataCaptura) = 10 then 'Outubro'
-		when month (dataCaptura) = 11 then 'Novembro'
-		when month (dataCaptura) = 12 then 'Dezembro'
-        else 0 end  as Mes, 
-    count(datacaptura) as MesCheio
-    from registro where fkShopping = ${fkShopping} group by mes order by MesCheio asc limit 1;
-    
+        instrucaoSql = `select top 1 count(idRegistro) qtd,
+        case 
+            when month (dataCaptura) = 1 then 'Janeiro'
+            when month (dataCaptura) = 2 then 'Fevereiro'
+            when month (dataCaptura) = 3 then 'Março'
+            when month (dataCaptura) = 4 then 'Abril'
+            when month (dataCaptura) = 5 then 'Maio'
+            when month (dataCaptura) = 6 then 'Junho'
+            when month (dataCaptura) = 7 then 'Julho'
+            when month (dataCaptura) = 8 then 'Agosto'
+            when month (dataCaptura) = 9 then 'Setembro'
+            when month (dataCaptura) = 10 then 'Outubro'
+            when month (dataCaptura) = 11 then 'Novembro'
+            when month (dataCaptura) = 12 then 'Dezembro'
+            else 'err' end  as Mes
+        from registro
+        join sensor on idSensor = fkSensor
+        join setor on idSetor = fkSetor
+        where fkShopping = ${fkShopping}
+        group by month (dataCaptura)
+        order by qtd
            `
-
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select apelidoSetor ,count(captura) as Qtde from registro
@@ -306,12 +296,7 @@ function mesVazio(fkShopping) {
         group by fkSensor order by count(captura) asc limit 1;`;
 
 
-    } else {
-        // console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-        return
     }
-
-
     // console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 
@@ -326,9 +311,8 @@ function graficoLinha(fkShopping, horario, horario2, dataformatada) {
     and '${dataformatada} ${horario2}:00:00'
     and idShopping = '${fkShopping}'
     group by apelidoSetor`;
-    return database.executar(instrucaoSql);
     // console.log("Executando a instrução SQL: \n" + instrucaoSql);
-
+    return database.executar(instrucaoSql);
 }
 module.exports = {
     buscarUltimasMedidas,
