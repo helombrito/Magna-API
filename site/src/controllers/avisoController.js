@@ -125,7 +125,7 @@ function listarRegistros1Minuto(req, res) {
   if (id) {
     let dt1min = new Date();
     let dt = new Date();
-    dt1min.setMinutes(dt.getMinutes() + 160);
+    dt1min.setMinutes(dt.getMinutes() + 150);
     dt.setMinutes(dt.getMinutes() + 180);
     formatada1min = formatarDate(dt1min);
     formatada = formatarDate(dt);
