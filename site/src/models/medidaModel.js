@@ -232,33 +232,53 @@ function mesCheio(fkShopping) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
 
-        instrucaoSql = `select month(dataCaptura) mes, count(idRegistro),
-	case 
-		when month (dataCaptura) = 1 then 'Janeiro'
-		when month (dataCaptura) = 2 then 'Fevereiro'
-		when month (dataCaptura) = 3 then 'Março'
-		when month (dataCaptura) = 4 then 'Abril'
-		when month (dataCaptura) = 5 then 'Maio'
-		when month (dataCaptura) = 6 then 'Junho'
-		when month (dataCaptura) = 7 then 'Julho'
-		when month (dataCaptura) = 8 then 'Agosto'
-		when month (dataCaptura) = 9 then 'Setembro'
-		when month (dataCaptura) = 10 then 'Outubro'
-		when month (dataCaptura) = 11 then 'Novembro'
-		when month (dataCaptura) = 12 then 'Dezembro'
-        else 0 end  as Mes, 
-    count(datacaptura) as MesCheio
-    from registro where fkShopping = ${fkShopping} group by mes order by MesCheio desc limit 1;
+        instrucaoSql = `select top 1 count(idRegistro) qtd,
+        case 
+            when month (dataCaptura) = 1 then 'Janeiro'
+            when month (dataCaptura) = 2 then 'Fevereiro'
+            when month (dataCaptura) = 3 then 'Março'
+            when month (dataCaptura) = 4 then 'Abril'
+            when month (dataCaptura) = 5 then 'Maio'
+            when month (dataCaptura) = 6 then 'Junho'
+            when month (dataCaptura) = 7 then 'Julho'
+            when month (dataCaptura) = 8 then 'Agosto'
+            when month (dataCaptura) = 9 then 'Setembro'
+            when month (dataCaptura) = 10 then 'Outubro'
+            when month (dataCaptura) = 11 then 'Novembro'
+            when month (dataCaptura) = 12 then 'Dezembro'
+            else 'err' end  as Mes
+        from registro
+        join sensor on idSensor = fkSensor
+        join setor on idSetor = fkSetor
+        where fkShopping = 1
+        group by month (dataCaptura)
+        order by qtd desc
     
            `
 
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select apelidoSetor ,count(captura) as Qtde from registro
-        join sensor on idSensor = fkSensor 
-        join setor on idSetor = fkSetor 
-        where captura = 1 and fkShopping = ${fkShopping}
-        group by fkSensor order by count(captura) asc limit 1;`;
+        instrucaoSql = `select top 1 count(idRegistro) qtd,
+        case 
+            when month (dataCaptura) = 1 then 'Janeiro'
+            when month (dataCaptura) = 2 then 'Fevereiro'
+            when month (dataCaptura) = 3 then 'Março'
+            when month (dataCaptura) = 4 then 'Abril'
+            when month (dataCaptura) = 5 then 'Maio'
+            when month (dataCaptura) = 6 then 'Junho'
+            when month (dataCaptura) = 7 then 'Julho'
+            when month (dataCaptura) = 8 then 'Agosto'
+            when month (dataCaptura) = 9 then 'Setembro'
+            when month (dataCaptura) = 10 then 'Outubro'
+            when month (dataCaptura) = 11 then 'Novembro'
+            when month (dataCaptura) = 12 then 'Dezembro'
+            else 'err' end  as Mes
+        from registro
+        join sensor on idSensor = fkSensor
+        join setor on idSetor = fkSetor
+        where fkShopping = 1
+        group by month (dataCaptura)
+        order by qtd desc`;
 
 
     } else {
@@ -277,25 +297,27 @@ function mesVazio(fkShopping) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
 
-        instrucaoSql = `select month(dataCaptura) mes, count(idRegistro),
-	case 
-		when month (dataCaptura) = 1 then 'Janeiro'
-		when month (dataCaptura) = 2 then 'Fevereiro'
-		when month (dataCaptura) = 3 then 'Março'
-		when month (dataCaptura) = 4 then 'Abril'
-		when month (dataCaptura) = 5 then 'Maio'
-		when month (dataCaptura) = 6 then 'Junho'
-		when month (dataCaptura) = 7 then 'Julho'
-		when month (dataCaptura) = 8 then 'Agosto'
-		when month (dataCaptura) = 9 then 'Setembro'
-		when month (dataCaptura) = 10 then 'Outubro'
-		when month (dataCaptura) = 11 then 'Novembro'
-		when month (dataCaptura) = 12 then 'Dezembro'
-        else 0 end  as Mes, 
-    count(datacaptura) as MesCheio
-    from registro where fkShopping = ${fkShopping} group by mes order by MesCheio asc limit 1;
-    
-           `
+        instrucaoSql = `select top 1 count(idRegistro) qtd,
+        case 
+            when month (dataCaptura) = 1 then 'Janeiro'
+            when month (dataCaptura) = 2 then 'Fevereiro'
+            when month (dataCaptura) = 3 then 'Março'
+            when month (dataCaptura) = 4 then 'Abril'
+            when month (dataCaptura) = 5 then 'Maio'
+            when month (dataCaptura) = 6 then 'Junho'
+            when month (dataCaptura) = 7 then 'Julho'
+            when month (dataCaptura) = 8 then 'Agosto'
+            when month (dataCaptura) = 9 then 'Setembro'
+            when month (dataCaptura) = 10 then 'Outubro'
+            when month (dataCaptura) = 11 then 'Novembro'
+            when month (dataCaptura) = 12 then 'Dezembro'
+            else 'err' end  as Mes
+        from registro
+        join sensor on idSensor = fkSensor
+        join setor on idSetor = fkSetor
+        where fkShopping = 1
+        group by month (dataCaptura)
+        order by qtd desc`;
 
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
